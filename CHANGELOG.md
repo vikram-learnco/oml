@@ -11,6 +11,10 @@ Before 1.0, minor releases may also change the schema; each such change is calle
 
 ## [Unreleased]
 
+### Fixed
+
+* Release workflow was invalid (`secrets` used in a step `if`), so no run had ever executed. The Hugging Face step is now gated on a job-level `env` value, and the workflow can be re-run for an existing tag via `workflow_dispatch`.
+
 ## [0.1.0] - 2026-09-05
 
 First citable release.
