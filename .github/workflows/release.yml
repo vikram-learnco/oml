@@ -1,0 +1,46 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e tools/oml
+      - run: python -m unittest discover -s tools/tests
+      - run: oml validate records/
+      - name: Export distributions stamped with the tag
+        run: oml export all --version "${GITHUB_REF_NAME#v}"
+      - name: Attach distributions to the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/oml.case.json
+            dist/oml.jsonl
+            dist/oml.csv
+            CITATION.cff
+          generate_release_notes: true
+      - name: Mirror to Hugging Face (when HF_TOKEN is configured)
+        if: ${{ secrets.HF_TOKEN != '' }}
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          pip install huggingface_hub
+          python - <<'PY'
+          import os
+          from huggingface_hub import HfApi
+          api = HfApi(token=os.environ["HF_TOKEN"])
+          repo = "learnco/oml"
+          api.create_repo(repo, repo_type="dataset", exist_ok=True)
+          api.upload_file(path_or_fileobj="dist/oml.jsonl", path_in_repo="oml.jsonl", repo_id=repo, repo_type="dataset")
+          api.upload_file(path_or_fileobj="dist/huggingface/README.md", path_in_repo="README.md", repo_id=repo, repo_type="dataset")
+          PY

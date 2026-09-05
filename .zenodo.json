@@ -1,0 +1,15 @@
+{
+  "title": "Open Misconception Library",
+  "upload_type": "dataset",
+  "description": "A public, versioned catalogue of misconceptions with stable IDs. Each record states a belief, its kind, the evidence pattern that reveals it, discriminators against slips and neighbouring misconceptions, and provenance. Distributed as JSON records, JSON Lines, CSV and a 1EdTech CASE 1.1 framework. Most records in early releases are status draft.",
+  "creators": [
+    { "name": "Maram, Vikram" }
+  ],
+  "license": "CC-BY-4.0",
+  "keywords": ["misconceptions", "learning analytics", "assessment", "CASE", "fractions", "programming education"],
+  "related_identifiers": [
+    { "identifier": "https://github.com/vikram-learnco/oml", "relation": "isSupplementTo", "scheme": "url" },
+    { "identifier": "https://oml.learnco.io", "relation": "isDescribedBy", "scheme": "url" }
+  ],
+  "access_right": "open"
+}

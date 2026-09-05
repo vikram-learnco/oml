@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use the Open Misconception Library, please cite it as below. Cite individual records by their oml: ID and URI."
+title: "Open Misconception Library"
+abstract: "A public, versioned catalogue of misconceptions with stable IDs, evidence patterns, discriminators and provenance, distributed as JSON and as a 1EdTech CASE 1.1 framework."
+type: dataset
+authors:
+  - family-names: Maram
+    given-names: Vikram
+  - name: "OML contributors"
+version: 0.1.0
+date-released: 2026-09-05
+license: CC-BY-4.0
+repository-code: "https://github.com/vikram-learnco/oml"
+url: "https://oml.learnco.io"
+keywords:
+  - misconceptions
+  - learning analytics
+  - assessment
+  - CASE
+  - fractions
+  - programming education
+# doi: 10.5281/zenodo.XXXXXXX   # filled in when Zenodo mints the concept DOI on the first release
