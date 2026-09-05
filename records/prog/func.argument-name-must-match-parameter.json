@@ -10,7 +10,10 @@
   "kind": "misapplied-analogy",
   "domain": "prog.functions",
   "about": [
-    "prog.func.parameter-passing"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.func.parameter-passing"
+    }
   ],
   "level_band": [
     "secondary",

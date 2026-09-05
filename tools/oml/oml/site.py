@@ -105,7 +105,7 @@ def render_record(config: Config, r: dict, by_id: dict[str, dict]) -> str:
     if r.get("locale"):
         dl.append(("Locale", esc(r["locale"])))
     if r.get("about"):
-        dl.append(("About", "<br>".join(f'<a href="{esc(a)}">{esc(a)}</a>' if a.startswith("http") else f"<code>{esc(a)}</code>" for a in r["about"])))
+        dl.append(("About", "<br>".join(f'<a href="{esc(a["uri"])}">{esc(a.get("label") or a["uri"])}</a> <span class="muted">({esc(a["scheme"])})</span>' for a in r["about"])))
     parts.append("<dl>" + "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in dl) + "</dl>")
 
     parts.append("<h2>Evidence patterns</h2>")
@@ -134,8 +134,7 @@ def render_record(config: Config, r: dict, by_id: dict[str, dict]) -> str:
     if rels:
         parts.append("<h2>Relations</h2><dl>")
         for name, targets in rels.items():
-            prov = "" if name in ("conflicts_with", "resolved_by") else ' <span class="muted">(provisional)</span>'
-            parts.append(f"<dt><code>{esc(name)}</code>{prov}</dt><dd>" + "<br>".join(_target_html(config, t, by_id) for t in targets) + "</dd>")
+            parts.append(f"<dt><code>{esc(name)}</code></dt><dd>" + "<br>".join(_target_html(config, t, by_id) for t in targets) + "</dd>")
         parts.append("</dl>")
 
     if r.get("alignments"):

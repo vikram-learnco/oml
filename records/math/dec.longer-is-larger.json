@@ -10,8 +10,14 @@
   "kind": "overgeneralization",
   "domain": "math.decimals",
   "about": [
-    "http://corestandards.org/Math/Content/4/NF/C/7/",
-    "http://corestandards.org/Math/Content/5/NBT/A/3/"
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/4/NF/C/7/"
+    },
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/5/NBT/A/3/"
+    }
   ],
   "level_band": [
     "primary",

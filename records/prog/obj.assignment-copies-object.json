@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "prog.objects",
   "about": [
-    "prog.obj.reference"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.obj.reference"
+    }
   ],
   "level_band": [
     "secondary",
@@ -50,9 +53,6 @@
     ],
     "confusable_with": [
       "prog.obj.variables-hold-objects"
-    ],
-    "co_occurs_with": [
-      "prog.var.assignment-links-variables"
     ]
   },
   "alignments": [

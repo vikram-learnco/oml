@@ -10,7 +10,10 @@
   "kind": "undergeneralization",
   "domain": "prog.boolean",
   "about": [
-    "prog.bool.short-circuit"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.bool.short-circuit"
+    }
   ],
   "level_band": [
     "secondary",

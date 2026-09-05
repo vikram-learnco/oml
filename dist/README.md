@@ -21,10 +21,11 @@ and the Pages build serves them from the site root).
 | `title` | `CFItem.abbreviatedStatement` |
 | `kind` + first evidence pattern | `CFItem.notes` |
 | `level_band` | `CFItem.educationLevel` (K, 01–12, UG, PG, AE) |
-| domain | `CFItem` of type `Domain`; records are `isChildOf` it |
-| `alignments[].uri` | `isRelatedTo` association to the external URI |
-| `relations.conflicts_with` / `resolved_by` | `isRelatedTo`, relation name in `notes` |
-| provisional M→M relations | `isRelatedTo`, relation name and "provisional" in `notes` (until decision (a)) |
+| domain | `CFItem` of type `Domain`; records with no `specializes` are `isChildOf` it |
+| `relations.specializes` | `isChildOf` from the narrower to the broader misconception (first target is the hierarchy parent; further targets are `isRelatedTo` noted "secondary parent") |
+| `relations.confusable_with` | `isRelatedTo` in both directions, relation name in `notes` |
+| `relations.conflicts_with` / `resolved_by` | `isRelatedTo` to the concept's URI, relation name in `notes` |
+| `alignments[].uri` | `isRelatedTo` association to the external URI, scheme and relation in `notes` |
 
 Identifiers for the document, item types, licence and associations are
 UUIDv5 values derived from the base URI, so re-exporting is deterministic.

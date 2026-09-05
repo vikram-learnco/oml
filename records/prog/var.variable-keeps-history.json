@@ -10,7 +10,10 @@
   "kind": "misapplied-analogy",
   "domain": "prog.variables",
   "about": [
-    "prog.var.variable"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.var.variable"
+    }
   ],
   "level_band": [
     "secondary",

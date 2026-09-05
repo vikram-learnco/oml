@@ -10,7 +10,10 @@
   "kind": "misapplied-analogy",
   "domain": "prog.functions",
   "about": [
-    "prog.func.recursion"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.func.recursion"
+    }
   ],
   "level_band": [
     "secondary",

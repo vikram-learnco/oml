@@ -22,11 +22,11 @@ One misconception. Required fields first.
 | `evidence_patterns[]` | At least one `{item_shape, signature, example{item, expected, response}}`. |
 | `provenance` | `{sources[], origin}`; every source has `type` and `citation`, optionally `doi`, `url`, `identifier`, `license`. |
 | `license` | Always `CC-BY-4.0`. |
-| `about[]` | Concepts the misconception is about (OML concept IDs or CASE URIs; see provisional areas). |
+| `about[]` | Concepts the misconception is about: `{scheme: CASE|OML, uri, label?}`. Prefer CASE URIs; an OML concept URI (`<base>/c/<concept-id>`) only where no CASE URI exists. |
 | `level_band[]` | Education levels where it is typically seen. |
 | `locale` | BCP 47 tag for the text; default `en`. |
 | `discriminators` | `vs_slip` (systematic vs one-off) and `vs{<neighbour-id>: text}`. |
-| `relations` | Typed links; see provisional areas. |
+| `relations` | Closed object. `conflicts_with`, `resolved_by` → concepts as `{external: <uri>}`; `confusable_with` (symmetric), `specializes` → OML record ids. |
 | `alignments[]` | `{scheme, uri|guid, code?, relation?, note?}` into external schemes. |
 | `prevalence` | Reserved; not populated in v1. |
 | `review` | `{reviewer, date, notes?}`; required when `status` is `reviewed`. |
@@ -37,7 +37,7 @@ One misconception. Required fields first.
 * `status: reviewed` requires `review`.
 * `status: merged` requires `history.merged_into`.
 * Every evidence pattern has a concrete `example`.
-* Every relation target is an OML id or `{"external": "<uri>"}`.
+* Concept relations (`conflicts_with`, `resolved_by`) take `{"external": "<uri>"}`; misconception relations (`confusable_with`, `specializes`) take OML record ids. No other relation keys are accepted.
 
 ## `diagnosis-record.schema.json`
 
@@ -55,16 +55,21 @@ One diagnosed learner response, for systems that emit diagnoses citing OML.
 | `insufficient_evidence` | `true` when the response was too thin to diagnose. |
 | `observed_at` | Optional timestamp. |
 
-## Provisional areas
+## Decisions recorded in the schema (2026-09-05)
 
-Two parts of the record schema are marked provisional and may change before
-v1.0. Records that use them validate today.
+1. **Relations.** Misconception→Concept: `conflicts_with`, `resolved_by` only.
+   Misconception→Misconception: `confusable_with` (symmetric; `oml validate`
+   warns when the reverse edge is missing) and `specializes` only.
+   `co_occurs_with` and `blocked_by` were dropped before any release.
+2. **`about`.** CASE URIs directly; an OML concept URI only where no CASE
+   URI exists. Both schemes are accepted, tagged by `scheme`.
+3. **ID space.** A record's `id`/`uri` is the canonical public ID of the
+   corresponding Knowledge Map Misconception node. There is no second
+   identifier field; the `uuid` exists only for systems that need an opaque
+   key (it is the CASE `CFItem.identifier`).
 
-1. **Misconception-to-misconception relations.** `relations.conflicts_with`
-   and `relations.resolved_by` mirror the Knowledge Map's `conflicts-with` and
-   `resolves` edges and are settled. `confusable_with`, `specializes`,
-   `co_occurs_with`, and `blocked_by` carry `"x-status": "provisional"` in
-   the schema. Open decision (a) decides which survive.
-2. **`about` targets.** Strings in `about[]` may be OML's own concept IDs or
-   CASE item URIs. Open decision (b) picks one. Until then the validator
-   accepts any non-empty string.
+## Still provisional
+
+* `prevalence` is reserved and unpopulated; its shape may change.
+* The base URI (`https://oml.learnco.io`) is a placeholder until the domain
+  is decided. Record `uri` values are rewritten mechanically when it changes.

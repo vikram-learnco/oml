@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
-    "http://corestandards.org/Math/Content/5/NF/B/5/"
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/5/NF/B/5/"
+    }
   ],
   "level_band": [
     "primary",
@@ -61,9 +64,6 @@
         "external": "http://corestandards.org/Math/Content/5/NF/B/4/",
         "label": "CCSS 5.NF.B.4: multiply a fraction or whole number by a fraction"
       }
-    ],
-    "co_occurs_with": [
-      "math.frac.divide-makes-smaller"
     ]
   },
   "alignments": [

@@ -10,7 +10,10 @@
   "kind": "misapplied-analogy",
   "domain": "prog.variables",
   "about": [
-    "prog.var.assignment"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.var.assignment"
+    }
   ],
   "level_band": [
     "secondary",
@@ -49,7 +52,8 @@
       }
     ],
     "confusable_with": [
-      "prog.var.assignment-links-variables"
+      "prog.var.assignment-links-variables",
+      "prog.var.assignment-is-equation"
     ]
   },
   "provenance": {

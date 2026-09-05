@@ -10,7 +10,10 @@
   "kind": "undergeneralization",
   "domain": "prog.functions",
   "about": [
-    "prog.func.single-return-value"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.func.single-return-value"
+    }
   ],
   "level_band": [
     "undergraduate"

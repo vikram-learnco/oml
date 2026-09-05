@@ -11,14 +11,10 @@ from jsonschema import Draft202012Validator, FormatChecker
 from .config import Config
 from .loader import LoadedRecord, expected_id_for_path, load_records
 
-RELATION_KEYS = {
-    "conflicts_with",
-    "resolved_by",
-    "confusable_with",
-    "specializes",
-    "co_occurs_with",
-    "blocked_by",
-}
+CONCEPT_RELATIONS = {"conflicts_with", "resolved_by"}
+MISCONCEPTION_RELATIONS = {"confusable_with", "specializes"}
+RELATION_KEYS = CONCEPT_RELATIONS | MISCONCEPTION_RELATIONS
+SYMMETRIC_RELATIONS = {"confusable_with"}
 
 
 @dataclass
@@ -102,8 +98,13 @@ def validate_records(
             if r.id:
                 seen_ids.setdefault(r.id, r.path)
 
+    corpus_by_id: dict[str, dict] = {r.id: r.data for r in corpus if r.id and r.data}
+    for r in records:
+        if r.id and r.data:
+            corpus_by_id.setdefault(r.id, r.data)
+
     for rec in records:
-        _validate_one(rec, config, validator, known_ids, seen_uuids, seen_ids, report)
+        _validate_one(rec, config, validator, known_ids, corpus_by_id, seen_uuids, seen_ids, report)
 
     return report
 
@@ -113,6 +114,7 @@ def _validate_one(
     config: Config,
     validator: Draft202012Validator,
     known_ids: set[str],
+    corpus_by_id: dict[str, dict],
     seen_uuids: dict[str, Path],
     seen_ids: dict[str, Path],
     report: Report,
@@ -171,20 +173,35 @@ def _validate_one(
     # relations resolve
     for key, target in _relation_targets(data):
         if key not in RELATION_KEYS:
-            report.problems.append(Problem(path, f"relations.{key}: unknown relation type"))
-        if isinstance(target, str):
-            if target == record_id:
+            report.problems.append(Problem(path, f"relations.{key}: unknown relation type (allowed: {sorted(RELATION_KEYS)})"))
+            continue
+        if key in MISCONCEPTION_RELATIONS:
+            if not isinstance(target, str):
+                report.problems.append(Problem(path, f"relations.{key}: targets must be OML record ids"))
+            elif target == record_id:
                 report.problems.append(Problem(path, f"relations.{key}: record points at itself"))
             elif target not in known_ids:
+                report.problems.append(Problem(path, f"relations.{key}: target {target!r} is not a record in the repo"))
+            elif key in SYMMETRIC_RELATIONS:
+                other = corpus_by_id.get(target)
+                if other is not None:
+                    reverse = ((other.get("relations") or {}).get(key) or [])
+                    if record_id not in reverse:
+                        report.problems.append(
+                            Problem(path, f"relations.{key}: {target!r} does not list {record_id!r} back (relation is symmetric)", "warning")
+                        )
+        else:  # concept relations: external URIs only
+            if not (isinstance(target, dict) and target.get("external")):
                 report.problems.append(
-                    Problem(
-                        path,
-                        f"relations.{key}: target {target!r} is not a record in the repo "
-                        "(use {\"external\": \"<uri>\"} for external targets)",
-                    )
+                    Problem(path, f"relations.{key}: targets are concepts and must be {{\"external\": \"<uri>\"}}")
                 )
-        elif isinstance(target, dict) and "external" not in target:
-            report.problems.append(Problem(path, f"relations.{key}: object target must have 'external'"))
+
+    # about: OML-scheme URIs live under <base>/c/
+    for entry in data.get("about", []) or []:
+        if isinstance(entry, dict) and entry.get("scheme") == "OML":
+            uri = str(entry.get("uri", ""))
+            if not uri.startswith(config.base_uri + "/c/"):
+                report.problems.append(Problem(path, f"about: OML concept URI must start with {config.base_uri}/c/ (got {uri!r})"))
 
     # discriminators.vs keys resolve
     vs = (data.get("discriminators") or {}).get("vs") if isinstance(data.get("discriminators"), dict) else None

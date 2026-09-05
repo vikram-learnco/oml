@@ -27,7 +27,7 @@ jobs:
         id: validate
         run: |
           set -o pipefail
-          oml validate records/ 2> errors.txt | tee summary.txt
+          oml validate records/ --strict 2> errors.txt | tee summary.txt
       - name: Summary
         if: always()
         run: |

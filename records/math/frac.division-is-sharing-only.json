@@ -10,8 +10,14 @@
   "kind": "undergeneralization",
   "domain": "math.fractions",
   "about": [
-    "http://corestandards.org/Math/Content/6/NS/A/1/",
-    "http://corestandards.org/Math/Content/5/NF/B/7/"
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/6/NS/A/1/"
+    },
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/5/NF/B/7/"
+    }
   ],
   "level_band": [
     "primary",

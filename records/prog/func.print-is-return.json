@@ -10,7 +10,10 @@
   "kind": "misapplied-analogy",
   "domain": "prog.functions",
   "about": [
-    "prog.func.return"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.func.return"
+    }
   ],
   "level_band": [
     "secondary",

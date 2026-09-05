@@ -10,7 +10,10 @@
   "kind": "misapplied-analogy",
   "domain": "prog.control",
   "about": [
-    "prog.control.loop"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.control.loop"
+    }
   ],
   "level_band": [
     "secondary",

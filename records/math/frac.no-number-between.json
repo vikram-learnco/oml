@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
-    "http://corestandards.org/Math/Content/6/NS/C/6/"
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/6/NS/C/6/"
+    }
   ],
   "level_band": [
     "middle",

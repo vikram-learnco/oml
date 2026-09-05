@@ -24,10 +24,14 @@ First citable release.
 * Static site with one page per record at its stable URI.
 * Contribution path: CONTRIBUTING.md, PR checklist, issue templates, Contributor Covenant 2.1.
 
+### Decided before release (2026-09-05)
+
+* Relations are a closed set: `conflicts_with`, `resolved_by` (to concepts), `confusable_with` (symmetric), `specializes` (to misconceptions).
+* `about[]` entries are `{scheme: CASE|OML, uri}`; CASE preferred.
+* The record `id`/`uri` is the canonical ID of the Knowledge Map Misconception node.
+
 ### Provisional
 
-* `relations.confusable_with`, `specializes`, `co_occurs_with`, `blocked_by` (open decision (a)).
-* `about[]` may hold OML concept IDs or CASE URIs (open decision (b)).
 * Base URI `https://oml.learnco.io` is a placeholder pending the domain decision.
 
 [Unreleased]: https://github.com/vikram-learnco/oml/compare/v0.1.0...HEAD

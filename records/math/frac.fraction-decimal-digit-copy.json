@@ -10,7 +10,10 @@
   "kind": "notation-confusion",
   "domain": "math.fractions",
   "about": [
-    "http://corestandards.org/Math/Content/4/NF/C/6/"
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/4/NF/C/6/"
+    }
   ],
   "level_band": [
     "primary",

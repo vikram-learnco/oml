@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "prog.objects",
   "about": [
-    "prog.obj.identity-vs-equality"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.obj.identity-vs-equality"
+    }
   ],
   "level_band": [
     "secondary",

@@ -86,7 +86,7 @@ class CliExitCodes(unittest.TestCase):
         )
 
     def test_real_records_pass(self):
-        proc = self.run_cli("validate", "records/", cwd=ROOT)
+        proc = self.run_cli("validate", "records/", "--strict", cwd=ROOT)
         self.assertEqual(proc.returncode, 0, proc.stderr)
         self.assertIn("records checked / 0 errors", proc.stdout)
 
@@ -118,3 +118,25 @@ class DiagnosisSchema(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SymmetricRelations(unittest.TestCase):
+    def test_missing_reverse_confusable_with_warns(self):
+        import copy
+        import tempfile
+
+        good = FIXTURES / "good" / "records" / "math"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "records" / "math").mkdir(parents=True)
+            (root / "oml.config.json").write_text((ROOT / "oml.config.json").read_text())
+            a = json.loads((good / "frac.add-across.json").read_text())
+            b = json.loads((good / "frac.add-numerators-keep-denominator.json").read_text())
+            b = copy.deepcopy(b)
+            b["relations"].pop("confusable_with", None)
+            (root / "records" / "math" / "frac.add-across.json").write_text(json.dumps(a))
+            (root / "records" / "math" / "frac.add-numerators-keep-denominator.json").write_text(json.dumps(b))
+            cfg = fixture_config(root / "records")
+            report = validate_records(root / "records", cfg)
+            self.assertTrue(report.ok, [str(p) for p in report.errors])
+            self.assertTrue(any("symmetric" in w.message for w in report.warnings), [str(w) for w in report.warnings])

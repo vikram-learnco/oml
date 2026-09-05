@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "prog.types",
   "about": [
-    "prog.type.integer-division"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.type.integer-division"
+    }
   ],
   "level_band": [
     "secondary",

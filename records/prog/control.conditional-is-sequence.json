@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "prog.control",
   "about": [
-    "prog.control.conditional"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.control.conditional"
+    }
   ],
   "level_band": [
     "primary",

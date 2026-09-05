@@ -10,7 +10,10 @@
   "kind": "misapplied-analogy",
   "domain": "prog.execution",
   "about": [
-    "prog.exec.literal-interpretation"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.exec.literal-interpretation"
+    }
   ],
   "level_band": [
     "primary",

@@ -10,7 +10,10 @@
   "kind": "bad-kind",
   "domain": "math.fractions",
   "about": [
-    "http://corestandards.org/Math/Content/5/NF/A/1/"
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/5/NF/A/1/"
+    }
   ],
   "level_band": [
     "primary",

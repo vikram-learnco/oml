@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "prog.objects",
   "about": [
-    "prog.obj.immutability"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.obj.immutability"
+    }
   ],
   "level_band": [
     "secondary",

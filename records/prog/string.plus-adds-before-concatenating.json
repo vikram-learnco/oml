@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "prog.strings",
   "about": [
-    "prog.string.concatenation-order"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.string.concatenation-order"
+    }
   ],
   "level_band": [
     "secondary",

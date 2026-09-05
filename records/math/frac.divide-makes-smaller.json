@@ -10,8 +10,14 @@
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
-    "http://corestandards.org/Math/Content/5/NF/B/7/",
-    "http://corestandards.org/Math/Content/6/NS/A/1/"
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/5/NF/B/7/"
+    },
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/6/NS/A/1/"
+    }
   ],
   "level_band": [
     "primary",
@@ -64,9 +70,6 @@
         "external": "http://corestandards.org/Math/Content/6/NS/A/1/",
         "label": "CCSS 6.NS.A.1: interpret and compute quotients of fractions"
       }
-    ],
-    "co_occurs_with": [
-      "math.frac.multiply-makes-bigger"
     ],
     "confusable_with": [
       "math.frac.invert-dividend",

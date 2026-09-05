@@ -98,8 +98,13 @@ def build_case(config: Config, records: list[dict], version: str | None = None) 
     cf_associations: list[dict] = []
     seq = 0
 
+    assoc_keys: set[str] = set()
+
     def assoc(kind: str, origin: dict, dest: dict, key: str, notes: str | None = None) -> None:
         nonlocal seq
+        if key in assoc_keys:
+            return
+        assoc_keys.add(key)
         seq += 1
         ident = stable_uuid(config, "CFAssociation", key)
         a = {
@@ -172,7 +177,15 @@ def build_case(config: Config, records: list[dict], version: str | None = None) 
             item["educationLevel"] = education
         cf_items.append(item)
 
-        assoc("isChildOf", link, domain_links[domain], f"isChildOf/{r['id']}/{domain}")
+        # Hierarchy: a record that specializes another sits under it; otherwise under its domain.
+        specializes = [t for t in (r.get("relations") or {}).get("specializes", []) if t in record_links]
+        if specializes:
+            parent = record_links[specializes[0]]
+            assoc("isChildOf", link, parent, f"isChildOf/{r['id']}/{specializes[0]}", notes="oml relation: specializes")
+            for extra in specializes[1:]:
+                assoc("isRelatedTo", link, record_links[extra], f"isRelatedTo/{r['id']}/specializes/{extra}", notes="oml relation: specializes (secondary parent)")
+        else:
+            assoc("isChildOf", link, domain_links[domain], f"isChildOf/{r['id']}/{domain}")
 
         for al in r.get("alignments", []):
             if al.get("uri"):
@@ -186,17 +199,19 @@ def build_case(config: Config, records: list[dict], version: str | None = None) 
                 )
 
         for rel_name, targets in (r.get("relations") or {}).items():
+            if rel_name == "specializes":
+                continue  # exported as isChildOf above
             for t in targets:
                 if isinstance(t, str) and t in record_links:
-                    assoc(
-                        "isRelatedTo",
-                        link,
-                        record_links[t],
-                        f"isRelatedTo/{r['id']}/{rel_name}/{t}",
-                        notes=f"oml relation: {rel_name} (provisional M->M relation until decision (a))"
-                        if rel_name not in ("conflicts_with", "resolved_by")
-                        else f"oml relation: {rel_name}",
-                    )
+                    # confusable_with is symmetric: emit both directions, deduplicated by key.
+                    for a, b in ((r["id"], t), (t, r["id"])):
+                        assoc(
+                            "isRelatedTo",
+                            record_links[a],
+                            record_links[b],
+                            f"isRelatedTo/{a}/{rel_name}/{b}",
+                            notes=f"oml relation: {rel_name}",
+                        )
                 elif isinstance(t, dict) and t.get("external"):
                     dest = {"title": t.get("label") or t["external"], "identifier": stable_uuid(config, "ext", t["external"]), "uri": t["external"]}
                     assoc(

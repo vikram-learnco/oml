@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "prog.functions",
   "about": [
-    "prog.func.parameter-passing"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.func.parameter-passing"
+    }
   ],
   "level_band": [
     "secondary",
@@ -54,9 +57,6 @@
     ],
     "confusable_with": [
       "prog.func.argument-name-must-match-parameter"
-    ],
-    "co_occurs_with": [
-      "prog.var.assignment-links-variables"
     ]
   },
   "provenance": {

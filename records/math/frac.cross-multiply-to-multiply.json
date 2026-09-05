@@ -10,7 +10,10 @@
   "kind": "procedural-bug",
   "domain": "math.fractions",
   "about": [
-    "http://corestandards.org/Math/Content/5/NF/B/4/"
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/5/NF/B/4/"
+    }
   ],
   "level_band": [
     "middle",

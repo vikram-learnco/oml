@@ -10,7 +10,10 @@
   "kind": "misapplied-analogy",
   "domain": "prog.objects",
   "about": [
-    "prog.obj.reference"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.obj.reference"
+    }
   ],
   "level_band": [
     "secondary",
@@ -57,7 +60,8 @@
       }
     ],
     "confusable_with": [
-      "prog.obj.assignment-copies-object"
+      "prog.obj.assignment-copies-object",
+      "prog.obj.equality-compares-contents"
     ]
   },
   "alignments": [

@@ -10,8 +10,14 @@
   "kind": "overgeneralization",
   "domain": "prog.control",
   "about": [
-    "prog.control.loop",
-    "prog.var.variable"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.control.loop"
+    },
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.var.variable"
+    }
   ],
   "level_band": [
     "primary",

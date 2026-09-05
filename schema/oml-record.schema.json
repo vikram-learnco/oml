@@ -48,7 +48,12 @@
     },
     "status": {
       "type": "string",
-      "enum": ["draft", "reviewed", "deprecated", "merged"],
+      "enum": [
+        "draft",
+        "reviewed",
+        "deprecated",
+        "merged"
+      ],
       "description": "Lifecycle state. `reviewed` requires a `review` block; `merged` requires `history.merged_into`."
     },
     "title": {
@@ -81,9 +86,34 @@
     },
     "about": {
       "type": "array",
-      "description": "Concepts this misconception is about. Strings are either OML concept IDs or CASE item URIs; which is canonical is an open decision (b).",
-      "items": { "type": "string", "minLength": 1 },
-      "uniqueItems": true
+      "description": "Concepts this misconception is about. Prefer CASE URIs; use an OML concept URI only where no CASE URI exists. Decided 2026-09-05.",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scheme",
+          "uri"
+        ],
+        "properties": {
+          "scheme": {
+            "type": "string",
+            "enum": [
+              "CASE",
+              "OML"
+            ],
+            "description": "CASE for a CASE item URI; OML for an OML concept URI (<base>/c/<concept-id>)."
+          },
+          "uri": {
+            "type": "string",
+            "format": "uri",
+            "minLength": 1
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
     },
     "level_band": {
       "type": "array",
@@ -91,8 +121,15 @@
       "items": {
         "type": "string",
         "enum": [
-          "early-primary", "primary", "middle", "secondary",
-          "upper-secondary", "undergraduate", "graduate", "adult", "any"
+          "early-primary",
+          "primary",
+          "middle",
+          "secondary",
+          "upper-secondary",
+          "undergraduate",
+          "graduate",
+          "adult",
+          "any"
         ]
       },
       "uniqueItems": true
@@ -106,7 +143,9 @@
       "type": "array",
       "minItems": 1,
       "description": "Observable response patterns that indicate the belief. At least one, each with a concrete example.",
-      "items": { "$ref": "#/$defs/evidence_pattern" }
+      "items": {
+        "$ref": "#/$defs/evidence_pattern"
+      }
     },
     "discriminators": {
       "type": "object",
@@ -121,68 +160,76 @@
         "vs": {
           "type": "object",
           "description": "Keyed by neighbouring OML id; value explains the observable difference.",
-          "propertyNames": { "pattern": "^[a-z]+(\\.[a-z0-9-]+)+$" },
-          "additionalProperties": { "type": "string", "minLength": 5 }
+          "propertyNames": {
+            "pattern": "^[a-z]+(\\.[a-z0-9-]+)+$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 5
+          }
         }
       }
     },
     "relations": {
       "type": "object",
-      "description": "Typed links to other records or external nodes. Open object in v0.1; keys beyond those listed are rejected by the validator. `conflicts_with` and `resolved_by` mirror the Knowledge Map's `conflicts-with` and `resolves` edges. The four provisional keys are misconception-to-misconception edges pending open decision (a).",
+      "description": "Typed links. Closed object, decided 2026-09-05: conflicts_with and resolved_by point at Concepts (external URIs, or OML concept URIs); confusable_with and specializes point at OML misconception records. confusable_with is symmetric; the validator warns when the reverse edge is missing. The record id/uri is the canonical public ID of the corresponding Knowledge Map Misconception node; there is no second identifier field.",
       "additionalProperties": false,
       "properties": {
         "conflicts_with": {
           "description": "Concepts this belief contradicts.",
-          "$ref": "#/$defs/relation_targets"
+          "$ref": "#/$defs/concept_targets"
         },
         "resolved_by": {
           "description": "Concepts whose understanding corrects this belief.",
-          "$ref": "#/$defs/relation_targets"
+          "$ref": "#/$defs/concept_targets"
         },
         "confusable_with": {
-          "x-status": "provisional",
-          "description": "Misconceptions that produce similar evidence and need a discriminator.",
-          "$ref": "#/$defs/relation_targets"
+          "description": "Misconceptions that produce similar evidence and need a discriminator. Symmetric.",
+          "$ref": "#/$defs/misconception_targets"
         },
         "specializes": {
-          "x-status": "provisional",
-          "description": "A more general misconception of which this is a special case.",
-          "$ref": "#/$defs/relation_targets"
-        },
-        "co_occurs_with": {
-          "x-status": "provisional",
-          "description": "Misconceptions frequently held by the same learners.",
-          "$ref": "#/$defs/relation_targets"
-        },
-        "blocked_by": {
-          "x-status": "provisional",
-          "description": "Misconceptions that must be resolved before this one can be addressed.",
-          "$ref": "#/$defs/relation_targets"
+          "description": "Broader misconceptions of which this is a special case.",
+          "$ref": "#/$defs/misconception_targets"
         }
       }
     },
     "alignments": {
       "type": "array",
       "description": "Links to items in external schemes (CASE frameworks, other inventories).",
-      "items": { "$ref": "#/$defs/alignment" }
+      "items": {
+        "$ref": "#/$defs/alignment"
+      }
     },
     "provenance": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["sources", "origin"],
+      "required": [
+        "sources",
+        "origin"
+      ],
       "description": "Where this record's claim comes from.",
       "properties": {
         "sources": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/source" }
+          "items": {
+            "$ref": "#/$defs/source"
+          }
         },
         "origin": {
           "type": "string",
-          "enum": ["literature", "inventory-import", "practitioner", "data-mined", "llm-drafted"],
+          "enum": [
+            "literature",
+            "inventory-import",
+            "practitioner",
+            "data-mined",
+            "llm-drafted"
+          ],
           "description": "How the record entered OML. `llm-drafted` records must cite literature in `sources` and stay `draft` until reviewed."
         },
-        "notes": { "type": "string" }
+        "notes": {
+          "type": "string"
+        }
       }
     },
     "prevalence": {
@@ -190,21 +237,44 @@
       "additionalProperties": false,
       "description": "Reserved for measured prevalence. Out of scope for v1; shape is provisional.",
       "properties": {
-        "population": { "type": "string" },
-        "rate": { "type": "number", "minimum": 0, "maximum": 1 },
-        "n": { "type": "integer", "minimum": 1 },
-        "source": { "type": "string" }
+        "population": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source": {
+          "type": "string"
+        }
       }
     },
     "review": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["reviewer", "date"],
+      "required": [
+        "reviewer",
+        "date"
+      ],
       "description": "Present when status is `reviewed`. Records who checked the record and when.",
       "properties": {
-        "reviewer": { "type": "string", "minLength": 1 },
-        "date": { "type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
-        "notes": { "type": "string" }
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "notes": {
+          "type": "string"
+        }
       }
     },
     "history": {
@@ -213,7 +283,10 @@
       "properties": {
         "supersedes": {
           "type": "array",
-          "items": { "type": "string", "pattern": "^[a-z]+(\\.[a-z0-9-]+)+$" },
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z]+(\\.[a-z0-9-]+)+$"
+          },
           "uniqueItems": true,
           "description": "Older records this one replaces."
         },
@@ -222,17 +295,31 @@
           "pattern": "^[a-z]+(\\.[a-z0-9-]+)+$",
           "description": "Required when status is `merged`. The surviving record."
         },
-        "deprecated_reason": { "type": "string" },
+        "deprecated_reason": {
+          "type": "string"
+        },
         "changelog": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["version", "date", "change"],
+            "required": [
+              "version",
+              "date",
+              "change"
+            ],
             "properties": {
-              "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
-              "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
-              "change": { "type": "string" }
+              "version": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+              },
+              "date": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "change": {
+                "type": "string"
+              }
             }
           }
         }
@@ -246,14 +333,38 @@
   },
   "allOf": [
     {
-      "if": { "properties": { "status": { "const": "reviewed" } } },
-      "then": { "required": ["review"] }
+      "if": {
+        "properties": {
+          "status": {
+            "const": "reviewed"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "review"
+        ]
+      }
     },
     {
-      "if": { "properties": { "status": { "const": "merged" } } },
+      "if": {
+        "properties": {
+          "status": {
+            "const": "merged"
+          }
+        }
+      },
       "then": {
-        "required": ["history"],
-        "properties": { "history": { "required": ["merged_into"] } }
+        "required": [
+          "history"
+        ],
+        "properties": {
+          "history": {
+            "required": [
+              "merged_into"
+            ]
+          }
+        }
       }
     }
   ],
@@ -261,7 +372,11 @@
     "evidence_pattern": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["item_shape", "signature", "example"],
+      "required": [
+        "item_shape",
+        "signature",
+        "example"
+      ],
       "properties": {
         "item_shape": {
           "type": "string",
@@ -276,80 +391,162 @@
         "example": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["item", "expected", "response"],
+          "required": [
+            "item",
+            "expected",
+            "response"
+          ],
           "properties": {
-            "item": { "type": "string", "minLength": 1, "description": "The task as shown to the learner." },
-            "expected": { "type": "string", "minLength": 1, "description": "The correct response." },
-            "response": { "type": "string", "minLength": 1, "description": "The response a holder of the belief gives." }
-          }
-        },
-        "notes": { "type": "string" }
-      }
-    },
-    "relation_targets": {
-      "type": "array",
-      "minItems": 1,
-      "uniqueItems": true,
-      "items": {
-        "oneOf": [
-          {
-            "type": "string",
-            "pattern": "^[a-z]+(\\.[a-z0-9-]+)+$",
-            "description": "An OML record id."
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["external"],
-            "properties": {
-              "external": {
-                "type": "string",
-                "minLength": 1,
-                "description": "A URI or identifier outside OML (a CASE item, a Knowledge Map node)."
-              },
-              "label": { "type": "string" }
+            "item": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The task as shown to the learner."
+            },
+            "expected": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The correct response."
+            },
+            "response": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The response a holder of the belief gives."
             }
           }
-        ]
+        },
+        "notes": {
+          "type": "string"
+        }
       }
     },
     "alignment": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["scheme"],
-      "anyOf": [{ "required": ["uri"] }, { "required": ["guid"] }],
+      "required": [
+        "scheme"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "uri"
+          ]
+        },
+        {
+          "required": [
+            "guid"
+          ]
+        }
+      ],
       "properties": {
         "scheme": {
           "type": "string",
           "minLength": 1,
           "description": "Name of the external scheme (e.g. `CCSS`, `progmiscon`, `eedi`)."
         },
-        "uri": { "type": "string", "format": "uri" },
-        "guid": { "type": "string", "minLength": 1 },
-        "code": { "type": "string", "description": "Human-readable code in the scheme (e.g. `5.NF.A.1`)." },
+        "uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "guid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "code": {
+          "type": "string",
+          "description": "Human-readable code in the scheme (e.g. `5.NF.A.1`)."
+        },
         "relation": {
           "type": "string",
-          "enum": ["about", "same-as", "close-match", "conflicts-with"],
+          "enum": [
+            "about",
+            "same-as",
+            "close-match",
+            "conflicts-with"
+          ],
           "description": "How this record relates to the aligned item. Default `about`."
         },
-        "note": { "type": "string" }
+        "note": {
+          "type": "string"
+        }
       }
     },
     "source": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["type", "citation"],
+      "required": [
+        "type",
+        "citation"
+      ],
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["paper", "book", "inventory", "dataset", "standard", "web", "practitioner"]
+          "enum": [
+            "paper",
+            "book",
+            "inventory",
+            "dataset",
+            "standard",
+            "web",
+            "practitioner"
+          ]
         },
-        "citation": { "type": "string", "minLength": 5, "description": "Human-readable citation." },
-        "doi": { "type": "string", "pattern": "^10\\.[0-9]{4,9}/\\S+$" },
-        "url": { "type": "string", "format": "uri" },
-        "identifier": { "type": "string", "description": "The source's own identifier for this misconception, if any." },
-        "license": { "type": "string", "description": "Licence of the source, if text was reused." },
-        "note": { "type": "string" }
+        "citation": {
+          "type": "string",
+          "minLength": 5,
+          "description": "Human-readable citation."
+        },
+        "doi": {
+          "type": "string",
+          "pattern": "^10\\.[0-9]{4,9}/\\S+$"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "The source's own identifier for this misconception, if any."
+        },
+        "license": {
+          "type": "string",
+          "description": "Licence of the source, if text was reused."
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "concept_targets": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "external"
+        ],
+        "properties": {
+          "external": {
+            "type": "string",
+            "format": "uri",
+            "minLength": 1,
+            "description": "A CASE item URI, or an OML concept URI (<base>/c/<concept-id>), or another external concept URI."
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "misconception_targets": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]+(\\.[a-z0-9-]+)+$",
+        "description": "An OML record id."
       }
     }
   }

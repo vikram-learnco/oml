@@ -10,7 +10,10 @@
   "kind": "undergeneralization",
   "domain": "prog.boolean",
   "about": [
-    "prog.bool.expression"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.bool.expression"
+    }
   ],
   "level_band": [
     "secondary",

@@ -10,7 +10,10 @@
   "kind": "missing-prerequisite",
   "domain": "prog.functions",
   "about": [
-    "prog.func.base-case"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.func.base-case"
+    }
   ],
   "level_band": [
     "middle",

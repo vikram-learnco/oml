@@ -10,7 +10,10 @@
   "kind": "notation-confusion",
   "domain": "prog.arrays",
   "about": [
-    "prog.arr.length"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.arr.length"
+    }
   ],
   "level_band": [
     "secondary",

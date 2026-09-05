@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "prog.arrays",
   "about": [
-    "prog.arr.fixed-size"
+    {
+      "scheme": "OML",
+      "uri": "https://oml.learnco.io/c/prog.arr.fixed-size"
+    }
   ],
   "level_band": [
     "secondary",

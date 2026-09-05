@@ -10,7 +10,10 @@
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
-    "http://corestandards.org/Math/Content/5/NF/A/1/"
+    {
+      "scheme": "CASE",
+      "uri": "http://corestandards.org/Math/Content/5/NF/A/1/"
+    }
   ],
   "level_band": [
     "primary",
@@ -55,9 +58,6 @@
         "external": "http://corestandards.org/Math/Content/5/NF/A/1/",
         "label": "CCSS 5.NF.A.1: add and subtract fractions with unlike denominators"
       }
-    ],
-    "co_occurs_with": [
-      "math.frac.add-across"
     ]
   },
   "alignments": [
