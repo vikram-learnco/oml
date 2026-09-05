@@ -5,3 +5,4 @@ __pycache__/
 .venv/
 site/_build/
 .DS_Store
+site/_build/
