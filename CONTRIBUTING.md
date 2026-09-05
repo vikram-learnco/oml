@@ -20,6 +20,7 @@ Tooling:
 ```sh
 pip install -e tools/oml
 oml validate records/      # must pass before you open a PR
+oml trust                  # computes trust from reviews; commit the result
 oml index                  # regenerates records/INDEX.md; commit the result
 ```
 
@@ -36,7 +37,7 @@ One pull request, one record.
    uuid; print(uuid.uuid4())"`).
 3. Fill in the required fields. The checklist below is what reviewers look
    for.
-4. Set `status: draft`. Only maintainers set `reviewed`.
+4. Set `status: draft` and leave `reviews` and `trust` out; `oml trust` fills in `trust`. Only maintainers set `reviewed`.
 5. Run `oml validate records/` and `oml index`, commit both, open the PR.
    CI runs the same validation and blocks merge on any error.
 
@@ -93,13 +94,30 @@ meaning are patch bumps.
 
 ## What `reviewed` means
 
-`reviewed` means a maintainer has read the record against the checklist
-above, checked that the sources say what the record says they say, and
-confirmed the discriminators against the neighbours. It is recorded in the
-`review` block with the reviewer's name and date. Only maintainers set
-`reviewed`; a PR from anyone else that sets it will be asked to change it
-back to `draft`. `draft` records are published and citable like any other;
-the status tells consumers how much scrutiny the record has had.
+Every record carries `reviews[]`. A review says who looked (`kind`:
+`human`, `model` or `attested`), at what (`scope`: statement, evidence,
+discriminators, sources), when, and with what `verdict`. Human reviewers
+sign with a durable handle (`"Name (github:handle)"` or an ORCID); model
+reviews name the model id and version; attested reviews point at the
+provenance source that asserts the misconception.
+
+Status follows from the reviews and the validator enforces it:
+
+| Status | Requires |
+|--------|----------|
+| `draft` | Nothing. Evidence and provenance present, no review yet. |
+| `llm-reviewed` | A model review with verdict `accept` covering `statement` and `evidence`. |
+| `reviewed` | A human review with verdict `accept`, or an attested review. |
+
+Only maintainers add human reviews. A PR from anyone else that adds one, or
+sets `reviewed`, will be asked to change it back. `draft` and
+`llm-reviewed` records are published and citable like any other; the
+status tells consumers how much scrutiny the record has had.
+
+`trust` (`low`, `medium`, `high`) is not a field you edit. `oml trust`
+computes it from `reviews[]` and the weights in `reviewers/registry.json`,
+and CI fails if a stored value disagrees. Run `oml trust` after adding a
+review and commit the result.
 
 ## Code contributions
 

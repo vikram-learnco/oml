@@ -3,8 +3,9 @@
   "id": "math.frac.equivalence-additive",
   "uri": "https://oml.learnco.io/m/math.frac.equivalence-additive",
   "uuid": "5aadfc6d-33f3-4336-908b-02c278e40508",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Equivalent fractions by adding the same number",
   "statement": "You get an equivalent fraction by adding the same number to the numerator and the denominator, or by subtracting the same number from both.",
   "kind": "overgeneralization",
@@ -95,6 +96,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

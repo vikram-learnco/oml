@@ -1,11 +1,11 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
-  "id": "math.frac.dup-uuid",
-  "uri": "https://oml.learnco.io/m/math.frac.dup-uuid",
-  "uuid": "20f1dd60-ea8a-4e14-ab41-12addc94b751",
+  "id": "math.frac.model-only",
+  "uri": "https://oml.learnco.io/m/math.frac.model-only",
+  "uuid": "4d4d4d4d-4d4d-4d4d-8d4d-4d4d4d4d4d4d",
   "version": "1.1.0",
   "status": "reviewed",
-  "trust": "high",
+  "trust": "low",
   "title": "Adding fractions across numerators and denominators",
   "statement": "Fractions are added by adding the numerators together and adding the denominators together.",
   "notes": "Likely origins: whole-number bias (numerator and denominator treated as independent whole numbers) and overgeneralisation from the multiplication rule.",
@@ -111,19 +111,6 @@
   },
   "reviews": [
     {
-      "kind": "human",
-      "by": "Vikram Maram (github:vikram-learnco)",
-      "date": "2026-09-05",
-      "scope": [
-        "statement",
-        "evidence",
-        "discriminators",
-        "sources"
-      ],
-      "verdict": "accept",
-      "notes": "Reviewed in session against the design worked example; statement trimmed to the belief; cause moved to notes."
-    },
-    {
       "kind": "model",
       "by": "claude-fable-5-1",
       "date": "2026-09-05",
@@ -134,26 +121,6 @@
         "sources"
       ],
       "verdict": "accept"
-    },
-    {
-      "kind": "attested",
-      "by": 0,
-      "date": "2026-09-05",
-      "scope": [
-        "statement"
-      ],
-      "verdict": "accept",
-      "notes": "Brown & VanLehn (1980): add-across as the canonical fraction bug in repair theory."
-    },
-    {
-      "kind": "attested",
-      "by": 2,
-      "date": "2026-09-05",
-      "scope": [
-        "statement"
-      ],
-      "verdict": "accept",
-      "notes": "Siegler, Thompson & Schneider (2011): independent whole-number operations on numerators and denominators as the most common fraction-arithmetic error."
     }
   ],
   "history": {

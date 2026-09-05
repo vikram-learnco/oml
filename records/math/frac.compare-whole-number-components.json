@@ -3,8 +3,9 @@
   "id": "math.frac.compare-whole-number-components",
   "uri": "https://oml.learnco.io/m/math.frac.compare-whole-number-components",
   "uuid": "210d5db3-daa8-49be-aaf9-aa453ea6b234",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Comparing fractions by their whole-number parts",
   "statement": "To compare two fractions you compare the numerators and the denominators as whole numbers; a fraction with bigger numbers is a bigger fraction.",
   "kind": "overgeneralization",
@@ -95,6 +96,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

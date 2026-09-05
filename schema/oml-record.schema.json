@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://oml.learnco.io/schema/oml-record.schema.json",
   "title": "OML record",
-  "description": "One misconception in the Open Misconception Library. Schema version 0.1.",
+  "description": "One misconception in the Open Misconception Library. Schema version 0.2 (v0.1.1 release): framework-agnostic alignments, reviews[] with a status lifecycle, computed trust.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -50,11 +50,12 @@
       "type": "string",
       "enum": [
         "draft",
+        "llm-reviewed",
         "reviewed",
         "deprecated",
         "merged"
       ],
-      "description": "Lifecycle state. `reviewed` requires a `review` block; `merged` requires `history.merged_into`."
+      "description": "Lifecycle: draft -> llm-reviewed -> reviewed -> deprecated | merged. llm-reviewed needs at least one model review with verdict accept covering statement and evidence; reviewed needs at least one human accept or one attested review. merged requires history.merged_into. The validator enforces the review rules."
     },
     "title": {
       "type": "string",
@@ -86,30 +87,10 @@
     },
     "about": {
       "type": "array",
-      "description": "Concepts this misconception is about. Prefer CASE item URIs (scheme CASE); use an OML concept URI (scheme OML) only where no CASE URI exists. Other schemes (e.g. CCSS for corestandards.org URLs) label URIs that are neither CASE identifiers nor OML concepts. Decided 2026-09-05.",
+      "description": "Concepts this misconception is about: {scheme, uri, code?, note?}. scheme is a free string; known schemes live in schemes/registry.json and the validator warns on unknown ones. Prefer CASE item URIs; use OML concept URIs (<base>/c/<id>) only where no CASE URI exists.",
       "uniqueItems": true,
       "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "scheme",
-          "uri"
-        ],
-        "properties": {
-          "scheme": {
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$",
-            "description": "CASE: a CASE Network item URI. OML: an OML concept URI (<base>/c/<concept-id>). Any other scheme name (e.g. CCSS) labels a non-CASE external URL."
-          },
-          "uri": {
-            "type": "string",
-            "format": "uri",
-            "minLength": 1
-          },
-          "label": {
-            "type": "string"
-          }
-        }
+        "$ref": "#/$defs/alignment"
       }
     },
     "level_band": {
@@ -192,7 +173,7 @@
     },
     "alignments": {
       "type": "array",
-      "description": "Links to items in external schemes (CASE frameworks, other inventories).",
+      "description": "Links to items in external schemes: {scheme, uri, code?, note?}. Framework-agnostic; see schemes/registry.json.",
       "items": {
         "$ref": "#/$defs/alignment"
       }
@@ -251,29 +232,6 @@
         }
       }
     },
-    "review": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "reviewer",
-        "date"
-      ],
-      "description": "Present when status is `reviewed`. Records who checked the record and when.",
-      "properties": {
-        "reviewer": {
-          "type": "string",
-          "minLength": 1
-        },
-        "date": {
-          "type": "string",
-          "format": "date",
-          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-        },
-        "notes": {
-          "type": "string"
-        }
-      }
-    },
     "history": {
       "type": "object",
       "additionalProperties": false,
@@ -326,6 +284,26 @@
       "type": "string",
       "const": "CC-BY-4.0",
       "description": "Licence for this record's content. All OML records are CC BY 4.0."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free text about the record that is not part of the belief itself, e.g. likely origins of the misconception."
+    },
+    "trust": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "description": "Computed by `oml trust` from reviews[] against reviewers/registry.json. Never hand-typed; the validator fails on a stored value that does not match the computed one."
+    },
+    "reviews": {
+      "type": "array",
+      "description": "Reviews of this record. Each entry records who reviewed what, when, and with which verdict. Human reviewers carry a durable handle; model reviewers carry a model id and version; attested reviews point at the provenance source that asserts the misconception.",
+      "items": {
+        "$ref": "#/$defs/review"
+      }
     }
   },
   "allOf": [
@@ -333,14 +311,22 @@
       "if": {
         "properties": {
           "status": {
-            "const": "reviewed"
+            "enum": [
+              "reviewed",
+              "llm-reviewed"
+            ]
           }
         }
       },
       "then": {
         "required": [
-          "review"
-        ]
+          "reviews"
+        ],
+        "properties": {
+          "reviews": {
+            "minItems": 1
+          }
+        }
       }
     },
     {
@@ -420,37 +406,26 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "scheme"
-      ],
-      "anyOf": [
-        {
-          "required": [
-            "uri"
-          ]
-        },
-        {
-          "required": [
-            "guid"
-          ]
-        }
+        "scheme",
+        "uri"
       ],
       "properties": {
         "scheme": {
           "type": "string",
-          "minLength": 1,
-          "description": "Name of the external scheme (e.g. `CCSS`, `progmiscon`, `eedi`)."
+          "pattern": "^[A-Za-z][A-Za-z0-9-]*$",
+          "description": "Name of the scheme, e.g. CASE, OML, CCSS, progmiscon. Free string; not an enum."
         },
         "uri": {
           "type": "string",
-          "format": "uri"
-        },
-        "guid": {
-          "type": "string",
+          "format": "uri",
           "minLength": 1
         },
         "code": {
           "type": "string",
-          "description": "Human-readable code in the scheme (e.g. `5.NF.A.1`)."
+          "description": "Human-readable code in the scheme (e.g. 5.NF.A.1, Java/AssignCompares)."
+        },
+        "label": {
+          "type": "string"
         },
         "relation": {
           "type": "string",
@@ -460,7 +435,7 @@
             "close-match",
             "conflicts-with"
           ],
-          "description": "How this record relates to the aligned item. Default `about`."
+          "description": "How this record relates to the item. Default about."
         },
         "note": {
           "type": "string"
@@ -545,6 +520,108 @@
         "pattern": "^[a-z]+(\\.[a-z0-9-]+)+$",
         "description": "An OML record id."
       }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "by",
+        "date",
+        "scope",
+        "verdict"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "human",
+            "model",
+            "attested"
+          ]
+        },
+        "by": {
+          "description": "human: name plus a durable handle, e.g. \"Vikram Maram (github:vikram-learnco)\" or an ORCID. model: model id and version, e.g. claude-fable-5-1. attested: integer index into provenance.sources[] of the source asserting the misconception.",
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "integer",
+              "minimum": 0
+            }
+          ]
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "For model reviews this pins the model's capability at review time."
+        },
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "statement",
+              "evidence",
+              "discriminators",
+              "sources"
+            ]
+          }
+        },
+        "verdict": {
+          "type": "string",
+          "enum": [
+            "accept",
+            "revise",
+            "reject"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "attested"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "by": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "human",
+                  "model"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "by": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

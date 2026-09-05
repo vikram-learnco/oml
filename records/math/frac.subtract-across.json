@@ -3,8 +3,9 @@
   "id": "math.frac.subtract-across",
   "uri": "https://oml.learnco.io/m/math.frac.subtract-across",
   "uuid": "f9b8d0fd-1f46-47ac-8fc7-d4923e7ef2c8",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Subtracting fractions across numerators and denominators",
   "statement": "Fractions are subtracted by subtracting the numerators and subtracting the denominators.",
   "kind": "overgeneralization",
@@ -87,6 +88,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

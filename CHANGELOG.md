@@ -15,10 +15,14 @@ Before 1.0, minor releases may also change the schema; each such change is calle
 
 First release archived by Zenodo; the concept DOI is minted on this tag.
 
-### Changed
+### Changed (record schema 0.2)
 
-* `math.frac.add-across` (record #1): statement trimmed to the belief itself, with the multiplication-analogy origin hypothesis moved to provenance notes; `status` set back to `draft` until a named maintainer confirms the review on the record; record version 0.2.0.
-* `about[].scheme` is an open identifier. `CASE` is reserved for CASE Network item URIs; corestandards.org URLs are now labelled `CCSS` across all mathematics records.
+* **Review model.** `review` is replaced by `reviews[]` (`kind: human|model|attested`, `by`, `date`, `scope[]`, `verdict`, `notes?`). Status lifecycle is `draft` → `llm-reviewed` → `reviewed` → `deprecated` | `merged`; the validator enforces that `llm-reviewed` has a model accept covering statement and evidence and that `reviewed` has a human accept or an attested review.
+* **Computed trust.** New `trust` field (`low|medium|high`) computed by `oml trust` from `reviews[]` against `reviewers/registry.json`; never hand-typed, checked in CI.
+* **Framework-agnostic alignments.** `about[]` and `alignments[]` are `{scheme, uri, code?, note?}` with a free-string `scheme`; known schemes are data in `schemes/registry.json` and the validator warns on unknown ones. corestandards.org URLs are labelled `CCSS` across all mathematics records.
+* New optional top-level `notes` field for text that is not the belief itself (e.g. likely origins).
+* `math.frac.add-across` (record #1, version 1.1.0): statement trimmed to the belief; likely origins moved to `notes`; review closed with Vikram Maram on 2026-09-05 and recorded as `reviews[]` (human accept, model accept, two attested reviews); `status: reviewed`, `trust: high`.
+* Every other record gains a changelog entry and a patch version bump for the migration; all remain `draft` with `trust: low`.
 * Hugging Face mirror targets the dataset `vikram-learnco/oml`.
 
 ### Fixed

@@ -3,8 +3,9 @@
   "id": "math.frac.cross-multiply-to-multiply",
   "uri": "https://oml.learnco.io/m/math.frac.cross-multiply-to-multiply",
   "uuid": "fef262fa-6980-416d-bd92-851b64e59458",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Cross-multiplying to multiply fractions",
   "statement": "To multiply two fractions you multiply diagonally: the first numerator by the second denominator over the first denominator by the second numerator.",
   "kind": "procedural-bug",
@@ -77,6 +78,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

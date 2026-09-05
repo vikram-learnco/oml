@@ -152,7 +152,7 @@ def build_case(config: Config, records: list[dict], version: str | None = None) 
         link = record_links[r["id"]]
         first = r["evidence_patterns"][0]
         notes = (
-            f"kind: {r['kind']}. status: {r['status']}. "
+            f"kind: {r['kind']}. status: {r['status']}. trust: {r.get('trust', 'low')}. "
             f"Evidence: on '{first['item_shape']}', {first['signature']}. "
             f"Example: {first['example']['item']} -> {first['example']['response']} "
             f"(expected {first['example']['expected']})."
@@ -264,7 +264,7 @@ def build_case(config: Config, records: list[dict], version: str | None = None) 
 CSV_COLUMNS = [
     "id", "uri", "uuid", "version", "status", "title", "statement", "kind", "domain",
     "level_band", "example_item", "example_expected", "example_response",
-    "n_evidence_patterns", "n_sources", "first_source", "review_date", "license",
+    "n_evidence_patterns", "n_sources", "first_source", "trust", "n_reviews", "last_review_date", "license",
 ]
 
 
@@ -288,7 +288,9 @@ def record_to_csv_row(r: dict) -> dict:
         "n_evidence_patterns": len(r["evidence_patterns"]),
         "n_sources": len(sources),
         "first_source": sources[0]["citation"] if sources else "",
-        "review_date": (r.get("review") or {}).get("date", ""),
+        "trust": r.get("trust", "low"),
+        "n_reviews": len(r.get("reviews") or []),
+        "last_review_date": max((rv["date"] for rv in (r.get("reviews") or [])), default=""),
         "license": r["license"],
     }
 

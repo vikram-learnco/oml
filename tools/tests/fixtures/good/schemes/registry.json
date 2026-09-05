@@ -1,0 +1,29 @@
+{
+  "$comment": "Known alignment schemes. The record schema is framework-agnostic: `scheme` is a free string and this file is the data that names the ones we recognise. `oml validate` warns (does not fail) on a scheme that is not listed here or a URI that does not match the listed pattern. Adding a framework is a change to this file, not to the schema.",
+  "schemes": [
+    {
+      "name": "CASE",
+      "description": "1EdTech CASE item identifiers (CASE Network or any CASE server).",
+      "uri_pattern": "^https?://[^/]*(casenetwork|1edtech|imsglobal|opensalt)[^/]*/.+",
+      "homepage": "https://www.1edtech.org/standards/case"
+    },
+    {
+      "name": "OML",
+      "description": "OML concept URIs, <base>/c/<concept-id>, used only where no CASE URI exists.",
+      "uri_pattern": "^https://oml\\.learnco\\.io/c/[a-z]+(\\.[a-z0-9-]+)+$",
+      "homepage": "https://oml.learnco.io"
+    },
+    {
+      "name": "CCSS",
+      "description": "Common Core State Standards canonical URLs on corestandards.org.",
+      "uri_pattern": "^https?://(www\\.)?corestandards\\.org/.+",
+      "homepage": "http://www.corestandards.org/"
+    },
+    {
+      "name": "progmiscon",
+      "description": "Programming misconception inventory entries (Chiodini et al., ITiCSE 2021).",
+      "uri_pattern": "^https://progmiscon\\.org/misconceptions/[A-Za-z]+/[A-Za-z0-9]+$",
+      "homepage": "https://progmiscon.org/"
+    }
+  ]
+}

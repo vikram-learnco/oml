@@ -3,8 +3,9 @@
   "id": "prog.control.conditional-is-sequence",
   "uri": "https://oml.learnco.io/m/prog.control.conditional-is-sequence",
   "uuid": "7e5b6c85-5df3-4013-8746-0f18576e8b5a",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Both branches of an if-else run in turn",
   "statement": "In an if-else statement the if branch runs when the condition is true and then the else branch runs afterwards as well, because it comes next in the code.",
   "kind": "overgeneralization",
@@ -97,6 +98,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

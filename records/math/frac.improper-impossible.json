@@ -3,8 +3,9 @@
   "id": "math.frac.improper-impossible",
   "uri": "https://oml.learnco.io/m/math.frac.improper-impossible",
   "uuid": "5211ad46-cba5-4c3d-92ff-9fa79d9ed753",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "A fraction cannot be more than one whole",
   "statement": "A fraction is always part of one whole, so the numerator can never be bigger than the denominator and a fraction can never be greater than 1.",
   "kind": "undergeneralization",
@@ -94,6 +95,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -10,6 +11,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 
 from .config import Config
 from .loader import LoadedRecord, expected_id_for_path, load_records
+from .trust import REVIEW_SCOPES, compute_trust, load_reviewers, load_schemes, reviewer_id
 
 CONCEPT_RELATIONS = {"conflicts_with", "resolved_by"}
 MISCONCEPTION_RELATIONS = {"confusable_with", "specializes"}
@@ -83,6 +85,7 @@ def validate_records(
     validator = load_schema(config)
     records = load_records(target)
     report.checked = len(records)
+    registries = {"schemes": load_schemes(config), "reviewers": load_reviewers(config)}
 
     corpus_dir = all_records_dir or config.records_dir
     corpus = load_records(corpus_dir) if corpus_dir.exists() else []
@@ -104,7 +107,7 @@ def validate_records(
             corpus_by_id.setdefault(r.id, r.data)
 
     for rec in records:
-        _validate_one(rec, config, validator, known_ids, corpus_by_id, seen_uuids, seen_ids, report)
+        _validate_one(rec, config, validator, known_ids, corpus_by_id, seen_uuids, seen_ids, report, registries)
 
     return report
 
@@ -118,7 +121,9 @@ def _validate_one(
     seen_uuids: dict[str, Path],
     seen_ids: dict[str, Path],
     report: Report,
+    registries: dict | None = None,
 ) -> None:
+    registries = registries or {"schemes": {}, "reviewers": {"reviewers": []}}
     path = rec.path
     if rec.error or rec.data is None:
         report.problems.append(Problem(path, rec.error or "could not load"))
@@ -196,12 +201,23 @@ def _validate_one(
                     Problem(path, f"relations.{key}: targets are concepts and must be {{\"external\": \"<uri>\"}}")
                 )
 
-    # about: OML-scheme URIs live under <base>/c/
-    for entry in data.get("about", []) or []:
-        if isinstance(entry, dict) and entry.get("scheme") == "OML":
+    # about / alignments: framework-agnostic; warn on schemes not in schemes/registry.json
+    schemes = registries.get("schemes", {})
+    for field in ("about", "alignments"):
+        for i, entry in enumerate(data.get(field, []) or []):
+            if not isinstance(entry, dict):
+                continue
+            scheme = entry.get("scheme")
             uri = str(entry.get("uri", ""))
-            if not uri.startswith(config.base_uri + "/c/"):
-                report.problems.append(Problem(path, f"about: OML concept URI must start with {config.base_uri}/c/ (got {uri!r})"))
+            known = schemes.get(scheme)
+            if known is None:
+                report.problems.append(Problem(path, f"{field}[{i}]: scheme {scheme!r} is not in schemes/registry.json", "warning"))
+                continue
+            pattern = known.get("uri_pattern")
+            if pattern and not re.match(pattern, uri):
+                report.problems.append(
+                    Problem(path, f"{field}[{i}]: uri {uri!r} does not match the {scheme} pattern in schemes/registry.json", "warning")
+                )
 
     # discriminators.vs keys resolve
     vs = (data.get("discriminators") or {}).get("vs") if isinstance(data.get("discriminators"), dict) else None
@@ -223,12 +239,50 @@ def _validate_one(
         if isinstance(old, str) and old not in known_ids:
             report.problems.append(Problem(path, f"history.supersedes: {old!r} is not a record in the repo", "warning"))
 
-    # status rules (schema enforces presence; enforce non-emptiness here)
+    # reviews: shape beyond the schema, and the status lifecycle rules
     status = data.get("status")
+    reviews = [r for r in (data.get("reviews") or []) if isinstance(r, dict)]
+    sources = (data.get("provenance") or {}).get("sources") or []
+    reviewer_registry = registries.get("reviewers", {"reviewers": []})
+    registry_ids = {r["id"] for r in reviewer_registry.get("reviewers", [])}
+    for i, rv in enumerate(reviews):
+        kind = rv.get("kind")
+        by = rv.get("by")
+        if kind == "attested":
+            if not isinstance(by, int) or by < 0 or by >= len(sources):
+                report.problems.append(Problem(path, f"reviews[{i}]: attested review must point at a provenance.sources index (got {by!r})"))
+        elif kind == "human":
+            rid = reviewer_id(rv)
+            if not isinstance(by, str) or "(" not in by or not re.search(r"\((orcid:|github:|https?://)[^)]+\)\s*$", by):
+                report.problems.append(Problem(path, f"reviews[{i}]: human reviewer needs a durable handle, e.g. \"Name (github:handle)\" or \"Name (orcid:0000-...)\""))
+            elif rid not in registry_ids:
+                report.problems.append(Problem(path, f"reviews[{i}]: reviewer {rid!r} is not in reviewers/registry.json", "warning"))
+        elif kind == "model":
+            if reviewer_id(rv) not in registry_ids:
+                report.problems.append(Problem(path, f"reviews[{i}]: model {by!r} is not in reviewers/registry.json", "warning"))
+
+    def accepts(kind: str) -> list[dict]:
+        return [r for r in reviews if r.get("kind") == kind and r.get("verdict") == "accept"]
+
+    if status == "llm-reviewed":
+        covered = set()
+        for r in accepts("model"):
+            covered |= set(r.get("scope", []))
+        if not {"statement", "evidence"} <= covered:
+            report.problems.append(Problem(path, "status 'llm-reviewed' requires a model review with verdict accept covering statement and evidence"))
     if status == "reviewed":
-        review = data.get("review")
-        if not isinstance(review, dict) or not review.get("reviewer") or not review.get("date"):
-            report.problems.append(Problem(path, "status 'reviewed' requires a non-empty review block"))
+        if not accepts("human") and not [r for r in reviews if r.get("kind") == "attested"]:
+            report.problems.append(Problem(path, "status 'reviewed' requires a human review with verdict accept or an attested review"))
+    if "review" in data:
+        report.problems.append(Problem(path, "'review' was replaced by 'reviews[]' in schema 0.2"))
+
+    # trust is computed, never hand-typed
+    expected_trust = compute_trust(data, reviewer_registry)
+    if data.get("trust") != expected_trust:
+        report.problems.append(
+            Problem(path, f"trust must be {expected_trust!r} (computed from reviews[] and reviewers/registry.json; run 'oml trust'), got {data.get('trust')!r}")
+        )
+
     if status == "merged" and not merged_into:
         report.problems.append(Problem(path, "status 'merged' requires history.merged_into"))
     if status == "deprecated" and not history.get("deprecated_reason"):

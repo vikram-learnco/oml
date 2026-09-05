@@ -3,8 +3,9 @@
   "id": "math.dec.longer-is-larger",
   "uri": "https://oml.learnco.io/m/math.dec.longer-is-larger",
   "uuid": "b9976592-9045-4327-8b17-485c7114d359",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Longer decimal is larger",
   "statement": "A decimal with more digits after the point is a larger number, because the digits after the point make a bigger whole number.",
   "kind": "overgeneralization",
@@ -106,6 +107,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

@@ -3,8 +3,9 @@
   "id": "prog.exec.all-statements-active",
   "uri": "https://oml.learnco.io/m/prog.exec.all-statements-active",
   "uuid": "a3989f3c-0cf8-4317-874b-f9b8fd9c12e2",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "All the statements in a program are active at once",
   "statement": "Every line of a program is active at the same time, so a later line can affect what an earlier line did, and a condition anywhere is watched continuously.",
   "kind": "misapplied-analogy",
@@ -67,6 +68,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

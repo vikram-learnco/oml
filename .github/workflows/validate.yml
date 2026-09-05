@@ -39,6 +39,8 @@ jobs:
             cat errors.txt >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
           fi
+      - name: Check trust is current
+        run: oml trust --check
       - name: Check INDEX.md is current
         run: |
           oml index

@@ -3,8 +3,9 @@
   "id": "prog.bool.no-short-circuit",
   "uri": "https://oml.learnco.io/m/prog.bool.no-short-circuit",
   "uuid": "835a754e-f33f-4ab3-88a1-2cc87dc58918",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Both operands of and/or are always evaluated",
   "statement": "A logical and or or always evaluates both of its operands, whatever the first one turns out to be.",
   "kind": "undergeneralization",
@@ -88,6 +89,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

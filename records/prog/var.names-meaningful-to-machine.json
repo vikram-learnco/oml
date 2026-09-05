@@ -3,8 +3,9 @@
   "id": "prog.var.names-meaningful-to-machine",
   "uri": "https://oml.learnco.io/m/prog.var.names-meaningful-to-machine",
   "uuid": "b34639bb-e7b4-400a-bd2a-ced15052078b",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "The computer understands variable names",
   "statement": "The name of a variable tells the computer what it is for, so a variable called total will add things up and one called largest will hold the biggest value.",
   "kind": "misapplied-analogy",
@@ -76,6 +77,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

@@ -3,8 +3,9 @@
   "id": "math.frac.invert-dividend",
   "uri": "https://oml.learnco.io/m/math.frac.invert-dividend",
   "uuid": "33e03294-fca9-4bef-92bc-386f55ec81de",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Inverting the first fraction when dividing",
   "statement": "To divide fractions you flip the first fraction and then multiply.",
   "kind": "procedural-bug",
@@ -91,6 +92,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

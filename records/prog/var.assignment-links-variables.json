@@ -3,8 +3,9 @@
   "id": "prog.var.assignment-links-variables",
   "uri": "https://oml.learnco.io/m/prog.var.assignment-links-variables",
   "uuid": "3c50552e-a1f7-4d39-b0e5-1e1673032c7b",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Assignment links two variables",
   "statement": "After a = b the two variables are connected, so whenever b changes later, a changes too.",
   "kind": "misapplied-analogy",
@@ -82,6 +83,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

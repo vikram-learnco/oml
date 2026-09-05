@@ -3,8 +3,9 @@
   "id": "prog.var.assignment-is-equation",
   "uri": "https://oml.learnco.io/m/prog.var.assignment-is-equation",
   "uuid": "1d678f7e-ebf2-49bf-979f-eb433148cc0e",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Assignment states an equation",
   "statement": "The equals sign in an assignment states that the two sides are equal, as in algebra, so x = x + 1 is a contradiction and a = b and b = a mean the same thing.",
   "kind": "misapplied-analogy",
@@ -103,6 +104,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

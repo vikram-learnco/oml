@@ -30,10 +30,11 @@ its stable URI, for example
 
 ## Provenance caveat
 
-Most records are `status: draft`: drafted from the cited literature and not
-yet reviewed by a maintainer. Check the `status` and `review` fields before
-treating a record as settled. `reviewed` records have been checked against
-their sources by a named reviewer.
+Most records are `status: draft` with `trust: low`: drafted from the cited
+literature and not yet reviewed. Check `status`, `trust` and `reviews`
+before treating a record as settled. `reviewed` records carry a human
+accept or an attested review; `trust` is computed from the reviews against
+the repository's reviewer registry.
 
 ## Fields
 
@@ -42,8 +43,8 @@ their sources by a named reviewer.
 | `id` | Stable ID (`math.frac.add-across`). Cite as `oml:<id>`. |
 | `uri` | Stable URI. |
 | `uuid` | Opaque identifier; the CASE `CFItem.identifier`. |
-| `version`, `status` | Record semver and lifecycle (`draft`, `reviewed`, `deprecated`, `merged`). |
-| `title`, `statement` | Short label and the belief as the learner holds it. |
+| `version`, `status`, `trust` | Record semver; lifecycle (`draft`, `llm-reviewed`, `reviewed`, `deprecated`, `merged`); computed trust (`low`, `medium`, `high`). |
+| `title`, `statement`, `notes` | Short label, the belief as the learner holds it, and optional notes such as likely origins. |
 | `kind` | Mechanism: overgeneralization, undergeneralization, procedural-bug, missing-prerequisite, notation-confusion, misapplied-analogy. |
 | `domain`, `about`, `level_band`, `locale` | Subject, concepts, education levels, language. |
 | `evidence_patterns` | List of `{item_shape, signature, example{item, expected, response}}`. |
@@ -51,7 +52,7 @@ their sources by a named reviewer.
 | `relations` | `conflicts_with`, `resolved_by`, and provisional `confusable_with`, `specializes`, `co_occurs_with`, `blocked_by`. |
 | `alignments` | `{scheme, code, uri, relation, note}` into CCSS, progmiscon, etc. |
 | `provenance` | `{sources[], origin, notes}`. |
-| `review`, `history`, `license` | Review block, merge/supersede history, always `CC-BY-4.0`. |
+| `reviews`, `history`, `license` | Reviews (`kind`, `by`, `date`, `scope`, `verdict`), merge/supersede history and changelog, always `CC-BY-4.0`. |
 
 Full field documentation: <https://github.com/vikram-learnco/oml/blob/main/schema/README.md>.
 

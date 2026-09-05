@@ -3,8 +3,9 @@
   "id": "prog.string.plus-adds-before-concatenating",
   "uri": "https://oml.learnco.io/m/prog.string.plus-adds-before-concatenating",
   "uuid": "71cc8015-8e64-4cbf-aec0-1227ef5023f9",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Plus adds numbers before it concatenates",
   "statement": "In an expression that mixes strings and numbers with +, the numbers are added together first and the string is attached afterwards.",
   "kind": "overgeneralization",
@@ -68,6 +69,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

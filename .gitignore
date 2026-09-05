@@ -11,3 +11,4 @@ site/_build/
 dist/oml.case.json
 dist/oml.jsonl
 dist/oml.csv
+\ntools/tests/fixtures/*/reviewers/\ntools/tests/fixtures/*/schemes/\n

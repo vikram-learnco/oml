@@ -3,15 +3,17 @@
   "id": "math.frac.no-review",
   "uri": "https://oml.learnco.io/m/math.frac.no-review",
   "uuid": "c89f4fca-8eec-4fe2-9932-66db6c02532d",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "reviewed",
+  "trust": "low",
   "title": "Adding fractions across numerators and denominators",
-  "statement": "Fractions are added by adding the numerators together and adding the denominators together, treating the top and bottom numbers as independent whole numbers, the same way fractions are multiplied.",
+  "statement": "Fractions are added by adding the numerators together and adding the denominators together.",
+  "notes": "Likely origins: whole-number bias (numerator and denominator treated as independent whole numbers) and overgeneralisation from the multiplication rule.",
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/5/NF/A/1/"
     }
   ],
@@ -107,12 +109,18 @@
     "origin": "literature",
     "notes": "Statement and examples written for OML. No text reused from any proprietary item bank."
   },
+  "reviews": [],
   "history": {
     "changelog": [
       {
         "version": "1.0.0",
         "date": "2026-09-05",
-        "change": "Initial reviewed record."
+        "change": "Initial record."
+      },
+      {
+        "version": "1.1.0",
+        "date": "2026-09-05",
+        "change": "Statement trimmed to the belief; likely origins moved to notes; about scheme relabelled CCSS; review replaced by reviews[] (human, model, two attested); trust computed. Review closed with Vikram Maram, 2026-09-05."
       }
     ]
   },
