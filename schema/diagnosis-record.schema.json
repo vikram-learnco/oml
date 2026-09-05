@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://oml.learnco.io/schema/diagnosis-record.schema.json",
+  "title": "OML diagnosis record",
+  "description": "One diagnosed learner response: the item, what was expected, what was given, and which OML misconceptions the response is evidence for. Schema version 0.1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["item", "expected", "response", "diagnoses", "oml_version", "engine_version"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "item": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The task as shown to the learner, or a stable reference to it."
+    },
+    "expected": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The correct response."
+    },
+    "response": {
+      "type": "string",
+      "description": "The learner's response. May be empty if the learner gave none."
+    },
+    "diagnoses": {
+      "type": "array",
+      "description": "Zero or more misconceptions the response is evidence for, most confident first. Empty means no OML record matched.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["oml_id", "confidence", "matched_pattern"],
+        "properties": {
+          "oml_id": {
+            "type": "string",
+            "pattern": "^[a-z]+(\\.[a-z0-9-]+)+$",
+            "description": "OML record id (without the `oml:` prefix)."
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Engine's confidence that the learner holds this belief, given this response."
+          },
+          "matched_pattern": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Index into the record's `evidence_patterns` array that the response matched."
+          },
+          "rationale": { "type": "string" }
+        }
+      }
+    },
+    "oml_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Library release the diagnosis was made against (e.g. `0.1.0`)."
+    },
+    "engine_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identifier and version of the diagnosing system."
+    },
+    "tenant_local_id": {
+      "type": "string",
+      "description": "A local misconception id when the diagnosis is against a record not (yet) in OML."
+    },
+    "insufficient_evidence": {
+      "type": "boolean",
+      "const": true,
+      "description": "Present and true when the engine judged the response too thin to diagnose. `diagnoses` should then be empty."
+    },
+    "observed_at": { "type": "string", "format": "date-time" }
+  }
+}
