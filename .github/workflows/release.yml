@@ -6,20 +6,26 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Existing tag to (re)build the release for, e.g. v0.1.0"
+        description: "Existing tag to (re)build the release for, e.g. v0.1.1"
         required: true
         type: string
 
 permissions:
   contents: write
+  id-token: write # lets the job request a GitHub OIDC token for the Hugging Face Trusted Publisher exchange
 
 jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      # Optional. When the secret is unset this is empty and the Hugging Face step is skipped.
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
       RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+      # Hugging Face dataset mirror. Authentication is the Hub's Trusted Publisher:
+      # the hf CLI exchanges this job's GitHub OIDC token for a one-hour token scoped
+      # to HF_OIDC_RESOURCE. No HF_TOKEN secret is needed; if one is set it is used
+      # as a fallback. The mirror steps never fail the release.
+      HF_DATASET: vikram-learnco/oml
+      HF_OIDC_RESOURCE: datasets/vikram-learnco/oml
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,16 +48,26 @@ jobs:
             dist/oml.csv
             CITATION.cff
           generate_release_notes: true
-      - name: Mirror to Hugging Face (when HF_TOKEN is configured)
-        if: ${{ env.HF_TOKEN != '' }}
+
+      - name: Install the hf CLI
+        id: hf_cli
+        continue-on-error: true
         run: |
-          pip install huggingface_hub
-          python - <<'PY'
-          import os
-          from huggingface_hub import HfApi
-          api = HfApi(token=os.environ["HF_TOKEN"])
-          repo = "learnco/oml"
-          api.create_repo(repo, repo_type="dataset", exist_ok=True)
-          api.upload_file(path_or_fileobj="dist/oml.jsonl", path_in_repo="oml.jsonl", repo_id=repo, repo_type="dataset")
-          api.upload_file(path_or_fileobj="dist/huggingface/README.md", path_in_repo="README.md", repo_id=repo, repo_type="dataset")
-          PY
+          curl -LsSf https://hf.co/cli/install.sh | bash -s -- --exclude-skill
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Mirror the dataset to Hugging Face
+        if: steps.hf_cli.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          hf upload "$HF_DATASET" dist/oml.jsonl oml.jsonl --repo-type dataset \
+            --commit-message "Mirror ${RELEASE_TAG} from vikram-learnco/oml"
+          hf upload "$HF_DATASET" dist/huggingface/README.md README.md --repo-type dataset \
+            --commit-message "Dataset card for ${RELEASE_TAG}"
+          echo "::notice::Mirrored ${RELEASE_TAG} to https://huggingface.co/datasets/${HF_DATASET}"
+      - name: Report mirror outcome
+        if: always()
+        run: |
+          if [ "${{ steps.hf_cli.outcome }}" != "success" ]; then
+            echo "::warning::Hugging Face mirror skipped: hf CLI install failed."
+          fi

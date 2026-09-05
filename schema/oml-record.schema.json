@@ -86,7 +86,7 @@
     },
     "about": {
       "type": "array",
-      "description": "Concepts this misconception is about. Prefer CASE URIs; use an OML concept URI only where no CASE URI exists. Decided 2026-09-05.",
+      "description": "Concepts this misconception is about. Prefer CASE item URIs (scheme CASE); use an OML concept URI (scheme OML) only where no CASE URI exists. Other schemes (e.g. CCSS for corestandards.org URLs) label URIs that are neither CASE identifiers nor OML concepts. Decided 2026-09-05.",
       "uniqueItems": true,
       "items": {
         "type": "object",
@@ -98,11 +98,8 @@
         "properties": {
           "scheme": {
             "type": "string",
-            "enum": [
-              "CASE",
-              "OML"
-            ],
-            "description": "CASE for a CASE item URI; OML for an OML concept URI (<base>/c/<concept-id>)."
+            "pattern": "^[A-Za-z][A-Za-z0-9-]*$",
+            "description": "CASE: a CASE Network item URI. OML: an OML concept URI (<base>/c/<concept-id>). Any other scheme name (e.g. CCSS) labels a non-CASE external URL."
           },
           "uri": {
             "type": "string",

@@ -11,9 +11,19 @@ Before 1.0, minor releases may also change the schema; each such change is calle
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-09-05
+
+First release archived by Zenodo; the concept DOI is minted on this tag.
+
+### Changed
+
+* `math.frac.add-across` (record #1): statement trimmed to the belief itself, with the multiplication-analogy origin hypothesis moved to provenance notes; `status` set back to `draft` until a named maintainer confirms the review on the record; record version 0.2.0.
+* `about[].scheme` is an open identifier. `CASE` is reserved for CASE Network item URIs; corestandards.org URLs are now labelled `CCSS` across all mathematics records.
+* Hugging Face mirror targets the dataset `vikram-learnco/oml`.
+
 ### Fixed
 
-* Release workflow was invalid (`secrets` used in a step `if`), so no run had ever executed. The Hugging Face step is now gated on a job-level `env` value, and the workflow can be re-run for an existing tag via `workflow_dispatch`.
+* Release workflow was invalid (`secrets` used in a step `if`), so no run had ever executed before v0.1.0 was re-cut. The Hugging Face step now authenticates through the Hub's Trusted Publisher (GitHub OIDC), falls back to `HF_TOKEN` if present, and is skipped otherwise; the workflow can be re-run for an existing tag via `workflow_dispatch`.
 
 ## [0.1.0] - 2026-09-05
 
@@ -38,5 +48,6 @@ First citable release.
 
 * Base URI `https://oml.learnco.io` is a placeholder pending the domain decision.
 
-[Unreleased]: https://github.com/vikram-learnco/oml/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/vikram-learnco/oml/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/vikram-learnco/oml/releases/tag/v0.1.1
 [0.1.0]: https://github.com/vikram-learnco/oml/releases/tag/v0.1.0

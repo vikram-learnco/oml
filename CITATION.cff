@@ -7,7 +7,7 @@ authors:
   - family-names: Maram
     given-names: Vikram
   - name: "OML contributors"
-version: 0.1.0
+version: 0.1.1
 date-released: 2026-09-05
 license: CC-BY-4.0
 repository-code: "https://github.com/vikram-learnco/oml"

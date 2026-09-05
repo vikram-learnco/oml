@@ -22,7 +22,7 @@ One misconception. Required fields first.
 | `evidence_patterns[]` | At least one `{item_shape, signature, example{item, expected, response}}`. |
 | `provenance` | `{sources[], origin}`; every source has `type` and `citation`, optionally `doi`, `url`, `identifier`, `license`. |
 | `license` | Always `CC-BY-4.0`. |
-| `about[]` | Concepts the misconception is about: `{scheme: CASE|OML, uri, label?}`. Prefer CASE URIs; an OML concept URI (`<base>/c/<concept-id>`) only where no CASE URI exists. |
+| `about[]` | Concepts the misconception is about: `{scheme, uri, label?}`. `CASE` for CASE Network item URIs (preferred); `OML` for an OML concept URI (`<base>/c/<concept-id>`) where no CASE URI exists; any other scheme name (e.g. `CCSS`) for a non-CASE external URL. |
 | `level_band[]` | Education levels where it is typically seen. |
 | `locale` | BCP 47 tag for the text; default `en`. |
 | `discriminators` | `vs_slip` (systematic vs one-off) and `vs{<neighbour-id>: text}`. |
@@ -62,7 +62,9 @@ One diagnosed learner response, for systems that emit diagnoses citing OML.
    warns when the reverse edge is missing) and `specializes` only.
    `co_occurs_with` and `blocked_by` were dropped before any release.
 2. **`about`.** CASE URIs directly; an OML concept URI only where no CASE
-   URI exists. Both schemes are accepted, tagged by `scheme`.
+   URI exists. Entries are tagged by `scheme`; `CASE` is reserved for real
+   CASE Network identifiers, so corestandards.org URLs carry `CCSS` until
+   their CASE GUIDs are confirmed.
 3. **ID space.** A record's `id`/`uri` is the canonical public ID of the
    corresponding Knowledge Map Misconception node. There is no second
    identifier field; the `uuid` exists only for systems that need an opaque

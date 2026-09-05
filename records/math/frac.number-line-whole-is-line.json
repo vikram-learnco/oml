@@ -11,7 +11,7 @@
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/3/NF/A/2/"
     }
   ],

@@ -3,15 +3,15 @@
   "id": "math.frac.add-across",
   "uri": "https://oml.learnco.io/m/math.frac.add-across",
   "uuid": "20f1dd60-ea8a-4e14-ab41-12addc94b751",
-  "version": "1.0.0",
-  "status": "reviewed",
+  "version": "0.2.0",
+  "status": "draft",
   "title": "Adding fractions across numerators and denominators",
-  "statement": "Fractions are added by adding the numerators together and adding the denominators together, treating the top and bottom numbers as independent whole numbers, the same way fractions are multiplied.",
+  "statement": "Fractions are added by adding the numerators together and adding the denominators together, treating the top and bottom numbers as independent whole numbers.",
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/5/NF/A/1/"
     }
   ],
@@ -105,19 +105,19 @@
       }
     ],
     "origin": "literature",
-    "notes": "Statement and examples written for OML. No text reused from any proprietary item bank."
-  },
-  "review": {
-    "reviewer": "Vikram Maram",
-    "date": "2026-09-05",
-    "notes": "First record. Reviewed statement, kind, both evidence patterns, discriminators and sources against the design doc worked example."
+    "notes": "Statement and examples written for OML. No text reused from any proprietary item bank. The multiplication analogy (adding across mirrors how fractions are multiplied) is a hypothesis about origin, recorded here rather than in the statement; the record's kind is overgeneralization. Awaiting maintainer review; status returns to reviewed only when a named reviewer confirms on the record."
   },
   "history": {
     "changelog": [
       {
-        "version": "1.0.0",
+        "version": "0.1.0",
         "date": "2026-09-05",
-        "change": "Initial reviewed record."
+        "change": "Initial record."
+      },
+      {
+        "version": "0.2.0",
+        "date": "2026-09-05",
+        "change": "Statement trimmed to the belief (origin hypothesis moved to provenance notes); about scheme relabelled CCSS; status set to draft pending a confirmed human review."
       }
     ]
   },

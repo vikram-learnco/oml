@@ -59,7 +59,7 @@ Full field documentation: <https://github.com/vikram-learnco/oml/blob/main/schem
 
 ```python
 from datasets import load_dataset
-ds = load_dataset("learnco/oml")
+ds = load_dataset("vikram-learnco/oml")
 ```
 
 ## Cite
