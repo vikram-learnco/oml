@@ -1,0 +1,44 @@
+name: Dispute
+description: Challenge a statement, kind, evidence pattern or source on an existing record
+title: "Dispute: <record id>"
+labels: ["dispute"]
+body:
+  - type: input
+    id: record
+    attributes:
+      label: Record ID
+      placeholder: math.frac.add-across
+    validations:
+      required: true
+  - type: dropdown
+    id: field
+    attributes:
+      label: Field in question
+      options:
+        - statement
+        - kind
+        - evidence_patterns
+        - discriminators
+        - provenance
+        - alignments
+        - relations
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence for the change
+      description: Citations, data, or a worked counter-example.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed wording or change

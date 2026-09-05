@@ -1,0 +1,29 @@
+name: Merge request
+description: Propose that two records describe the same belief and should be merged
+title: "Merge: <retired id> into <surviving id>"
+labels: ["merge"]
+body:
+  - type: input
+    id: surviving
+    attributes:
+      label: Surviving record ID
+    validations:
+      required: true
+  - type: input
+    id: retired
+    attributes:
+      label: Record ID to retire (status merged)
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why they are the same belief
+      description: Show that the evidence patterns and discriminators do not separate them.
+    validations:
+      required: true
+  - type: textarea
+    id: carry
+    attributes:
+      label: What to carry over
+      description: Evidence patterns, sources or alignments only present on the retired record.

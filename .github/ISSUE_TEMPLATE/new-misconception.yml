@@ -1,0 +1,63 @@
+name: New misconception
+description: Propose a misconception for the library before writing the record
+title: "New: <domain>.<area>.<slug>"
+labels: ["new-record"]
+body:
+  - type: input
+    id: proposed-id
+    attributes:
+      label: Proposed ID
+      description: Lowercase, dot-separated, hyphens inside segments. Check records/INDEX.md for neighbours first.
+      placeholder: math.frac.add-across
+    validations:
+      required: true
+  - type: textarea
+    id: statement
+    attributes:
+      label: Statement
+      description: The belief, as the learner holds it. A belief, not a wrong answer.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - overgeneralization
+        - undergeneralization
+        - procedural-bug
+        - missing-prerequisite
+        - notation-confusion
+        - misapplied-analogy
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence pattern with example
+      description: What task shows it, what rule the learner follows, and one concrete item with the correct and the belief-driven response.
+      placeholder: |
+        item_shape: add two fractions with unlike denominators
+        signature: numerator = a + c, denominator = b + d
+        example: 1/2 + 1/3 -> expected 5/6, response 2/5
+    validations:
+      required: true
+  - type: textarea
+    id: neighbours
+    attributes:
+      label: Nearest neighbours and how to tell them apart
+      description: Existing OML IDs that share an item shape, and the item that separates them.
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Citations with DOIs or URLs. No proprietary text.
+    validations:
+      required: true
+  - type: checkboxes
+    id: licence
+    attributes:
+      label: Licence
+      options:
+        - label: The statement and examples are my own words and may be released under CC BY 4.0.
+          required: true
