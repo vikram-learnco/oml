@@ -1,0 +1,83 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.part-to-part",
+  "uri": "https://oml.learnco.io/m/math.frac.part-to-part",
+  "uuid": "15a57c88-bbde-47b3-bd0d-6771a62e6cec",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Writing the shaded part over the unshaded part",
+  "statement": "A fraction compares the shaded part with the unshaded part, so the number of shaded pieces goes on top and the number of unshaded pieces goes underneath.",
+  "kind": "notation-confusion",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/3/NF/A/1/"
+  ],
+  "level_band": [
+    "early-primary",
+    "primary"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "name the fraction shaded in a shape divided into equal parts",
+      "signature": "writes shaded/unshaded instead of shaded/total",
+      "example": {
+        "item": "A bar is cut into 5 equal parts and 3 are shaded. What fraction is shaded?",
+        "expected": "3/5",
+        "response": "3/2"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across items, and the learner produces 'fractions' larger than one for a majority-shaded shape without noticing. A slip is one miswritten denominator.",
+    "vs": {
+      "math.frac.unequal-parts": "Unequal-parts believers write the correct denominator (the total count) on equal-parts shapes; part-to-part writers do not."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/1/",
+        "label": "CCSS 3.NF.A.1: understand a fraction 1/b as one part of a whole partitioned into b equal parts"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/1/",
+        "label": "CCSS 3.NF.A.1: understand a fraction 1/b as one part of a whole partitioned into b equal parts"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.unequal-parts"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "3.NF.A.1",
+      "uri": "http://corestandards.org/Math/Content/3/NF/A/1/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Hart, K. M. (Ed.). (1981). Children's Understanding of Mathematics: 11-16. John Murray. (Concepts in Secondary Mathematics and Science project.)",
+        "note": "CSMS fractions items: part-part responses on shaded-region tasks."
+      },
+      {
+        "type": "book",
+        "citation": "Kerslake, D. (1986). Fractions: Children's Strategies and Errors. NFER-Nelson."
+      },
+      {
+        "type": "book",
+        "citation": "Lamon, S. J. (2012). Teaching Fractions and Ratios for Understanding: Essential Content Knowledge and Instructional Strategies for Teachers (3rd ed.). Routledge.",
+        "note": "Distinguishes part-whole from ratio (part-part) interpretations."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

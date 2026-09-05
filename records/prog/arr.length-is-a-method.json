@@ -1,0 +1,70 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "prog.arr.length-is-a-method",
+  "uri": "https://oml.learnco.io/m/prog.arr.length-is-a-method",
+  "uuid": "38f22ed3-8b31-4032-9be3-581599629ee5",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "An array's length is a method call",
+  "statement": "You get the length of an array by calling a method on it, in the same way as for a string or a list.",
+  "kind": "notation-confusion",
+  "domain": "prog.arrays",
+  "about": [
+    "prog.arr.length"
+  ],
+  "level_band": [
+    "secondary",
+    "undergraduate"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "write the length of an array",
+      "signature": "writes length() or size() on an array",
+      "example": {
+        "item": "Given int[] a, write an expression for its length.",
+        "expected": "a.length",
+        "response": "a.length() (or a.size())"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip is a typo fixed on the first compile error. The belief persists across items and the learner explains that 'everything is a method'."
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "https://oml.learnco.io/c/prog.arr.length",
+        "label": "An array's length is a property, not a method"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "https://oml.learnco.io/c/prog.arr.length",
+        "label": "An array's length is a property, not a method"
+      }
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "progmiscon",
+      "code": "Java/ArrayHasLengthMethod",
+      "uri": "https://progmiscon.org/misconceptions/Java/ArrayHasLengthMethod",
+      "relation": "close-match"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "inventory",
+        "citation": "Chiodini, L., Moreno Santos, I., Gallidabino, A., Tafliovich, A., Santos, A. L., & Hauswirth, M. (2021). A curated inventory of programming language misconceptions. In Proceedings of the 26th ACM Conference on Innovation and Technology in Computer Science Education (ITiCSE '21), 380-386.",
+        "doi": "10.1145/3430665.3456343",
+        "url": "https://progmiscon.org/",
+        "note": "Inventory consulted for the misconception name and scope only; progmiscon publishes no licence for its text, so OML's statements and examples are written independently."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

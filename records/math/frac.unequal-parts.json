@@ -1,0 +1,92 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.unequal-parts",
+  "uri": "https://oml.learnco.io/m/math.frac.unequal-parts",
+  "uuid": "e7a0875c-e339-4404-9f39-1f73cfe9206f",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Any part of a shape cut into b pieces is 1/b",
+  "statement": "If a shape is cut into b pieces, each piece is one b-th of the shape, whether or not the pieces are the same size.",
+  "kind": "missing-prerequisite",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/3/NF/A/1/"
+  ],
+  "level_band": [
+    "early-primary",
+    "primary"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "name the fraction shaded in a shape divided into unequal parts",
+      "signature": "counts pieces and writes shaded/total, ignoring the sizes of the pieces",
+      "example": {
+        "item": "A rectangle is cut into 4 pieces of different sizes; the largest is shaded. What fraction is shaded?",
+        "expected": "Cannot tell from the count; it is more than 1/4",
+        "response": "1/4"
+      }
+    },
+    {
+      "item_shape": "judge whether a shape shows a given fraction",
+      "signature": "accepts an unequal partition as showing the fraction",
+      "example": {
+        "item": "Does this circle, cut into 3 pieces of different sizes with 1 shaded, show 1/3?",
+        "expected": "No, the parts are not equal",
+        "response": "Yes"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Ask directly whether the pieces need to be the same size. A slip is a miscount with equal parts assumed; the belief is a stated 'it doesn't matter, there are four pieces'.",
+    "vs": {
+      "math.frac.part-to-part": "Use a shape with equal parts. Part-to-part writers give 3/2 for 3 shaded of 5; this belief gives 3/5 correctly and only fails on unequal partitions."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/1/",
+        "label": "CCSS 3.NF.A.1: understand a fraction 1/b as one part of a whole partitioned into b equal parts"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/1/",
+        "label": "CCSS 3.NF.A.1: understand a fraction 1/b as one part of a whole partitioned into b equal parts"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.part-to-part"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "3.NF.A.1",
+      "uri": "http://corestandards.org/Math/Content/3/NF/A/1/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Kerslake, D. (1986). Fractions: Children's Strategies and Errors. NFER-Nelson."
+      },
+      {
+        "type": "book",
+        "citation": "Steffe, L. P., & Olive, J. (2010). Children's Fractional Knowledge. Springer.",
+        "doi": "10.1007/978-1-4419-0591-8",
+        "note": "Equipartitioning as a prerequisite scheme for fractional knowledge."
+      },
+      {
+        "type": "book",
+        "citation": "Lamon, S. J. (2012). Teaching Fractions and Ratios for Understanding: Essential Content Knowledge and Instructional Strategies for Teachers (3rd ed.). Routledge."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

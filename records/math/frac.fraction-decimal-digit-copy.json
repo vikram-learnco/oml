@@ -1,0 +1,84 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.fraction-decimal-digit-copy",
+  "uri": "https://oml.learnco.io/m/math.frac.fraction-decimal-digit-copy",
+  "uuid": "fb3c3db0-26d5-4aba-a7ea-c9ce84089d88",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Writing a fraction as a decimal by copying its digits",
+  "statement": "A fraction is written as a decimal by putting its numerator, or its denominator, after the decimal point.",
+  "kind": "notation-confusion",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/4/NF/C/6/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "convert a unit fraction to a decimal",
+      "signature": "writes 0.<denominator>",
+      "example": {
+        "item": "Write 1/4 as a decimal",
+        "expected": "0.25",
+        "response": "0.4"
+      }
+    },
+    {
+      "item_shape": "convert a decimal to a fraction",
+      "signature": "writes the digits after the point as the numerator over the denominator that matches their count in the 'other direction', or over 1",
+      "example": {
+        "item": "Write 0.2 as a fraction",
+        "expected": "2/10 (= 1/5)",
+        "response": "1/2"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across fractions, and the learner cannot say whether 0.4 and 1/4 are the same size. A slip is one wrong conversion with correct ones nearby."
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/C/6/",
+        "label": "CCSS 4.NF.C.6: use decimal notation for fractions with denominators 10 or 100"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/C/6/",
+        "label": "CCSS 4.NF.C.6: use decimal notation for fractions with denominators 10 or 100"
+      }
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "4.NF.C.6",
+      "uri": "http://corestandards.org/Math/Content/4/NF/C/6/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Kerslake, D. (1986). Fractions: Children's Strategies and Errors. NFER-Nelson."
+      },
+      {
+        "type": "paper",
+        "citation": "Markovits, Z., & Sowder, J. T. (1991). Students' understanding of the relationship between fractions and decimals. Focus on Learning Problems in Mathematics, 13(1), 3-11."
+      },
+      {
+        "type": "book",
+        "citation": "Hart, K. M. (Ed.). (1981). Children's Understanding of Mathematics: 11-16. John Murray. (Concepts in Secondary Mathematics and Science project.)"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.cross-multiply-to-multiply",
+  "uri": "https://oml.learnco.io/m/math.frac.cross-multiply-to-multiply",
+  "uuid": "fef262fa-6980-416d-bd92-851b64e59458",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Cross-multiplying to multiply fractions",
+  "statement": "To multiply two fractions you multiply diagonally: the first numerator by the second denominator over the first denominator by the second numerator.",
+  "kind": "procedural-bug",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/5/NF/B/4/"
+  ],
+  "level_band": [
+    "middle",
+    "secondary"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "multiply two proper fractions",
+      "signature": "product numerator = a x d and product denominator = b x c for a/b x c/d",
+      "example": {
+        "item": "2/3 x 4/5 = ?",
+        "expected": "8/15",
+        "response": "10/12"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across items and usually accompanied by the word 'cross-multiply'. A slip is one diagonal product.",
+    "vs": {
+      "math.frac.multiply-with-common-denominator": "Common-denominator multipliers show a conversion step in their working; cross-multipliers do not."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/4/",
+        "label": "CCSS 5.NF.B.4: multiply a fraction or whole number by a fraction"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/4/",
+        "label": "CCSS 5.NF.B.4: multiply a fraction or whole number by a fraction"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.multiply-with-common-denominator"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "5.NF.B.4",
+      "uri": "http://corestandards.org/Math/Content/5/NF/B/4/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Ashlock, R. B. (2010). Error Patterns in Computation: Using Error Patterns to Help Each Student Learn (10th ed.). Allyn & Bacon."
+      },
+      {
+        "type": "paper",
+        "citation": "Newton, K. J. (2008). An extensive analysis of preservice elementary teachers' knowledge of fractions. American Educational Research Journal, 45(4), 1080-1110.",
+        "doi": "10.3102/0002831208320851",
+        "note": "Cross-multiplication misapplied to multiplication and addition."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

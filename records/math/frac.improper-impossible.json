@@ -1,0 +1,96 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.improper-impossible",
+  "uri": "https://oml.learnco.io/m/math.frac.improper-impossible",
+  "uuid": "5211ad46-cba5-4c3d-92ff-9fa79d9ed753",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "A fraction cannot be more than one whole",
+  "statement": "A fraction is always part of one whole, so the numerator can never be bigger than the denominator and a fraction can never be greater than 1.",
+  "kind": "undergeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/4/NF/B/3/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "add two proper fractions whose sum exceeds one",
+      "signature": "adjusts the result so it stays below or equal to one",
+      "example": {
+        "item": "3/4 + 3/4 = ?",
+        "expected": "6/4 (= 1 1/2)",
+        "response": "6/8 (or 1)"
+      }
+    },
+    {
+      "item_shape": "place an improper fraction on a number line",
+      "signature": "places it below 1 or says it cannot be placed",
+      "example": {
+        "item": "Mark 5/4 on a number line from 0 to 2",
+        "expected": "one quarter past 1",
+        "response": "just below 1 (or 'not a real fraction')"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Ask directly whether 7/4 is a number. A slip is an arithmetic error; the belief is the stated rule 'the top can't be bigger than the bottom'.",
+    "vs": {
+      "math.frac.mixed-to-improper-add-all": "That bug accepts improper fractions but converts to them wrongly; this belief rejects them."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/B/3/",
+        "label": "CCSS 4.NF.B.3: understand a fraction a/b with a > 1 as a sum of fractions 1/b"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/B/3/",
+        "label": "CCSS 4.NF.B.3: understand a fraction a/b with a > 1 as a sum of fractions 1/b"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/2/",
+        "label": "CCSS 3.NF.A.2: understand a fraction as a number on the number line"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.mixed-to-improper-add-all"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "4.NF.B.3",
+      "uri": "http://corestandards.org/Math/Content/4/NF/B/3/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Stafylidou, S., & Vosniadou, S. (2004). The development of students' understanding of the numerical value of fractions. Learning and Instruction, 14(5), 503-518.",
+        "doi": "10.1016/j.learninstruc.2004.06.015",
+        "note": "A developmental stage in which fractions are understood as always smaller than the unit."
+      },
+      {
+        "type": "book",
+        "citation": "Kerslake, D. (1986). Fractions: Children's Strategies and Errors. NFER-Nelson."
+      },
+      {
+        "type": "book",
+        "citation": "Hart, K. M. (Ed.). (1981). Children's Understanding of Mathematics: 11-16. John Murray. (Concepts in Secondary Mathematics and Science project.)"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

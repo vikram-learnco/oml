@@ -1,0 +1,78 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "prog.var.assignment-moves-value",
+  "uri": "https://oml.learnco.io/m/prog.var.assignment-moves-value",
+  "uuid": "55c0374e-b4f9-4b70-aef3-8d020d2c99c1",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Assignment moves the value out of the source",
+  "statement": "Assigning a = b moves the value from b into a, so b is empty or zero afterwards.",
+  "kind": "misapplied-analogy",
+  "domain": "prog.variables",
+  "about": [
+    "prog.var.assignment"
+  ],
+  "level_band": [
+    "secondary",
+    "undergraduate",
+    "adult"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "trace the source variable after an assignment",
+      "signature": "reports the source as empty, zero or undefined",
+      "example": {
+        "item": "b = 4\na = b\nWhat is b?",
+        "expected": "4",
+        "response": "0 (or 'nothing')"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across items; the learner explains that the value 'went into' the other variable. A slip does not empty the source.",
+    "vs": {
+      "prog.var.assignment-links-variables": "Linkers keep both variables and couple them; movers empty the source."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "https://oml.learnco.io/c/prog.var.assignment",
+        "label": "Assignment copies a value into a variable at one moment"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "https://oml.learnco.io/c/prog.var.assignment",
+        "label": "Assignment copies a value into a variable at one moment"
+      }
+    ],
+    "confusable_with": [
+      "prog.var.assignment-links-variables"
+    ]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Bayman, P., & Mayer, R. E. (1983). A diagnosis of beginning programmers' misconceptions of BASIC programming statements. Communications of the ACM, 26(9), 677-679.",
+        "doi": "10.1145/358172.358408",
+        "note": "LET statements understood as moving a value."
+      },
+      {
+        "type": "paper",
+        "citation": "du Boulay, B. (1986). Some difficulties of learning to program. Journal of Educational Computing Research, 2(1), 57-73.",
+        "doi": "10.2190/3LFX-9RRF-67T8-UVK9"
+      },
+      {
+        "type": "book",
+        "citation": "Sorva, J. (2012). Visual Program Simulation in Introductory Programming Education (Doctoral dissertation, Aalto University). Appendix A catalogues introductory programming misconceptions from the literature.",
+        "url": "https://aaltodoc.aalto.fi/handle/123456789/3534"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

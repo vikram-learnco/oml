@@ -1,0 +1,69 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "prog.exec.all-statements-active",
+  "uri": "https://oml.learnco.io/m/prog.exec.all-statements-active",
+  "uuid": "a3989f3c-0cf8-4317-874b-f9b8fd9c12e2",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "All the statements in a program are active at once",
+  "statement": "Every line of a program is active at the same time, so a later line can affect what an earlier line did, and a condition anywhere is watched continuously.",
+  "kind": "misapplied-analogy",
+  "domain": "prog.execution",
+  "about": [
+    "prog.exec.sequential-execution"
+  ],
+  "level_band": [
+    "secondary",
+    "undergraduate"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "trace a program where a later assignment would matter if it applied retroactively",
+      "signature": "applies the later value to the earlier output",
+      "example": {
+        "item": "x = 1\nprint(x)\nx = 2",
+        "expected": "1",
+        "response": "2"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across items; the learner talks about the program 'as a whole' rather than step by step. A slip is a single wrong step.",
+    "vs": {
+      "prog.control.while-checked-continuously": "The while case is a special case of this belief; a learner may show it only for loop conditions."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "https://oml.learnco.io/c/prog.exec.sequential-execution",
+        "label": "Statements run one at a time in order"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "https://oml.learnco.io/c/prog.exec.sequential-execution",
+        "label": "Statements run one at a time in order"
+      }
+    ]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Pea, R. D. (1986). Language-independent conceptual \"bugs\" in novice programming. Journal of Educational Computing Research, 2(1), 25-36.",
+        "doi": "10.2190/689T-1R2A-X4W4-29J2",
+        "note": "Parallelism bug."
+      },
+      {
+        "type": "book",
+        "citation": "Sorva, J. (2012). Visual Program Simulation in Introductory Programming Education (Doctoral dissertation, Aalto University). Appendix A catalogues introductory programming misconceptions from the literature.",
+        "url": "https://aaltodoc.aalto.fi/handle/123456789/3534"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

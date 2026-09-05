@@ -1,0 +1,97 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.compare-whole-number-components",
+  "uri": "https://oml.learnco.io/m/math.frac.compare-whole-number-components",
+  "uuid": "210d5db3-daa8-49be-aaf9-aa453ea6b234",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Comparing fractions by their whole-number parts",
+  "statement": "To compare two fractions you compare the numerators and the denominators as whole numbers; a fraction with bigger numbers is a bigger fraction.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/4/NF/A/2/"
+  ],
+  "level_band": [
+    "primary",
+    "middle",
+    "secondary"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "compare two fractions where the larger fraction has the smaller numerator and denominator",
+      "signature": "chooses the fraction whose numerator and denominator are both larger",
+      "example": {
+        "item": "Which is larger, 4/5 or 5/9?",
+        "expected": "4/5",
+        "response": "5/9"
+      },
+      "notes": "Incongruent item: whole-number ordering and fraction ordering disagree, so the error is diagnostic. Pair with a congruent item (2/7 vs 3/8) which this belief answers correctly; near-perfect congruent accuracy with systematic incongruent errors is the signature."
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Compare accuracy on congruent and incongruent items. A holder of this belief is near-perfect on congruent items and systematically wrong on incongruent ones; a slip does not follow that split.",
+    "vs": {
+      "math.frac.bigger-denominator-bigger-fraction": "Unit-fraction items isolate the denominator rule. Component comparison also covers non-unit fractions such as 4/5 vs 5/9.",
+      "math.frac.compare-by-gap": "On 5/6 vs 7/8 gap thinking says they are equal; component comparison picks 7/8."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/A/2/",
+        "label": "CCSS 4.NF.A.2: compare two fractions with different numerators and different denominators"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/3/",
+        "label": "CCSS 3.NF.A.3: explain equivalence of fractions and compare fractions by reasoning about their size"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/A/2/",
+        "label": "CCSS 4.NF.A.2: compare two fractions with different numerators and different denominators"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.compare-by-gap"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "4.NF.A.2",
+      "uri": "http://corestandards.org/Math/Content/4/NF/A/2/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Obersteiner, A., Van Dooren, W., Van Hoof, J., & Verschaffel, L. (2013). The natural number bias and magnitude representation in fraction comparison by expert mathematicians. Learning and Instruction, 28, 64-72.",
+        "doi": "10.1016/j.learninstruc.2013.05.003",
+        "note": "Congruent/incongruent comparison paradigm; the bias persists in reaction times even for experts."
+      },
+      {
+        "type": "paper",
+        "citation": "Van Hoof, J., Verschaffel, L., & Van Dooren, W. (2015). Inappropriately applying natural number properties in rational number tasks: Characterizing the development of the natural number bias through primary and secondary education. Educational Studies in Mathematics, 90(1), 39-56.",
+        "doi": "10.1007/s10649-015-9613-3"
+      },
+      {
+        "type": "paper",
+        "citation": "DeWolf, M., & Vosniadou, S. (2015). The representation of fraction magnitudes and the whole number bias reconsidered. Learning and Instruction, 37, 39-49.",
+        "doi": "10.1016/j.learninstruc.2014.07.002"
+      },
+      {
+        "type": "paper",
+        "citation": "Ni, Y., & Zhou, Y.-D. (2005). Teaching and learning fraction and rational numbers: The origins and implications of whole number bias. Educational Psychologist, 40(1), 27-52.",
+        "doi": "10.1207/s15326985ep4001_3"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

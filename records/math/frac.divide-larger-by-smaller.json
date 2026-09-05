@@ -1,0 +1,99 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.divide-larger-by-smaller",
+  "uri": "https://oml.learnco.io/m/math.frac.divide-larger-by-smaller",
+  "uuid": "78a649f3-688d-49a2-a85c-7be491860757",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "You can only divide a larger number by a smaller one",
+  "statement": "In a division the bigger number must be divided by the smaller number, so if the divisor is bigger the two numbers should be swapped.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/6/NS/A/1/"
+  ],
+  "level_band": [
+    "primary",
+    "middle",
+    "adult"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "divide a fraction by a larger whole number",
+      "signature": "swaps dividend and divisor so that the larger number is divided by the smaller",
+      "example": {
+        "item": "1/2 / 3 = ?",
+        "expected": "1/6",
+        "response": "6"
+      }
+    },
+    {
+      "item_shape": "write the division for a word problem where the dividend is smaller than the divisor",
+      "signature": "writes the numbers in the order that makes the dividend larger",
+      "example": {
+        "item": "3/4 of a litre is shared equally between 3 people. Write the division.",
+        "expected": "3/4 / 3",
+        "response": "3 / 3/4"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip is one reversed pair. The belief is a stated rule ('you can't divide a small number by a big one') and is applied to whole numbers too (3 / 12 rewritten as 12 / 3).",
+    "vs": {
+      "math.frac.divide-makes-smaller": "Divide-makes-smaller keeps the order and gets a smaller wrong result; this belief changes the order."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/A/1/",
+        "label": "CCSS 6.NS.A.1: interpret and compute quotients of fractions"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/A/1/",
+        "label": "CCSS 6.NS.A.1: interpret and compute quotients of fractions"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/7/",
+        "label": "CCSS 5.NF.B.7: divide unit fractions by whole numbers and whole numbers by unit fractions"
+      }
+    ],
+    "co_occurs_with": [
+      "math.frac.divide-makes-smaller"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "6.NS.A.1",
+      "uri": "http://corestandards.org/Math/Content/6/NS/A/1/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Fischbein, E., Deri, M., Nello, M. S., & Marino, M. S. (1985). The role of implicit models in solving verbal problems in multiplication and division. Journal for Research in Mathematics Education, 16(1), 3-17.",
+        "doi": "10.5951/jresematheduc.16.1.0003"
+      },
+      {
+        "type": "paper",
+        "citation": "Graeber, A. O., Tirosh, D., & Glover, R. (1989). Preservice teachers' misconceptions in solving verbal problems in multiplication and division. Journal for Research in Mathematics Education, 20(1), 95-102.",
+        "doi": "10.5951/jresematheduc.20.1.0095",
+        "note": "Preservice teachers reversing dividend and divisor so the divisor is smaller."
+      },
+      {
+        "type": "paper",
+        "citation": "Tirosh, D. (2000). Enhancing prospective teachers' knowledge of children's conceptions: The case of division of fractions. Journal for Research in Mathematics Education, 31(1), 5-25.",
+        "doi": "10.2307/749817"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

@@ -1,0 +1,105 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.dec.longer-is-larger",
+  "uri": "https://oml.learnco.io/m/math.dec.longer-is-larger",
+  "uuid": "b9976592-9045-4327-8b17-485c7114d359",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Longer decimal is larger",
+  "statement": "A decimal with more digits after the point is a larger number, because the digits after the point make a bigger whole number.",
+  "kind": "overgeneralization",
+  "domain": "math.decimals",
+  "about": [
+    "http://corestandards.org/Math/Content/4/NF/C/7/",
+    "http://corestandards.org/Math/Content/5/NBT/A/3/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "compare two decimals where the shorter is larger",
+      "signature": "chooses the decimal with more digits after the point",
+      "example": {
+        "item": "Which is larger, 0.5 or 0.25?",
+        "expected": "0.5",
+        "response": "0.25"
+      }
+    },
+    {
+      "item_shape": "order decimals of different lengths",
+      "signature": "orders by the digits after the point read as whole numbers",
+      "example": {
+        "item": "Order from smallest to largest: 0.3, 0.125, 0.45",
+        "expected": "0.125, 0.3, 0.45",
+        "response": "0.3, 0.45, 0.125"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip is one wrong comparison. The belief is diagnosed by a consistent pattern on length-incongruent items and a justification such as 'twenty-five is more than five'.",
+    "vs": {
+      "math.dec.shorter-is-larger": "Mirror belief. Include items where the longer decimal is larger (0.75 vs 0.8): longer-is-larger gets those right and shorter-is-larger gets them wrong."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/C/7/",
+        "label": "CCSS 4.NF.C.7: compare two decimals to hundredths by reasoning about their size"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/C/7/",
+        "label": "CCSS 4.NF.C.7: compare two decimals to hundredths by reasoning about their size"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/5/NBT/A/3/",
+        "label": "CCSS 5.NBT.A.3: read, write and compare decimals to thousandths"
+      }
+    ],
+    "confusable_with": [
+      "math.dec.shorter-is-larger"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "4.NF.C.7",
+      "uri": "http://corestandards.org/Math/Content/4/NF/C/7/",
+      "relation": "about"
+    },
+    {
+      "scheme": "CCSS",
+      "code": "5.NBT.A.3",
+      "uri": "http://corestandards.org/Math/Content/5/NBT/A/3/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Resnick, L. B., Nesher, P., Leonard, F., Magone, M., Omanson, S., & Peled, I. (1989). Conceptual bases of arithmetic errors: The case of decimal fractions. Journal for Research in Mathematics Education, 20(1), 8-27.",
+        "doi": "10.5951/jresematheduc.20.1.0008",
+        "note": "Whole-number rule for decimal comparison."
+      },
+      {
+        "type": "paper",
+        "citation": "Stacey, K., & Steinle, V. (1998). Refining the classification of students' interpretations of decimal notation. Hiroshima Journal of Mathematics Education, 6, 49-69.",
+        "note": "Longer-is-larger classification and its sub-types."
+      },
+      {
+        "type": "paper",
+        "citation": "Durkin, K., & Rittle-Johnson, B. (2015). Diagnosing misconceptions: Revealing changing decimal fraction knowledge. Learning and Instruction, 37, 21-29.",
+        "doi": "10.1016/j.learninstruc.2014.08.003"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

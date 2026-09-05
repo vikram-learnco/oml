@@ -1,0 +1,79 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.mixed-to-improper-add-all",
+  "uri": "https://oml.learnco.io/m/math.frac.mixed-to-improper-add-all",
+  "uuid": "be94771a-f7b8-4af6-acb3-a3fe723a0d20",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Converting a mixed number by adding all its numbers",
+  "statement": "To write a mixed number as an improper fraction you add the whole number to the numerator and keep the denominator.",
+  "kind": "procedural-bug",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/4/NF/B/3/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "convert a mixed number to an improper fraction",
+      "signature": "numerator = whole + numerator; denominator unchanged",
+      "example": {
+        "item": "Write 2 1/3 as an improper fraction",
+        "expected": "7/3",
+        "response": "3/3"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across items. A slip is a wrong product within the multiply-then-add method.",
+    "vs": {
+      "math.frac.add-whole-to-numerator": "Same surface result on 2 + 1/3, but this bug is triggered by mixed-number notation, not by a plus sign.",
+      "math.frac.improper-impossible": "Improper-impossible believers refuse to write 7/3 at all."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/B/3/",
+        "label": "CCSS 4.NF.B.3: understand a fraction a/b with a > 1 as a sum of fractions 1/b"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/B/3/",
+        "label": "CCSS 4.NF.B.3: understand a fraction a/b with a > 1 as a sum of fractions 1/b"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.add-whole-to-numerator",
+      "math.frac.improper-impossible"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "4.NF.B.3",
+      "uri": "http://corestandards.org/Math/Content/4/NF/B/3/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Ashlock, R. B. (2010). Error Patterns in Computation: Using Error Patterns to Help Each Student Learn (10th ed.). Allyn & Bacon."
+      },
+      {
+        "type": "book",
+        "citation": "Kerslake, D. (1986). Fractions: Children's Strategies and Errors. NFER-Nelson."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

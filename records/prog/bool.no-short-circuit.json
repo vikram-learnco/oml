@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "prog.bool.no-short-circuit",
+  "uri": "https://oml.learnco.io/m/prog.bool.no-short-circuit",
+  "uuid": "835a754e-f33f-4ab3-88a1-2cc87dc58918",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Both operands of and/or are always evaluated",
+  "statement": "A logical and or or always evaluates both of its operands, whatever the first one turns out to be.",
+  "kind": "undergeneralization",
+  "domain": "prog.boolean",
+  "about": [
+    "prog.bool.short-circuit"
+  ],
+  "level_band": [
+    "secondary",
+    "undergraduate"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "predict whether a guarded expression raises an error",
+      "signature": "predicts an error from the second operand even though the first operand decides the result",
+      "example": {
+        "item": "items = []\nif len(items) > 0 and items[0] == 'x':\n    print('yes')\nelse:\n    print('no')",
+        "expected": "no",
+        "response": "IndexError"
+      }
+    },
+    {
+      "item_shape": "predict a side effect in the second operand",
+      "signature": "predicts the side effect happens when the first operand already decides the result",
+      "example": {
+        "item": "def f():\n    print('called')\n    return True\nresult = False and f()",
+        "expected": "(nothing printed)",
+        "response": "called"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across items; the learner can state 'it checks both'. A slip is a single wrong prediction."
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "https://oml.learnco.io/c/prog.bool.short-circuit",
+        "label": "Logical and/or stop evaluating once the result is known"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "https://oml.learnco.io/c/prog.bool.short-circuit",
+        "label": "Logical and/or stop evaluating once the result is known"
+      }
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "progmiscon",
+      "code": "Java/NoShortCircuit",
+      "uri": "https://progmiscon.org/misconceptions/Java/NoShortCircuit",
+      "relation": "close-match"
+    },
+    {
+      "scheme": "progmiscon",
+      "code": "Python/NoShortCircuit",
+      "uri": "https://progmiscon.org/misconceptions/Python/NoShortCircuit",
+      "relation": "close-match"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "inventory",
+        "citation": "Chiodini, L., Moreno Santos, I., Gallidabino, A., Tafliovich, A., Santos, A. L., & Hauswirth, M. (2021). A curated inventory of programming language misconceptions. In Proceedings of the 26th ACM Conference on Innovation and Technology in Computer Science Education (ITiCSE '21), 380-386.",
+        "doi": "10.1145/3430665.3456343",
+        "url": "https://progmiscon.org/",
+        "note": "Inventory consulted for the misconception name and scope only; progmiscon publishes no licence for its text, so OML's statements and examples are written independently."
+      },
+      {
+        "type": "paper",
+        "citation": "Qian, Y., & Lehman, J. (2017). Students' misconceptions and other difficulties in introductory programming: A literature review. ACM Transactions on Computing Education, 18(1), Article 1.",
+        "doi": "10.1145/3077618"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

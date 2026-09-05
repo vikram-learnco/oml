@@ -1,0 +1,93 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.invert-dividend",
+  "uri": "https://oml.learnco.io/m/math.frac.invert-dividend",
+  "uuid": "33e03294-fca9-4bef-92bc-386f55ec81de",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Inverting the first fraction when dividing",
+  "statement": "To divide fractions you flip the first fraction and then multiply.",
+  "kind": "procedural-bug",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/6/NS/A/1/"
+  ],
+  "level_band": [
+    "middle",
+    "secondary",
+    "adult"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "divide two proper fractions",
+      "signature": "inverts the dividend instead of the divisor and multiplies",
+      "example": {
+        "item": "1/2 / 3/4 = ?",
+        "expected": "2/3",
+        "response": "6/4 (= 3/2)"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Apply to several items. The bug inverts the first fraction every time; a slip flips the wrong one once and self-corrects when asked which fraction is the divisor.",
+    "vs": {
+      "math.frac.invert-both": "Invert-both gives 2/1 x 4/3 = 8/3 on the same item; invert-dividend gives 2/1 x 3/4 = 6/4.",
+      "math.frac.divide-makes-smaller": "Ask the learner to predict the size of the answer first; the procedure bug gets the direction right and the number wrong."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/A/1/",
+        "label": "CCSS 6.NS.A.1: interpret and compute quotients of fractions"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/A/1/",
+        "label": "CCSS 6.NS.A.1: interpret and compute quotients of fractions"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.invert-both",
+      "math.frac.divide-makes-smaller"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "6.NS.A.1",
+      "uri": "http://corestandards.org/Math/Content/6/NS/A/1/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Ashlock, R. B. (2010). Error Patterns in Computation: Using Error Patterns to Help Each Student Learn (10th ed.). Allyn & Bacon."
+      },
+      {
+        "type": "paper",
+        "citation": "Newton, K. J. (2008). An extensive analysis of preservice elementary teachers' knowledge of fractions. American Educational Research Journal, 45(4), 1080-1110.",
+        "doi": "10.3102/0002831208320851",
+        "note": "Invert-and-multiply errors among preservice teachers."
+      },
+      {
+        "type": "paper",
+        "citation": "Siegler, R. S., & Lortie-Forgues, H. (2015). Conceptual knowledge of fraction arithmetic. Journal of Educational Psychology, 107(3), 909-918.",
+        "doi": "10.1037/edu0000025"
+      },
+      {
+        "type": "paper",
+        "citation": "Braithwaite, D. W., Pyke, A. A., & Siegler, R. S. (2017). A computational model of fraction arithmetic. Psychological Review, 124(5), 603-625.",
+        "doi": "10.1037/rev0000072",
+        "note": "Models fraction arithmetic bugs as mis-selected procedures."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

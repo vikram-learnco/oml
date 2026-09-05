@@ -1,0 +1,80 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.cancel-matching-digits",
+  "uri": "https://oml.learnco.io/m/math.frac.cancel-matching-digits",
+  "uuid": "9b81e6e0-ad37-42aa-9494-bc6892e7140b",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Cancelling matching digits",
+  "statement": "A fraction is simplified by crossing out a digit that appears in both the numerator and the denominator.",
+  "kind": "notation-confusion",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/4/NF/A/1/"
+  ],
+  "level_band": [
+    "middle",
+    "secondary"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "simplify a fraction whose numerator and denominator share a digit",
+      "signature": "deletes the shared digit from both numbers",
+      "example": {
+        "item": "Simplify 12/24",
+        "expected": "1/2",
+        "response": "1/4 (cancelling the 2s)"
+      },
+      "notes": "16/64 = 1/4 and 19/95 = 1/5 happen to be true, which reinforces the rule."
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Ask the learner to simplify 16/64 and then 12/24 and explain. The belief is 'the sixes cancel'; a slip has no digit-based rule.",
+    "vs": {
+      "math.frac.equivalence-additive": "Additive reasoners subtract from both parts; digit cancellers delete a digit and leave the rest."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/A/1/",
+        "label": "CCSS 4.NF.A.1: explain why a fraction a/b is equivalent to (n x a)/(n x b)"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/A/1/",
+        "label": "CCSS 4.NF.A.1: explain why a fraction a/b is equivalent to (n x a)/(n x b)"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.equivalence-additive"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "4.NF.A.1",
+      "uri": "http://corestandards.org/Math/Content/4/NF/A/1/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Ashlock, R. B. (2010). Error Patterns in Computation: Using Error Patterns to Help Each Student Learn (10th ed.). Allyn & Bacon."
+      },
+      {
+        "type": "paper",
+        "citation": "Brown, J. S., & VanLehn, K. (1980). Repair theory: A generative theory of bugs in procedural skills. Cognitive Science, 4(4), 379-426.",
+        "doi": "10.1207/s15516709cog0404_3",
+        "note": "Repair theory: bugs formed by over-literal reading of a procedure's surface form."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

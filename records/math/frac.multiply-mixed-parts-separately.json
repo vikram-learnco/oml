@@ -1,0 +1,81 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.multiply-mixed-parts-separately",
+  "uri": "https://oml.learnco.io/m/math.frac.multiply-mixed-parts-separately",
+  "uuid": "89ca96fb-84d7-4b24-a0f0-c24cf282e25c",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Multiplying mixed numbers part by part",
+  "statement": "To multiply mixed numbers you multiply the whole numbers together and the fractions together and put the two results back together.",
+  "kind": "procedural-bug",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/5/NF/B/4/"
+  ],
+  "level_band": [
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "multiply two mixed numbers",
+      "signature": "product = (whole x whole) and (fraction x fraction) written as a mixed number; the cross terms are dropped",
+      "example": {
+        "item": "2 1/2 x 3 1/3 = ?",
+        "expected": "8 1/3",
+        "response": "6 1/6"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "The answer is too small by exactly the two cross products and the pattern holds across items. A slip is an arithmetic error within the full method.",
+    "vs": {
+      "math.frac.multiply-with-common-denominator": "That bug appears on proper-fraction items; this one only appears with mixed numbers."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/4/",
+        "label": "CCSS 5.NF.B.4: multiply a fraction or whole number by a fraction"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/4/",
+        "label": "CCSS 5.NF.B.4: multiply a fraction or whole number by a fraction"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.multiply-with-common-denominator"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "5.NF.B.4",
+      "uri": "http://corestandards.org/Math/Content/5/NF/B/4/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Ashlock, R. B. (2010). Error Patterns in Computation: Using Error Patterns to Help Each Student Learn (10th ed.). Allyn & Bacon."
+      },
+      {
+        "type": "paper",
+        "citation": "Newton, K. J. (2008). An extensive analysis of preservice elementary teachers' knowledge of fractions. American Educational Research Journal, 45(4), 1080-1110.",
+        "doi": "10.3102/0002831208320851"
+      },
+      {
+        "type": "book",
+        "citation": "Lamon, S. J. (2012). Teaching Fractions and Ratios for Understanding: Essential Content Knowledge and Instructional Strategies for Teachers (3rd ed.). Routledge."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

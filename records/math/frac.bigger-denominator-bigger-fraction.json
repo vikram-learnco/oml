@@ -1,0 +1,114 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.bigger-denominator-bigger-fraction",
+  "uri": "https://oml.learnco.io/m/math.frac.bigger-denominator-bigger-fraction",
+  "uuid": "1288d189-d36c-4a7d-925d-62c88196a161",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Bigger denominator means bigger fraction",
+  "statement": "The fraction with the bigger denominator is the bigger fraction, because the denominator is a bigger number.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/3/NF/A/3/",
+    "http://corestandards.org/Math/Content/4/NF/A/2/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "compare two unit fractions",
+      "signature": "picks the unit fraction with the larger denominator as larger; on 1/b vs 1/d chooses the one with the larger b",
+      "example": {
+        "item": "Which is larger, 1/3 or 1/8?",
+        "expected": "1/3",
+        "response": "1/8"
+      }
+    },
+    {
+      "item_shape": "order a set of unit fractions",
+      "signature": "orders unit fractions by denominator ascending as if ordering whole numbers",
+      "example": {
+        "item": "Order from smallest to largest: 1/2, 1/5, 1/3",
+        "expected": "1/5, 1/3, 1/2",
+        "response": "1/2, 1/3, 1/5"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip is a single reversed choice among otherwise correct comparisons. The belief shows as a consistent preference for the larger denominator across unit-fraction items and a justification such as 'eight is more than three'.",
+    "vs": {
+      "math.frac.compare-whole-number-components": "Use an item where the larger denominator goes with the smaller numerator (2/3 vs 1/8). The component-comparison belief gives no clear answer or picks by numerator; this belief still picks 1/8.",
+      "math.frac.compare-by-gap": "Gap thinking on 1/3 vs 1/8 says both are 'one piece away from nothing' and compares the pieces; it answers 1/3. This belief answers 1/8."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/3/",
+        "label": "CCSS 3.NF.A.3: explain equivalence of fractions and compare fractions by reasoning about their size"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/1/",
+        "label": "CCSS 3.NF.A.1: understand a fraction 1/b as one part of a whole partitioned into b equal parts"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/3/",
+        "label": "CCSS 3.NF.A.3: explain equivalence of fractions and compare fractions by reasoning about their size"
+      }
+    ],
+    "specializes": [
+      "math.frac.compare-whole-number-components"
+    ],
+    "confusable_with": [
+      "math.frac.compare-by-gap"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "3.NF.A.3",
+      "uri": "http://corestandards.org/Math/Content/3/NF/A/3/",
+      "relation": "about"
+    },
+    {
+      "scheme": "CCSS",
+      "code": "4.NF.A.2",
+      "uri": "http://corestandards.org/Math/Content/4/NF/A/2/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Stafylidou, S., & Vosniadou, S. (2004). The development of students' understanding of the numerical value of fractions. Learning and Instruction, 14(5), 503-518.",
+        "doi": "10.1016/j.learninstruc.2004.06.015",
+        "note": "Reports the 'fraction increases as the denominator increases' interpretation as an early developmental stage."
+      },
+      {
+        "type": "paper",
+        "citation": "Ni, Y., & Zhou, Y.-D. (2005). Teaching and learning fraction and rational numbers: The origins and implications of whole number bias. Educational Psychologist, 40(1), 27-52.",
+        "doi": "10.1207/s15326985ep4001_3"
+      },
+      {
+        "type": "paper",
+        "citation": "Van Hoof, J., Verschaffel, L., & Van Dooren, W. (2015). Inappropriately applying natural number properties in rational number tasks: Characterizing the development of the natural number bias through primary and secondary education. Educational Studies in Mathematics, 90(1), 39-56.",
+        "doi": "10.1007/s10649-015-9613-3"
+      },
+      {
+        "type": "paper",
+        "citation": "DeWolf, M., & Vosniadou, S. (2015). The representation of fraction magnitudes and the whole number bias reconsidered. Learning and Instruction, 37, 39-49.",
+        "doi": "10.1016/j.learninstruc.2014.07.002"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

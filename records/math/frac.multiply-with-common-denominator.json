@@ -1,0 +1,98 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.multiply-with-common-denominator",
+  "uri": "https://oml.learnco.io/m/math.frac.multiply-with-common-denominator",
+  "uuid": "116cbd32-81bd-4fbb-b5b2-31a47ff576b4",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Multiplying needs a common denominator",
+  "statement": "Before multiplying fractions you must write them with a common denominator, then multiply the numerators and keep the denominator.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/5/NF/B/4/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "multiply two fractions with unlike denominators",
+      "signature": "converts to a common denominator, multiplies numerators and keeps the common denominator",
+      "example": {
+        "item": "1/2 x 1/3 = ?",
+        "expected": "1/6",
+        "response": "3/6 x 2/6 = 6/6 = 1"
+      }
+    },
+    {
+      "item_shape": "multiply two fractions with like denominators",
+      "signature": "multiplies numerators and keeps the shared denominator",
+      "example": {
+        "item": "2/5 x 3/5 = ?",
+        "expected": "6/25",
+        "response": "6/5"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "The extra common-denominator step is visible in the working and repeated across items. A slip does not add that step.",
+    "vs": {
+      "math.frac.cross-multiply-to-multiply": "Cross-multipliers do not convert denominators; they give 1/2 x 1/3 = (1x3)/(2x1) = 3/2.",
+      "math.frac.add-across": "Add-across is the mirror error (addition treated like multiplication). A learner with both answers 1/2 + 1/3 = 2/5 and 1/2 x 1/3 = 6/6."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/4/",
+        "label": "CCSS 5.NF.B.4: multiply a fraction or whole number by a fraction"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/4/",
+        "label": "CCSS 5.NF.B.4: multiply a fraction or whole number by a fraction"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.cross-multiply-to-multiply"
+    ],
+    "co_occurs_with": [
+      "math.frac.add-across"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "5.NF.B.4",
+      "uri": "http://corestandards.org/Math/Content/5/NF/B/4/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Newton, K. J. (2008). An extensive analysis of preservice elementary teachers' knowledge of fractions. American Educational Research Journal, 45(4), 1080-1110.",
+        "doi": "10.3102/0002831208320851",
+        "note": "Overgeneralisation of the addition procedure to multiplication."
+      },
+      {
+        "type": "paper",
+        "citation": "Siegler, R. S., & Lortie-Forgues, H. (2015). Conceptual knowledge of fraction arithmetic. Journal of Educational Psychology, 107(3), 909-918.",
+        "doi": "10.1037/edu0000025"
+      },
+      {
+        "type": "paper",
+        "citation": "Braithwaite, D. W., Pyke, A. A., & Siegler, R. S. (2017). A computational model of fraction arithmetic. Psychological Review, 124(5), 603-625.",
+        "doi": "10.1037/rev0000072"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

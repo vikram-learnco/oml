@@ -1,0 +1,92 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.subtract-across",
+  "uri": "https://oml.learnco.io/m/math.frac.subtract-across",
+  "uuid": "f9b8d0fd-1f46-47ac-8fc7-d4923e7ef2c8",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Subtracting fractions across numerators and denominators",
+  "statement": "Fractions are subtracted by subtracting the numerators and subtracting the denominators.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/5/NF/A/1/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "subtract two fractions with unlike denominators",
+      "signature": "difference numerator = a - c and difference denominator = b - d for a/b - c/d",
+      "example": {
+        "item": "3/4 - 1/2 = ?",
+        "expected": "1/4",
+        "response": "2/2 (= 1)"
+      }
+    },
+    {
+      "item_shape": "subtract two fractions with like denominators",
+      "signature": "subtracts denominators to get zero and cannot finish, or writes the numerator difference over 0",
+      "example": {
+        "item": "3/5 - 1/5 = ?",
+        "expected": "2/5",
+        "response": "2/0 (or 'impossible')"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Like-denominator items are diagnostic: the bug produces a zero denominator and the learner stalls. A slip does not.",
+    "vs": {
+      "math.frac.add-across": "Same mechanism for the other operation. Most learners with one have the other; test both."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/A/1/",
+        "label": "CCSS 5.NF.A.1: add and subtract fractions with unlike denominators"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/A/1/",
+        "label": "CCSS 5.NF.A.1: add and subtract fractions with unlike denominators"
+      }
+    ],
+    "co_occurs_with": [
+      "math.frac.add-across"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "5.NF.A.1",
+      "uri": "http://corestandards.org/Math/Content/5/NF/A/1/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Siegler, R. S., Thompson, C. A., & Schneider, M. (2011). An integrated theory of whole number and fractions development. Cognitive Psychology, 62(4), 273-296.",
+        "doi": "10.1016/j.cogpsych.2011.03.001"
+      },
+      {
+        "type": "paper",
+        "citation": "Braithwaite, D. W., Pyke, A. A., & Siegler, R. S. (2017). A computational model of fraction arithmetic. Psychological Review, 124(5), 603-625.",
+        "doi": "10.1037/rev0000072"
+      },
+      {
+        "type": "book",
+        "citation": "Ashlock, R. B. (2010). Error Patterns in Computation: Using Error Patterns to Help Each Student Learn (10th ed.). Allyn & Bacon."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

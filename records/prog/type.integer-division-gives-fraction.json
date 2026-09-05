@@ -1,0 +1,75 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "prog.type.integer-division-gives-fraction",
+  "uri": "https://oml.learnco.io/m/prog.type.integer-division-gives-fraction",
+  "uuid": "f884573f-e177-4865-9cbb-e334397e406a",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Dividing two integers gives a fraction",
+  "statement": "Dividing one whole number by another gives the exact mathematical result with a fractional part, whatever the types involved.",
+  "kind": "overgeneralization",
+  "domain": "prog.types",
+  "about": [
+    "prog.type.integer-division"
+  ],
+  "level_band": [
+    "secondary",
+    "undergraduate"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "predict the result of integer division in a language that truncates",
+      "signature": "predicts the exact quotient",
+      "example": {
+        "item": "int x = 7 / 2;\nSystem.out.println(x);",
+        "expected": "3",
+        "response": "3.5"
+      }
+    },
+    {
+      "item_shape": "compute an average of integers",
+      "signature": "divides an int sum by an int count and expects a decimal average",
+      "example": {
+        "item": "int total = 7, n = 2;\ndouble avg = total / n;",
+        "expected": "3.0 (integer division happens first)",
+        "response": "3.5"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across items; the learner is surprised by 3 and cannot explain it. A slip is forgetting a cast once while knowing the rule."
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "https://oml.learnco.io/c/prog.type.integer-division",
+        "label": "Dividing two integers gives an integer result"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "https://oml.learnco.io/c/prog.type.integer-division",
+        "label": "Dividing two integers gives an integer result"
+      }
+    ]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Qian, Y., & Lehman, J. (2017). Students' misconceptions and other difficulties in introductory programming: A literature review. ACM Transactions on Computing Education, 18(1), Article 1.",
+        "doi": "10.1145/3077618",
+        "note": "Integer division and type-related misconceptions in the review."
+      },
+      {
+        "type": "book",
+        "citation": "Sorva, J. (2012). Visual Program Simulation in Introductory Programming Education (Doctoral dissertation, Aalto University). Appendix A catalogues introductory programming misconceptions from the literature.",
+        "url": "https://aaltodoc.aalto.fi/handle/123456789/3534"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

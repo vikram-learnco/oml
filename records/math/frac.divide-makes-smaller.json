@@ -1,0 +1,118 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.divide-makes-smaller",
+  "uri": "https://oml.learnco.io/m/math.frac.divide-makes-smaller",
+  "uuid": "72884d31-1a9a-418f-92ee-f073eef02008",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Division always makes smaller",
+  "statement": "Dividing always gives a result smaller than the number you started with, so dividing by a fraction cannot make a number bigger.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/5/NF/B/7/",
+    "http://corestandards.org/Math/Content/6/NS/A/1/"
+  ],
+  "level_band": [
+    "primary",
+    "middle",
+    "secondary",
+    "adult"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "predict whether a quotient will be larger or smaller than the dividend, without calculating",
+      "signature": "predicts the quotient of a number divided by a proper fraction is smaller than the number",
+      "example": {
+        "item": "Without calculating, is 6 / 1/2 more or less than 6?",
+        "expected": "More (it is 12)",
+        "response": "Less"
+      }
+    },
+    {
+      "item_shape": "evaluate a whole number divided by a unit fraction",
+      "signature": "halves the number instead of doubling it",
+      "example": {
+        "item": "6 / 1/2 = ?",
+        "expected": "12",
+        "response": "3"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip is one wrong prediction. The belief is stated as a rule ('dividing makes it smaller') and holds for decimals too; it often coexists with math.frac.multiply-makes-bigger.",
+    "vs": {
+      "math.frac.multiply-makes-bigger": "Mirror belief; test each separately.",
+      "math.frac.invert-dividend": "Ask the learner to predict before calculating. Procedure bugs give a wrong number but often a correct prediction of direction; this belief gets the direction wrong.",
+      "math.frac.division-is-sharing-only": "Sharing-only believers say 6 / 1/2 'makes no sense' or reinterpret it; this belief answers confidently with a smaller number."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/7/",
+        "label": "CCSS 5.NF.B.7: divide unit fractions by whole numbers and whole numbers by unit fractions"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/7/",
+        "label": "CCSS 5.NF.B.7: divide unit fractions by whole numbers and whole numbers by unit fractions"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/A/1/",
+        "label": "CCSS 6.NS.A.1: interpret and compute quotients of fractions"
+      }
+    ],
+    "co_occurs_with": [
+      "math.frac.multiply-makes-bigger"
+    ],
+    "confusable_with": [
+      "math.frac.invert-dividend",
+      "math.frac.division-is-sharing-only"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "5.NF.B.7",
+      "uri": "http://corestandards.org/Math/Content/5/NF/B/7/",
+      "relation": "about"
+    },
+    {
+      "scheme": "CCSS",
+      "code": "6.NS.A.1",
+      "uri": "http://corestandards.org/Math/Content/6/NS/A/1/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Fischbein, E., Deri, M., Nello, M. S., & Marino, M. S. (1985). The role of implicit models in solving verbal problems in multiplication and division. Journal for Research in Mathematics Education, 16(1), 3-17.",
+        "doi": "10.5951/jresematheduc.16.1.0003",
+        "note": "Implicit partitive model of division: the quotient must be smaller than the dividend."
+      },
+      {
+        "type": "paper",
+        "citation": "Tirosh, D. (2000). Enhancing prospective teachers' knowledge of children's conceptions: The case of division of fractions. Journal for Research in Mathematics Education, 31(1), 5-25.",
+        "doi": "10.2307/749817"
+      },
+      {
+        "type": "paper",
+        "citation": "Graeber, A. O., Tirosh, D., & Glover, R. (1989). Preservice teachers' misconceptions in solving verbal problems in multiplication and division. Journal for Research in Mathematics Education, 20(1), 95-102.",
+        "doi": "10.5951/jresematheduc.20.1.0095"
+      },
+      {
+        "type": "paper",
+        "citation": "Siegler, R. S., & Lortie-Forgues, H. (2015). Conceptual knowledge of fraction arithmetic. Journal of Educational Psychology, 107(3), 909-918.",
+        "doi": "10.1037/edu0000025"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

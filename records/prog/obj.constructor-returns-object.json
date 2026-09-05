@@ -1,0 +1,82 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "prog.obj.constructor-returns-object",
+  "uri": "https://oml.learnco.io/m/prog.obj.constructor-returns-object",
+  "uuid": "82998d6e-dc24-425a-984e-e60d6a3b1de6",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "A constructor must return the object",
+  "statement": "A constructor creates the object and has to return it at the end, so a constructor without a return statement produces nothing.",
+  "kind": "overgeneralization",
+  "domain": "prog.objects",
+  "about": [
+    "prog.obj.constructor"
+  ],
+  "level_band": [
+    "secondary",
+    "undergraduate"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "write a constructor",
+      "signature": "adds return this (or return self) at the end, or a return type to the constructor header",
+      "example": {
+        "item": "Write a constructor for Point that stores x and y.",
+        "expected": "Point(int x, int y) { this.x = x; this.y = y; }",
+        "response": "Point Point(int x, int y) { this.x = x; this.y = y; return this; }"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip is a stray return removed when noticed. The belief is stated ('otherwise you don't get the object back') and the learner also expects new Point(1, 2) to be 'empty' without it."
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "https://oml.learnco.io/c/prog.obj.constructor",
+        "label": "A constructor initialises an object the runtime has already created"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "https://oml.learnco.io/c/prog.obj.constructor",
+        "label": "A constructor initialises an object the runtime has already created"
+      }
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "progmiscon",
+      "code": "Java/ConstructorReturnsObject",
+      "uri": "https://progmiscon.org/misconceptions/Java/ConstructorReturnsObject",
+      "relation": "close-match"
+    },
+    {
+      "scheme": "progmiscon",
+      "code": "Python/InitReturnsObject",
+      "uri": "https://progmiscon.org/misconceptions/Python/InitReturnsObject",
+      "relation": "close-match"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "inventory",
+        "citation": "Chiodini, L., Moreno Santos, I., Gallidabino, A., Tafliovich, A., Santos, A. L., & Hauswirth, M. (2021). A curated inventory of programming language misconceptions. In Proceedings of the 26th ACM Conference on Innovation and Technology in Computer Science Education (ITiCSE '21), 380-386.",
+        "doi": "10.1145/3430665.3456343",
+        "url": "https://progmiscon.org/",
+        "note": "Inventory consulted for the misconception name and scope only; progmiscon publishes no licence for its text, so OML's statements and examples are written independently."
+      },
+      {
+        "type": "paper",
+        "citation": "Ragonis, N., & Ben-Ari, M. (2005). A long-term investigation of the comprehension of OOP concepts by novices. Computer Science Education, 15(3), 203-221.",
+        "doi": "10.1080/08993400500224310",
+        "note": "Novice comprehension of constructors and object creation."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

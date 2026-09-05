@@ -1,0 +1,95 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.no-number-between",
+  "uri": "https://oml.learnco.io/m/math.frac.no-number-between",
+  "uuid": "a18f0879-fc85-4c07-8da5-d1e68e72c460",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "No number between neighbouring fractions",
+  "statement": "Fractions come one after another like whole numbers, so between two fractions that are 'next to each other' there is no other number.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/6/NS/C/6/"
+  ],
+  "level_band": [
+    "middle",
+    "secondary"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "ask how many numbers lie between two fractions",
+      "signature": "answers none, or a small finite count found by listing",
+      "example": {
+        "item": "How many numbers are there between 1/5 and 2/5?",
+        "expected": "Infinitely many",
+        "response": "None"
+      }
+    },
+    {
+      "item_shape": "ask for a fraction between two given fractions with consecutive numerators",
+      "signature": "says there is none, or gives one only by changing to a bigger denominator and then says that is the only one",
+      "example": {
+        "item": "Name a fraction between 3/7 and 4/7",
+        "expected": "any of 7/14 ... e.g. 1/2",
+        "response": "There isn't one"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip is failing to find one on a single item. The belief is a stated rule ('there's nothing between them') that survives being shown an example, or is repaired to 'there are a few, but not infinitely many'."
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/C/6/",
+        "label": "CCSS 6.NS.C.6: understand a rational number as a point on the number line"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/C/6/",
+        "label": "CCSS 6.NS.C.6: understand a rational number as a point on the number line"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/A/1/",
+        "label": "CCSS 4.NF.A.1: explain why a fraction a/b is equivalent to (n x a)/(n x b)"
+      }
+    ],
+    "specializes": [
+      "math.frac.two-whole-numbers"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "6.NS.C.6",
+      "uri": "http://corestandards.org/Math/Content/6/NS/C/6/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Vamvakoussi, X., & Vosniadou, S. (2004). Understanding the structure of the set of rational numbers: A conceptual change approach. Learning and Instruction, 14(5), 453-467.",
+        "doi": "10.1016/j.learninstruc.2004.06.013",
+        "note": "Discreteness of the rational number set as a synthetic model carried over from natural numbers."
+      },
+      {
+        "type": "paper",
+        "citation": "Vamvakoussi, X., & Vosniadou, S. (2010). How many decimals are there between two fractions? Aspects of secondary school students' understanding of rational numbers and their notation. Cognition and Instruction, 28(2), 181-209.",
+        "doi": "10.1080/07370001003676603"
+      },
+      {
+        "type": "paper",
+        "citation": "Van Hoof, J., Verschaffel, L., & Van Dooren, W. (2015). Inappropriately applying natural number properties in rational number tasks: Characterizing the development of the natural number bias through primary and secondary education. Educational Studies in Mathematics, 90(1), 39-56.",
+        "doi": "10.1007/s10649-015-9613-3"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

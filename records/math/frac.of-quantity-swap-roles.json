@@ -1,0 +1,85 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.of-quantity-swap-roles",
+  "uri": "https://oml.learnco.io/m/math.frac.of-quantity-swap-roles",
+  "uuid": "721c3f30-4b4e-4ffb-ac77-3433d1a18164",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Swapping numerator and denominator when finding a fraction of a quantity",
+  "statement": "To find a/b of a quantity you divide the quantity by a and multiply by b.",
+  "kind": "procedural-bug",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/4/NF/B/4/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "find a non-unit fraction of a whole-number quantity",
+      "signature": "divides by the numerator and multiplies by the denominator",
+      "example": {
+        "item": "Find 3/4 of 20",
+        "expected": "15",
+        "response": "26 2/3 (20 / 3 x 4)"
+      }
+    },
+    {
+      "item_shape": "find a unit fraction of a quantity",
+      "signature": "divides by 1 and multiplies by the denominator",
+      "example": {
+        "item": "Find 1/5 of 30",
+        "expected": "6",
+        "response": "150"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "The answer is larger than the original quantity for a proper fraction and the learner does not object. A slip is a wrong division or multiplication within the right method."
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/B/4/",
+        "label": "CCSS 4.NF.B.4: multiply a fraction by a whole number"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/B/4/",
+        "label": "CCSS 4.NF.B.4: multiply a fraction by a whole number"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/1/",
+        "label": "CCSS 3.NF.A.1: understand a fraction 1/b as one part of a whole partitioned into b equal parts"
+      }
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "4.NF.B.4",
+      "uri": "http://corestandards.org/Math/Content/4/NF/B/4/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Hart, K. M. (Ed.). (1981). Children's Understanding of Mathematics: 11-16. John Murray. (Concepts in Secondary Mathematics and Science project.)",
+        "note": "CSMS fractions: errors on 'fraction of a quantity' items."
+      },
+      {
+        "type": "book",
+        "citation": "Kerslake, D. (1986). Fractions: Children's Strategies and Errors. NFER-Nelson."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

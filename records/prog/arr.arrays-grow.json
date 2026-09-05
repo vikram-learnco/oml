@@ -1,0 +1,81 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "prog.arr.arrays-grow",
+  "uri": "https://oml.learnco.io/m/prog.arr.arrays-grow",
+  "uuid": "c14aea0d-dc29-4cdc-9e08-bde06dfa0014",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Arrays grow when you add to them",
+  "statement": "An array gets bigger by itself when you store something past its end, so its size does not need to be decided in advance.",
+  "kind": "overgeneralization",
+  "domain": "prog.arrays",
+  "about": [
+    "prog.arr.fixed-size"
+  ],
+  "level_band": [
+    "secondary",
+    "undergraduate"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "predict a write one past the end of an array",
+      "signature": "predicts the array now has one more element",
+      "example": {
+        "item": "int[] a = new int[3];\na[3] = 7;\nSystem.out.println(a.length);",
+        "expected": "ArrayIndexOutOfBoundsException",
+        "response": "4"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across items; the learner treats arrays like lists. A slip is a single off-by-one index."
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "https://oml.learnco.io/c/prog.arr.fixed-size",
+        "label": "An array has a fixed length set when it is created"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "https://oml.learnco.io/c/prog.arr.fixed-size",
+        "label": "An array has a fixed length set when it is created"
+      }
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "progmiscon",
+      "code": "Java/ArraysGrow",
+      "uri": "https://progmiscon.org/misconceptions/Java/ArraysGrow",
+      "relation": "close-match"
+    },
+    {
+      "scheme": "progmiscon",
+      "code": "Java/ArrayListIsArray",
+      "uri": "https://progmiscon.org/misconceptions/Java/ArrayListIsArray",
+      "relation": "close-match"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "inventory",
+        "citation": "Chiodini, L., Moreno Santos, I., Gallidabino, A., Tafliovich, A., Santos, A. L., & Hauswirth, M. (2021). A curated inventory of programming language misconceptions. In Proceedings of the 26th ACM Conference on Innovation and Technology in Computer Science Education (ITiCSE '21), 380-386.",
+        "doi": "10.1145/3430665.3456343",
+        "url": "https://progmiscon.org/",
+        "note": "Inventory consulted for the misconception name and scope only; progmiscon publishes no licence for its text, so OML's statements and examples are written independently."
+      },
+      {
+        "type": "paper",
+        "citation": "Kaczmarczyk, L. C., Petrick, E. R., East, J. P., & Herman, G. L. (2010). Identifying student misconceptions of programming. In Proceedings of the 41st ACM Technical Symposium on Computer Science Education (SIGCSE '10), 107-111.",
+        "doi": "10.1145/1734263.1734299"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.number-line-whole-is-line",
+  "uri": "https://oml.learnco.io/m/math.frac.number-line-whole-is-line",
+  "uuid": "fb647fd2-a6ef-40a4-a0ac-abd0d497e750",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "The whole line is the whole",
+  "statement": "On a number line the fraction refers to the whole line drawn, so 1/2 is at the middle of the line wherever the line ends.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/3/NF/A/2/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "place a fraction on a number line longer than one unit",
+      "signature": "places the fraction at that fraction of the whole drawn segment rather than of the unit interval",
+      "example": {
+        "item": "Mark 1/2 on a number line from 0 to 3",
+        "expected": "halfway between 0 and 1",
+        "response": "at 1 1/2, the middle of the line"
+      },
+      "notes": "On a 0-to-2 line the two placements for 1/2 differ (1/2 vs 1); on 0-to-1 they coincide, so 0-to-1 lines cannot detect this belief."
+    },
+    {
+      "item_shape": "read the fraction shown by a point on a number line longer than one unit",
+      "signature": "reports the point's position as a fraction of the drawn line",
+      "example": {
+        "item": "A point is at 1 1/2 on a line from 0 to 3. What number is it?",
+        "expected": "1 1/2",
+        "response": "1/2"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Correct on 0-to-1 lines and wrong on longer lines, consistently. A slip has no such dependence on line length.",
+    "vs": {
+      "math.frac.two-whole-numbers": "Learners who see a fraction as two whole numbers fail 0-to-1 lines too, placing 3/4 at 3 or 4."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/2/",
+        "label": "CCSS 3.NF.A.2: understand a fraction as a number on the number line"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/2/",
+        "label": "CCSS 3.NF.A.2: understand a fraction as a number on the number line"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/1/",
+        "label": "CCSS 3.NF.A.1: understand a fraction 1/b as one part of a whole partitioned into b equal parts"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.two-whole-numbers"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "3.NF.A.2",
+      "uri": "http://corestandards.org/Math/Content/3/NF/A/2/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Bright, G. W., Behr, M. J., Post, T. R., & Wachsmuth, I. (1988). Identifying fractions on number lines. Journal for Research in Mathematics Education, 19(3), 215-232.",
+        "doi": "10.5951/jresematheduc.19.3.0215",
+        "note": "Number-line tasks: students using the whole line rather than the unit interval."
+      },
+      {
+        "type": "book",
+        "citation": "Hart, K. M. (Ed.). (1981). Children's Understanding of Mathematics: 11-16. John Murray. (Concepts in Secondary Mathematics and Science project.)"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

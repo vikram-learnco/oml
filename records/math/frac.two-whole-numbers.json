@@ -1,0 +1,105 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.two-whole-numbers",
+  "uri": "https://oml.learnco.io/m/math.frac.two-whole-numbers",
+  "uuid": "dd52364b-0b0d-4ab8-a0f5-51bcb845f7fc",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "A fraction is two separate whole numbers",
+  "statement": "A fraction is two whole numbers written one above the other, not a single number with its own size; the numerator and denominator can be read and handled separately.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/3/NF/A/2/",
+    "http://corestandards.org/Math/Content/6/NS/C/6/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "place a fraction on a number line marked 0 to 10",
+      "signature": "places the fraction at the numerator, the denominator, or their sum",
+      "example": {
+        "item": "Mark 3/4 on a number line from 0 to 10",
+        "expected": "between 0 and 1, three quarters of the way",
+        "response": "at 3 (or at 4, or at 7)"
+      }
+    },
+    {
+      "item_shape": "say which whole numbers a fraction lies between",
+      "signature": "answers with the numerator and denominator themselves",
+      "example": {
+        "item": "Between which two whole numbers is 5/8?",
+        "expected": "0 and 1",
+        "response": "5 and 8"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip is one misplaced point. The belief is stable across fractions and shows in language: the learner describes 3/4 as 'three and four' or 'three out of four' but cannot say whether it is more or less than one.",
+    "vs": {
+      "math.frac.number-line-whole-is-line": "Give a 0-to-1 line. Learners who treat the whole line as the unit place 3/4 correctly on a 0-1 line but not on a 0-2 line; learners with this belief fail both and place by the numerator."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/2/",
+        "label": "CCSS 3.NF.A.2: understand a fraction as a number on the number line"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/C/6/",
+        "label": "CCSS 6.NS.C.6: understand a rational number as a point on the number line"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/2/",
+        "label": "CCSS 3.NF.A.2: understand a fraction as a number on the number line"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.number-line-whole-is-line"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "3.NF.A.2",
+      "uri": "http://corestandards.org/Math/Content/3/NF/A/2/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Ni, Y., & Zhou, Y.-D. (2005). Teaching and learning fraction and rational numbers: The origins and implications of whole number bias. Educational Psychologist, 40(1), 27-52.",
+        "doi": "10.1207/s15326985ep4001_3",
+        "note": "Whole number bias: the components of a fraction are treated as independent natural numbers."
+      },
+      {
+        "type": "paper",
+        "citation": "Stafylidou, S., & Vosniadou, S. (2004). The development of students' understanding of the numerical value of fractions. Learning and Instruction, 14(5), 503-518.",
+        "doi": "10.1016/j.learninstruc.2004.06.015"
+      },
+      {
+        "type": "paper",
+        "citation": "Siegler, R. S., Thompson, C. A., & Schneider, M. (2011). An integrated theory of whole number and fractions development. Cognitive Psychology, 62(4), 273-296.",
+        "doi": "10.1016/j.cogpsych.2011.03.001",
+        "note": "Fraction magnitude understanding as the core of fraction knowledge; its absence underlies this belief."
+      },
+      {
+        "type": "paper",
+        "citation": "Mack, N. K. (1995). Confounding whole-number and fraction concepts when building on informal knowledge. Journal for Research in Mathematics Education, 26(5), 422-441.",
+        "doi": "10.5951/jresematheduc.26.5.0422"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

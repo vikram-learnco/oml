@@ -1,0 +1,97 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "prog.control.loop-body-variables-reset",
+  "uri": "https://oml.learnco.io/m/prog.control.loop-body-variables-reset",
+  "uuid": "300e50db-d430-4eaa-928f-d34e302f6c48",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Variables reset at the start of every loop iteration",
+  "statement": "Every time a loop body starts again, the variables changed inside it go back to what they were before the loop.",
+  "kind": "overgeneralization",
+  "domain": "prog.control",
+  "about": [
+    "prog.control.loop",
+    "prog.var.variable"
+  ],
+  "level_band": [
+    "primary",
+    "middle",
+    "secondary",
+    "undergraduate"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "trace an accumulator updated inside a loop",
+      "signature": "reports the value from a single iteration rather than the accumulated value",
+      "example": {
+        "item": "total = 0\nfor n in [1, 2, 3]:\n    total = total + n\nprint(total)",
+        "expected": "6",
+        "response": "3"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across accumulator items; the learner explains that the loop 'starts over'. A slip is an arithmetic error in the running total.",
+    "vs": {
+      "prog.var.variable-keeps-history": "History-keepers report too many values; resetters report only the last iteration's contribution."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "https://oml.learnco.io/c/prog.var.variable",
+        "label": "A variable holds exactly one value at a time"
+      },
+      {
+        "external": "https://oml.learnco.io/c/prog.control.loop",
+        "label": "A loop checks its condition only at defined points and repeats its whole body"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "https://oml.learnco.io/c/prog.var.variable",
+        "label": "A variable holds exactly one value at a time"
+      },
+      {
+        "external": "https://oml.learnco.io/c/prog.control.loop",
+        "label": "A loop checks its condition only at defined points and repeats its whole body"
+      }
+    ],
+    "confusable_with": [
+      "prog.var.variable-keeps-history"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "progmiscon",
+      "code": "Scratch/ResetStateEachLoopIteration",
+      "uri": "https://progmiscon.org/misconceptions/Scratch/ResetStateEachLoopIteration",
+      "relation": "close-match"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "inventory",
+        "citation": "Chiodini, L., Moreno Santos, I., Gallidabino, A., Tafliovich, A., Santos, A. L., & Hauswirth, M. (2021). A curated inventory of programming language misconceptions. In Proceedings of the 26th ACM Conference on Innovation and Technology in Computer Science Education (ITiCSE '21), 380-386.",
+        "doi": "10.1145/3430665.3456343",
+        "url": "https://progmiscon.org/",
+        "note": "Inventory consulted for the misconception name and scope only; progmiscon publishes no licence for its text, so OML's statements and examples are written independently."
+      },
+      {
+        "type": "paper",
+        "citation": "Swidan, A., Hermans, F., & Smit, M. (2018). Programming misconceptions for school students. In Proceedings of the 2018 ACM Conference on International Computing Education Research (ICER '18), 151-159.",
+        "doi": "10.1145/3230977.3230995"
+      },
+      {
+        "type": "book",
+        "citation": "Sorva, J. (2012). Visual Program Simulation in Introductory Programming Education (Doctoral dissertation, Aalto University). Appendix A catalogues introductory programming misconceptions from the literature.",
+        "url": "https://aaltodoc.aalto.fi/handle/123456789/3534"
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

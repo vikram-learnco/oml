@@ -1,0 +1,97 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.equivalence-additive",
+  "uri": "https://oml.learnco.io/m/math.frac.equivalence-additive",
+  "uuid": "5aadfc6d-33f3-4336-908b-02c278e40508",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Equivalent fractions by adding the same number",
+  "statement": "You get an equivalent fraction by adding the same number to the numerator and the denominator, or by subtracting the same number from both.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/4/NF/A/1/"
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "complete an equivalent fraction with a given denominator",
+      "signature": "adds the difference in denominators to the numerator",
+      "example": {
+        "item": "2/3 = ?/6",
+        "expected": "4/6",
+        "response": "5/6"
+      }
+    },
+    {
+      "item_shape": "simplify a fraction",
+      "signature": "subtracts the same number from numerator and denominator",
+      "example": {
+        "item": "Simplify 6/8",
+        "expected": "3/4",
+        "response": "5/7 (or 4/6)"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "Consistent across items; the learner defends it as 'you have to do the same to both'. A slip is a single wrong numerator with multiplicative reasoning elsewhere.",
+    "vs": {
+      "math.frac.cancel-matching-digits": "Digit cancellers only act when a digit repeats (16/64); additive reasoners act on any fraction."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/A/1/",
+        "label": "CCSS 4.NF.A.1: explain why a fraction a/b is equivalent to (n x a)/(n x b)"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/4/NF/A/1/",
+        "label": "CCSS 4.NF.A.1: explain why a fraction a/b is equivalent to (n x a)/(n x b)"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.cancel-matching-digits"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "4.NF.A.1",
+      "uri": "http://corestandards.org/Math/Content/4/NF/A/1/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "book",
+        "citation": "Hart, K. M. (Ed.). (1981). Children's Understanding of Mathematics: 11-16. John Murray. (Concepts in Secondary Mathematics and Science project.)",
+        "note": "CSMS: additive strategies on equivalence items."
+      },
+      {
+        "type": "book",
+        "citation": "Kerslake, D. (1986). Fractions: Children's Strategies and Errors. NFER-Nelson."
+      },
+      {
+        "type": "paper",
+        "citation": "Behr, M. J., Wachsmuth, I., Post, T. R., & Lesh, R. (1984). Order and equivalence of rational numbers: A clinical teaching experiment. Journal for Research in Mathematics Education, 15(5), 323-341.",
+        "doi": "10.5951/jresematheduc.15.5.0323"
+      },
+      {
+        "type": "book",
+        "citation": "Lamon, S. J. (2012). Teaching Fractions and Ratios for Understanding: Essential Content Knowledge and Instructional Strategies for Teachers (3rd ed.). Routledge.",
+        "note": "Additive versus multiplicative reasoning."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.division-is-sharing-only",
+  "uri": "https://oml.learnco.io/m/math.frac.division-is-sharing-only",
+  "uuid": "50e4d120-cd01-49b2-95e6-5ec8df0762d1",
+  "version": "0.1.0",
+  "status": "draft",
+  "title": "Division of fractions only means sharing",
+  "statement": "Dividing means sharing a quantity equally among a number of people, so a division by a fraction has no meaning and must be a mistake or a different operation.",
+  "kind": "undergeneralization",
+  "domain": "math.fractions",
+  "about": [
+    "http://corestandards.org/Math/Content/6/NS/A/1/",
+    "http://corestandards.org/Math/Content/5/NF/B/7/"
+  ],
+  "level_band": [
+    "primary",
+    "middle",
+    "adult"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "choose the operation for a measurement-division word problem",
+      "signature": "rejects division and multiplies or divides by the wrong number, because 'you can't share among half a person'",
+      "example": {
+        "item": "How many 1/2-cup servings are in 3 cups?",
+        "expected": "3 / 1/2 = 6",
+        "response": "3 / 2 = 1.5 (or 3 x 2 = 6 'because it can't be division')"
+      }
+    },
+    {
+      "item_shape": "write a word problem for a given fraction division",
+      "signature": "writes a sharing story that does not match the expression, or says it is impossible",
+      "example": {
+        "item": "Write a story problem for 3/4 / 1/4",
+        "expected": "How many quarter-cups are in three quarters of a cup?",
+        "response": "Three quarters shared between a quarter of a person (or: 'you can't')"
+      }
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip is one wrong operation choice. The belief is revealed when the learner is asked to model or explain division and only ever produces sharing stories.",
+    "vs": {
+      "math.frac.divide-makes-smaller": "Divide-makes-smaller computes an answer with the wrong direction; this belief refuses or reinterprets the operation."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/A/1/",
+        "label": "CCSS 6.NS.A.1: interpret and compute quotients of fractions"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/6/NS/A/1/",
+        "label": "CCSS 6.NS.A.1: interpret and compute quotients of fractions"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/B/7/",
+        "label": "CCSS 5.NF.B.7: divide unit fractions by whole numbers and whole numbers by unit fractions"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.divide-makes-smaller"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "6.NS.A.1",
+      "uri": "http://corestandards.org/Math/Content/6/NS/A/1/",
+      "relation": "about"
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Fischbein, E., Deri, M., Nello, M. S., & Marino, M. S. (1985). The role of implicit models in solving verbal problems in multiplication and division. Journal for Research in Mathematics Education, 16(1), 3-17.",
+        "doi": "10.5951/jresematheduc.16.1.0003",
+        "note": "Partitive (sharing) model as the primitive model of division."
+      },
+      {
+        "type": "paper",
+        "citation": "Tirosh, D. (2000). Enhancing prospective teachers' knowledge of children's conceptions: The case of division of fractions. Journal for Research in Mathematics Education, 31(1), 5-25.",
+        "doi": "10.2307/749817"
+      },
+      {
+        "type": "book",
+        "citation": "Sinicrope, R., Mick, H. W., & Kolb, J. R. (2002). Interpretations of fraction division. In B. Litwiller & G. Bright (Eds.), Making Sense of Fractions, Ratios, and Proportions: 2002 Yearbook (pp. 153-161). NCTM.",
+        "note": "Measurement, partitive and other interpretations of fraction division."
+      }
+    ],
+    "origin": "llm-drafted",
+    "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "license": "CC-BY-4.0"
+}
