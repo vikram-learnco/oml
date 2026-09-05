@@ -22,6 +22,12 @@ def fixture_config(records_dir: Path) -> Config:
     cfg = Config.load(ROOT)
     cfg.root = records_dir.parent
     cfg.schema_root = ROOT / "schema"
+    for name in ("reviewers", "schemes"):
+        dst = records_dir.parent / name / "registry.json"
+        dst.parent.mkdir(exist_ok=True)
+        src = ROOT / name / "registry.json"
+        if not dst.exists() or dst.read_text() != src.read_text():
+            dst.write_text(src.read_text())
     return cfg
 
 
@@ -66,6 +72,15 @@ class BrokenFixtures(unittest.TestCase):
 
     def test_reviewed_without_review(self):
         self.assertProblem("frac.no-review.json", "review")
+
+    def test_reviewed_with_model_only(self):
+        self.assertProblem("frac.model-only.json", "human review")
+
+    def test_hand_typed_trust(self):
+        self.assertProblem("frac.hand-trust.json", "trust must be")
+
+    def test_human_review_needs_handle(self):
+        self.assertProblem("frac.no-handle.json", "durable handle")
 
     def test_merged_without_target(self):
         self.assertProblem("frac.bad-merge.json", "merged_into")
@@ -134,9 +149,28 @@ class SymmetricRelations(unittest.TestCase):
             b = json.loads((good / "frac.add-numerators-keep-denominator.json").read_text())
             b = copy.deepcopy(b)
             b["relations"].pop("confusable_with", None)
+            (root / "reviewers").mkdir()
+            (root / "reviewers" / "registry.json").write_text((ROOT / "reviewers" / "registry.json").read_text())
+            (root / "schemes").mkdir()
+            (root / "schemes" / "registry.json").write_text((ROOT / "schemes" / "registry.json").read_text())
             (root / "records" / "math" / "frac.add-across.json").write_text(json.dumps(a))
             (root / "records" / "math" / "frac.add-numerators-keep-denominator.json").write_text(json.dumps(b))
             cfg = fixture_config(root / "records")
             report = validate_records(root / "records", cfg)
             self.assertTrue(report.ok, [str(p) for p in report.errors])
             self.assertTrue(any("symmetric" in w.message for w in report.warnings), [str(w) for w in report.warnings])
+
+
+class TrustComputation(unittest.TestCase):
+    def test_record_one_is_high_and_drafts_are_low(self):
+        from oml.trust import compute_trust, load_reviewers
+
+        reg = load_reviewers(Config.load(ROOT))
+        one = json.loads((ROOT / "records" / "math" / "frac.add-across.json").read_text())
+        self.assertEqual(compute_trust(one, reg), "high")
+        stub = json.loads((ROOT / "records" / "math" / "frac.add-numerators-keep-denominator.json").read_text())
+        self.assertEqual(compute_trust(stub, reg), "low")
+
+    def test_trust_check_is_clean(self):
+        proc = subprocess.run([sys.executable, "-m", "oml", "trust", "--check"], cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)

@@ -3,15 +3,16 @@
   "id": "math.frac.divide-larger-by-smaller",
   "uri": "https://oml.learnco.io/m/math.frac.divide-larger-by-smaller",
   "uuid": "78a649f3-688d-49a2-a85c-7be491860757",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "You can only divide a larger number by a smaller one",
   "statement": "In a division the bigger number must be divided by the smaller number, so if the divisor is bigger the two numbers should be swapped.",
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/6/NS/A/1/"
     }
   ],
@@ -94,6 +95,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

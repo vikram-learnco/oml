@@ -3,8 +3,9 @@
   "id": "prog.var.uninitialized-is-zero",
   "uri": "https://oml.learnco.io/m/prog.var.uninitialized-is-zero",
   "uuid": "436c64f5-62ac-40c8-86f7-60b05c57c1de",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Uninitialised variables start at zero",
   "statement": "A variable that has been declared but never assigned holds zero, or an empty value, so it can be safely read or added to.",
   "kind": "overgeneralization",
@@ -79,6 +80,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

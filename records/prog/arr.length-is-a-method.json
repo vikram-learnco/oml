@@ -3,8 +3,9 @@
   "id": "prog.arr.length-is-a-method",
   "uri": "https://oml.learnco.io/m/prog.arr.length-is-a-method",
   "uuid": "38f22ed3-8b31-4032-9be3-581599629ee5",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "An array's length is a method call",
   "statement": "You get the length of an array by calling a method on it, in the same way as for a string or a list.",
   "kind": "notation-confusion",
@@ -68,6 +69,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

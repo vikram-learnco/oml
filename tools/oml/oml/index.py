@@ -23,12 +23,12 @@ def build_index(config: Config) -> str:
         f"{len(records)} records: "
         + ", ".join(f"{n} {s}" for s, n in sorted(by_status.items())) + ".",
         "",
-        "| id | title | kind | status |",
-        "|----|-------|------|--------|",
+        "| id | title | kind | status | trust |",
+        "|----|-------|------|--------|-------|",
     ]
     for r in records:
         rel = _rel_path(config, r["id"])
-        lines.append(f"| [`{r['id']}`]({rel}) | {r['title']} | `{r['kind']}` | `{r['status']}` |")
+        lines.append(f"| [`{r['id']}`]({rel}) | {r['title']} | `{r['kind']}` | `{r['status']}` | `{r.get('trust', 'low')}` |")
     lines.append("")
     return "\n".join(lines)
 

@@ -3,15 +3,16 @@
   "id": "math.frac.add-numerators-keep-denominator",
   "uri": "https://oml.learnco.io/m/math.frac.add-numerators-keep-denominator",
   "uuid": "434a29b0-8c52-4db3-a2d6-81c86e5e5d6c",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Adding numerators and keeping one denominator",
   "statement": "To add fractions you add the numerators and keep the denominator, whichever denominator is written, because the denominator is just a label that does not take part in the sum.",
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/5/NF/A/1/"
     }
   ],
@@ -77,6 +78,15 @@
     ],
     "origin": "literature",
     "notes": "Stub created so that math.frac.add-across's discriminator resolves. Needs a second evidence pattern and review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

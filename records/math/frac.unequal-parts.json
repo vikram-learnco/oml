@@ -3,15 +3,16 @@
   "id": "math.frac.unequal-parts",
   "uri": "https://oml.learnco.io/m/math.frac.unequal-parts",
   "uuid": "e7a0875c-e339-4404-9f39-1f73cfe9206f",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Any part of a shape cut into b pieces is 1/b",
   "statement": "If a shape is cut into b pieces, each piece is one b-th of the shape, whether or not the pieces are the same size.",
   "kind": "missing-prerequisite",
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/3/NF/A/1/"
     }
   ],
@@ -90,6 +91,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

@@ -3,15 +3,16 @@
   "id": "math.frac.no-number-between",
   "uri": "https://oml.learnco.io/m/math.frac.no-number-between",
   "uuid": "a18f0879-fc85-4c07-8da5-d1e68e72c460",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "No number between neighbouring fractions",
   "statement": "Fractions come one after another like whole numbers, so between two fractions that are 'next to each other' there is no other number.",
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/6/NS/C/6/"
     }
   ],
@@ -93,6 +94,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

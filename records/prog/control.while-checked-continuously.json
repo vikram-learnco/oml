@@ -3,8 +3,9 @@
   "id": "prog.control.while-checked-continuously",
   "uri": "https://oml.learnco.io/m/prog.control.while-checked-continuously",
   "uuid": "8ed015e5-884f-4e76-91d6-2d5f339b2392",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "A while loop stops the instant its condition becomes false",
   "statement": "The condition of a while loop is watched continuously, so the loop exits in the middle of the body the moment the condition turns false.",
   "kind": "misapplied-analogy",
@@ -82,6 +83,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

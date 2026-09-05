@@ -3,8 +3,9 @@
   "id": "prog.type.integer-division-gives-fraction",
   "uri": "https://oml.learnco.io/m/prog.type.integer-division-gives-fraction",
   "uuid": "f884573f-e177-4865-9cbb-e334397e406a",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Dividing two integers gives a fraction",
   "statement": "Dividing one whole number by another gives the exact mathematical result with a fractional part, whatever the types involved.",
   "kind": "overgeneralization",
@@ -73,6 +74,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

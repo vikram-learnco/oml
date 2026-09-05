@@ -3,8 +3,9 @@
   "id": "prog.var.variable-keeps-history",
   "uri": "https://oml.learnco.io/m/prog.var.variable-keeps-history",
   "uuid": "1ee84937-cc32-4577-ae23-3d6e015807c3",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "A variable remembers every value it has held",
   "statement": "A variable stores every value ever assigned to it, so an earlier value can still be read out later.",
   "kind": "misapplied-analogy",
@@ -87,6 +88,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

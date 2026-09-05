@@ -3,15 +3,16 @@
   "id": "math.frac.part-to-part",
   "uri": "https://oml.learnco.io/m/math.frac.part-to-part",
   "uuid": "15a57c88-bbde-47b3-bd0d-6771a62e6cec",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Writing the shaded part over the unshaded part",
   "statement": "A fraction compares the shaded part with the unshaded part, so the number of shaded pieces goes on top and the number of unshaded pieces goes underneath.",
   "kind": "notation-confusion",
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/3/NF/A/1/"
     }
   ],
@@ -81,6 +82,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

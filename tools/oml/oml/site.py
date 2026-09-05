@@ -91,9 +91,11 @@ def _target_html(config: Config, t, by_id: dict[str, dict]) -> str:
 def render_record(config: Config, r: dict, by_id: dict[str, dict]) -> str:
     rid = r["id"]
     parts: list[str] = []
-    parts.append(f'<p class="muted"><code>oml:{esc(rid)}</code> · <span class="badge">{esc(r["status"])}</span> · v{esc(r["version"])} · kind <code>{esc(r["kind"])}</code></p>')
+    parts.append(f'<p class="muted"><code>oml:{esc(rid)}</code> · <span class="badge">{esc(r["status"])}</span> · trust <span class="badge">{esc(r.get("trust", "low"))}</span> · v{esc(r["version"])} · kind <code>{esc(r["kind"])}</code></p>')
     parts.append(f"<h1>{esc(r['title'])}</h1>")
     parts.append(f'<blockquote class="statement"><p>{esc(r["statement"])}</p></blockquote>')
+    if r.get("notes"):
+        parts.append(f'<p class="muted">{esc(r["notes"])}</p>')
 
     dl = [
         ("Stable URI", f'<a href="{esc(r["uri"])}">{esc(r["uri"])}</a>'),
@@ -168,11 +170,19 @@ def render_record(config: Config, r: dict, by_id: dict[str, dict]) -> str:
         parts.append(f'<p class="muted">{esc(prov["notes"])}</p>')
 
     parts.append("<h2>Review status</h2>")
-    if r.get("review"):
-        rv = r["review"]
-        parts.append(f"<p><span class='badge'>{esc(r['status'])}</span> by {esc(rv['reviewer'])} on {esc(rv['date'])}." + (f" {esc(rv['notes'])}" if rv.get("notes") else "") + "</p>")
+    parts.append(f"<p>Status <span class='badge'>{esc(r['status'])}</span>, trust <span class='badge'>{esc(r.get('trust', 'low'))}</span> (computed from the reviews below against the reviewer registry).</p>")
+    reviews = r.get("reviews") or []
+    if reviews:
+        parts.append("<table><thead><tr><th scope='col'>kind</th><th scope='col'>by</th><th scope='col'>date</th><th scope='col'>scope</th><th scope='col'>verdict</th><th scope='col'>notes</th></tr></thead><tbody>")
+        srcs = r["provenance"]["sources"]
+        for rv in reviews:
+            by = rv["by"]
+            if rv["kind"] == "attested" and isinstance(by, int) and 0 <= by < len(srcs):
+                by = f"source {by}: {srcs[by]['citation'][:80]}"
+            parts.append(f"<tr><td>{esc(rv['kind'])}</td><td>{esc(by)}</td><td>{esc(rv['date'])}</td><td>{esc(', '.join(rv['scope']))}</td><td>{esc(rv['verdict'])}</td><td>{esc(rv.get('notes', ''))}</td></tr>")
+        parts.append("</tbody></table>")
     else:
-        parts.append(f"<p><span class='badge'>{esc(r['status'])}</span> Not yet reviewed by a maintainer.</p>")
+        parts.append("<p>No reviews yet.</p>")
     hist = r.get("history") or {}
     if hist.get("merged_into"):
         parts.append(f"<p>Merged into {_record_link(config, hist['merged_into'], by_id)}.</p>")
@@ -232,13 +242,13 @@ def render_home(config: Config, records: list[dict], readme_paragraph: str) -> s
 
 def render_records_index(config: Config, records: list[dict]) -> str:
     rows = "".join(
-        f'<tr><td><a href="{esc(r["uri"])}"><code>{esc(r["id"])}</code></a></td><td>{esc(r["title"])}</td><td><code>{esc(r["kind"])}</code></td><td><span class="badge">{esc(r["status"])}</span></td></tr>'
+        f'<tr><td><a href="{esc(r["uri"])}"><code>{esc(r["id"])}</code></a></td><td>{esc(r["title"])}</td><td><code>{esc(r["kind"])}</code></td><td><span class="badge">{esc(r["status"])}</span></td><td><span class="badge">{esc(r.get("trust", "low"))}</span></td></tr>'
         for r in records
     )
     body = f"""
 <h1>Records</h1>
 <p>{len(records)} records. Also as <a href="{config.base_uri}/records.json">JSON</a>.</p>
-<table><caption class="muted">All records, by id</caption><thead><tr><th scope="col">id</th><th scope="col">title</th><th scope="col">kind</th><th scope="col">status</th></tr></thead><tbody>{rows}</tbody></table>
+<table><caption class="muted">All records, by id</caption><thead><tr><th scope="col">id</th><th scope="col">title</th><th scope="col">kind</th><th scope="col">status</th><th scope="col">trust</th></tr></thead><tbody>{rows}</tbody></table>
 """
     return page(config, f"Records · {config.title}", body, canonical=config.base_uri + "/records.html")
 
@@ -286,7 +296,7 @@ def build_site(config: Config, out_dir: Path | None = None) -> Path:
     (out / "index.html").write_text(render_home(config, records, readme_first_paragraph(config)), encoding="utf-8")
     (out / "records.html").write_text(render_records_index(config, records), encoding="utf-8")
     (out / "records.json").write_text(
-        json.dumps([{"id": r["id"], "uri": r["uri"], "uuid": r["uuid"], "title": r["title"], "kind": r["kind"], "status": r["status"]} for r in records], indent=2, ensure_ascii=False) + "\n",
+        json.dumps([{"id": r["id"], "uri": r["uri"], "uuid": r["uuid"], "title": r["title"], "kind": r["kind"], "status": r["status"], "trust": r.get("trust", "low")} for r in records], indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
 

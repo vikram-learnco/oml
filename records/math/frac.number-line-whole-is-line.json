@@ -3,15 +3,16 @@
   "id": "math.frac.number-line-whole-is-line",
   "uri": "https://oml.learnco.io/m/math.frac.number-line-whole-is-line",
   "uuid": "fb647fd2-a6ef-40a4-a0ac-abd0d497e750",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "The whole line is the whole",
   "statement": "On a number line the fraction refers to the whole line drawn, so 1/2 is at the middle of the line wherever the line ends.",
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/3/NF/A/2/"
     }
   ],
@@ -91,6 +92,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

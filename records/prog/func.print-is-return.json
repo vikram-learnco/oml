@@ -3,8 +3,9 @@
   "id": "prog.func.print-is-return",
   "uri": "https://oml.learnco.io/m/prog.func.print-is-return",
   "uuid": "c75e0b4a-c9c4-41af-af83-a095635ace63",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Printing a value is the same as returning it",
   "statement": "A function gives its result back by printing it, so a function that prints its answer can be used in an expression, and return is just another way to display.",
   "kind": "misapplied-analogy",
@@ -78,6 +79,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

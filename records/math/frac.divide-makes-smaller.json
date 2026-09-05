@@ -3,19 +3,20 @@
   "id": "math.frac.divide-makes-smaller",
   "uri": "https://oml.learnco.io/m/math.frac.divide-makes-smaller",
   "uuid": "72884d31-1a9a-418f-92ee-f073eef02008",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "status": "draft",
+  "trust": "low",
   "title": "Division always makes smaller",
   "statement": "Dividing always gives a result smaller than the number you started with, so dividing by a fraction cannot make a number bigger.",
   "kind": "overgeneralization",
   "domain": "math.fractions",
   "about": [
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/5/NF/B/7/"
     },
     {
-      "scheme": "CASE",
+      "scheme": "CCSS",
       "uri": "http://corestandards.org/Math/Content/6/NS/A/1/"
     }
   ],
@@ -116,6 +117,15 @@
     ],
     "origin": "llm-drafted",
     "notes": "Drafted from the cited literature for the OML seed pack; statement, examples and discriminators are original text. Awaiting maintainer review."
+  },
+  "history": {
+    "changelog": [
+      {
+        "version": "0.1.1",
+        "date": "2026-09-05",
+        "change": "Schema 0.2 migration: about/alignments carry a free-string scheme (corestandards.org URLs relabelled CCSS where present); trust computed from reviews[] (none yet, so low); no change to the statement or evidence."
+      }
+    ]
   },
   "license": "CC-BY-4.0"
 }

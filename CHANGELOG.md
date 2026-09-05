@@ -11,9 +11,23 @@ Before 1.0, minor releases may also change the schema; each such change is calle
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-09-05
+
+First release archived by Zenodo; the concept DOI is minted on this tag.
+
+### Changed (record schema 0.2)
+
+* **Review model.** `review` is replaced by `reviews[]` (`kind: human|model|attested`, `by`, `date`, `scope[]`, `verdict`, `notes?`). Status lifecycle is `draft` → `llm-reviewed` → `reviewed` → `deprecated` | `merged`; the validator enforces that `llm-reviewed` has a model accept covering statement and evidence and that `reviewed` has a human accept or an attested review.
+* **Computed trust.** New `trust` field (`low|medium|high`) computed by `oml trust` from `reviews[]` against `reviewers/registry.json`; never hand-typed, checked in CI.
+* **Framework-agnostic alignments.** `about[]` and `alignments[]` are `{scheme, uri, code?, note?}` with a free-string `scheme`; known schemes are data in `schemes/registry.json` and the validator warns on unknown ones. corestandards.org URLs are labelled `CCSS` across all mathematics records.
+* New optional top-level `notes` field for text that is not the belief itself (e.g. likely origins).
+* `math.frac.add-across` (record #1, version 1.1.0): statement trimmed to the belief; likely origins moved to `notes`; review closed with Vikram Maram on 2026-09-05 and recorded as `reviews[]` (human accept, model accept, two attested reviews); `status: reviewed`, `trust: high`.
+* Every other record gains a changelog entry and a patch version bump for the migration; all remain `draft` with `trust: low`.
+* Hugging Face mirror targets the dataset `vikram-learnco/oml`.
+
 ### Fixed
 
-* Release workflow was invalid (`secrets` used in a step `if`), so no run had ever executed. The Hugging Face step is now gated on a job-level `env` value, and the workflow can be re-run for an existing tag via `workflow_dispatch`.
+* Release workflow was invalid (`secrets` used in a step `if`), so no run had ever executed before v0.1.0 was re-cut. The Hugging Face step now authenticates through the Hub's Trusted Publisher (GitHub OIDC), falls back to `HF_TOKEN` if present, and is skipped otherwise; the workflow can be re-run for an existing tag via `workflow_dispatch`.
 
 ## [0.1.0] - 2026-09-05
 
@@ -38,5 +52,6 @@ First citable release.
 
 * Base URI `https://oml.learnco.io` is a placeholder pending the domain decision.
 
-[Unreleased]: https://github.com/vikram-learnco/oml/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/vikram-learnco/oml/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/vikram-learnco/oml/releases/tag/v0.1.1
 [0.1.0]: https://github.com/vikram-learnco/oml/releases/tag/v0.1.0

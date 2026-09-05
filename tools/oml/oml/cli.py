@@ -41,6 +41,17 @@ def _cmd_validate_diagnosis(args: argparse.Namespace) -> int:
     return rc
 
 
+def _cmd_trust(args: argparse.Namespace) -> int:
+    from .trust import write_trust
+
+    seen, changed = write_trust(Config.load(), check_only=args.check)
+    verb = "would change" if args.check else "updated"
+    print(f"{seen} records checked / {verb} {len(changed)}")
+    for path in changed:
+        print(f"  {path}")
+    return 1 if (args.check and changed) else 0
+
+
 def _cmd_index(args: argparse.Namespace) -> int:
     from .index import write_index
 
@@ -81,6 +92,10 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("validate-diagnosis", help="validate diagnosis record files")
     p.add_argument("files", nargs="+")
     p.set_defaults(func=_cmd_validate_diagnosis)
+
+    p = sub.add_parser("trust", help="recompute each record's trust from reviews[] and reviewers/registry.json")
+    p.add_argument("--check", action="store_true", help="exit non-zero if any record would change, without writing")
+    p.set_defaults(func=_cmd_trust)
 
     p = sub.add_parser("index", help="regenerate records/INDEX.md")
     p.set_defaults(func=_cmd_index)
