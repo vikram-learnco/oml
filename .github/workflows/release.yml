@@ -3,6 +3,12 @@ name: release
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to (re)build the release for, e.g. v0.1.0"
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -10,19 +16,26 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      # Optional. When the secret is unset this is empty and the Hugging Face step is skipped.
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -e tools/oml
       - run: python -m unittest discover -s tools/tests
-      - run: oml validate records/
+      - run: oml validate records/ --strict
       - name: Export distributions stamped with the tag
-        run: oml export all --version "${GITHUB_REF_NAME#v}"
+        run: oml export all --version "${RELEASE_TAG#v}"
       - name: Attach distributions to the GitHub release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ env.RELEASE_TAG }}
           files: |
             dist/oml.case.json
             dist/oml.jsonl
@@ -30,9 +43,7 @@ jobs:
             CITATION.cff
           generate_release_notes: true
       - name: Mirror to Hugging Face (when HF_TOKEN is configured)
-        if: ${{ secrets.HF_TOKEN != '' }}
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        if: ${{ env.HF_TOKEN != '' }}
         run: |
           pip install huggingface_hub
           python - <<'PY'
