@@ -3,6 +3,8 @@
 [![validate](https://github.com/vikram-learnco/oml/actions/workflows/validate.yml/badge.svg)](https://github.com/vikram-learnco/oml/actions/workflows/validate.yml)
 [![data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)](LICENSE-DATA)
 [![code: MIT](https://img.shields.io/badge/code-MIT-lightgrey.svg)](LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22416011.svg)](https://doi.org/10.5281/zenodo.22416011)
+[![Hugging Face dataset](https://img.shields.io/badge/dataset-vikram--learnco%2Foml-yellow.svg)](https://huggingface.co/datasets/vikram-learnco/oml)
 
 OML is a public catalogue of misconceptions with stable IDs. A misconception
 is a false but stable belief that produces predictable wrong answers, such as
@@ -29,8 +31,13 @@ IDs are lowercase, dot-separated, and never reused. A record may be
 and point you to the successor. Each record also carries a UUID for systems
 that prefer opaque identifiers.
 
-To cite the library as a whole, see [`CITATION.cff`](CITATION.cff). A DOI is
-minted for each tagged release.
+To cite the library as a whole, use the concept DOI
+[10.5281/zenodo.22416011](https://doi.org/10.5281/zenodo.22416011), which always resolves to
+the latest release; each release also has its own version DOI (v0.1.1:
+[10.5281/zenodo.22416012](https://doi.org/10.5281/zenodo.22416012)). Author and title
+metadata are in [`CITATION.cff`](CITATION.cff). The whole library is also
+mirrored as the Hugging Face dataset
+[`vikram-learnco/oml`](https://huggingface.co/datasets/vikram-learnco/oml).
 
 ## How to consume
 

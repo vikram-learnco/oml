@@ -65,7 +65,7 @@ ds = load_dataset("vikram-learnco/oml")
 
 ## Cite
 
-See `CITATION.cff` in the repository. A DOI is minted per release on Zenodo.
+Concept DOI (latest release): https://doi.org/10.5281/zenodo.22416011. Each release also has a version DOI (v0.1.1: https://doi.org/10.5281/zenodo.22416012). Author and title metadata are in `CITATION.cff` in the repository.
 
 ## Licence
 

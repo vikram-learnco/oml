@@ -11,6 +11,10 @@ Before 1.0, minor releases may also change the schema; each such change is calle
 
 ## [Unreleased]
 
+### Added
+
+* Zenodo concept DOI 10.5281/zenodo.22416011 in `CITATION.cff`, the README badge and the dataset card (minted on v0.1.1; version DOI 10.5281/zenodo.22416012).
+
 ## [0.1.1] - 2026-09-05
 
 First release archived by Zenodo; the concept DOI is minted on this tag.
