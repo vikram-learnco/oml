@@ -6,3 +6,8 @@ __pycache__/
 site/_build/
 .DS_Store
 site/_build/
+
+# generated; committed by the release workflow only
+dist/oml.case.json
+dist/oml.jsonl
+dist/oml.csv
