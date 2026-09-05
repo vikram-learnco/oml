@@ -19,4 +19,11 @@ keywords:
   - CASE
   - fractions
   - programming education
-# doi: 10.5281/zenodo.XXXXXXX   # filled in when Zenodo mints the concept DOI on the first release
+doi: 10.5281/zenodo.22416011
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22416011
+    description: "Concept DOI, resolves to the latest release."
+  - type: doi
+    value: 10.5281/zenodo.22416012
+    description: "Version DOI for v0.1.1."
