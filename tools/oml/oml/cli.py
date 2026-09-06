@@ -42,6 +42,22 @@ def _cmd_validate_diagnosis(args: argparse.Namespace) -> int:
     return rc
 
 
+def _cmd_rebase_uri(args: argparse.Namespace) -> int:
+    from .rebase import rebase
+
+    config = Config.load()
+    report = rebase(config, args.new_base, dry_run=args.dry_run)
+    if not report.changed:
+        print(f"nothing to do: base URI is already {report.new_base}")
+        return 0
+    print(("would change " if args.dry_run else "changed ") + report.summary())
+    for path in report.changed:
+        print(f"  {path}")
+    if not args.dry_run:
+        print("\nNow run: oml validate records/ --strict && oml index && oml export all")
+    return 0
+
+
 def _cmd_trust(args: argparse.Namespace) -> int:
     from .trust import write_trust
 
@@ -101,6 +117,14 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("files", nargs="+")
     p.set_defaults(func=_cmd_validate_diagnosis)
 
+    p = sub.add_parser(
+        "rebase-uri",
+        help="move the library to a new base URI, rewriting every record uri, concept URI, schema $id and doc reference",
+    )
+    p.add_argument("new_base", metavar="NEW_BASE", help="the new base URI, e.g. https://openmisconceptions.org")
+    p.add_argument("--dry-run", action="store_true", help="report what would change without writing")
+    p.set_defaults(func=_cmd_rebase_uri)
+
     p = sub.add_parser("trust", help="recompute each record's trust from reviews[] and reviewers/registry.json")
     p.add_argument("--check", action="store_true", help="exit non-zero if any record would change, without writing")
     p.set_defaults(func=_cmd_trust)
@@ -128,6 +152,12 @@ def main(argv: list[str] | None = None) -> int:
     except FileNotFoundError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
+    except BrokenPipeError:
+        # The caller closed the pipe (`oml ... | head`); that is not an error.
+        try:
+            sys.stdout.close()
+        finally:
+            return 0
 
 
 if __name__ == "__main__":

@@ -11,7 +11,14 @@ Before 1.0, minor releases may also change the schema; each such change is calle
 
 ## [Unreleased]
 
+### Changed
+
+* **OML is maintained by Vikram Maram as an individual project.** The MIT copyright holder, the `creator` in `oml.config.json` (which flows into the CASE `CFDocument`), and the dataset-card attribution now name the maintainer rather than a company. Nothing about the `oml:` IDs changes.
+
 ### Added
+
+* **Succession and the right to fork** in `GOVERNANCE.md`: if the maintainer is unresponsive for six months, the Reviewers named in the registry may fork under the same name and IDs, and that fork becomes the one to use. The licence, the Zenodo DOI, the Hugging Face mirror and host-independent IDs exist so that this is always possible.
+* **`oml rebase-uri <new-base>`**: moves the library to a new base URI, rewriting every record `uri`, every OML concept URI in `about[]` and `relations.*`, both schema `$id`s, the scheme registry's URI pattern, the config and the docs. Idempotent, `--dry-run` supported, and covered by round-trip tests — a record `uri` is a public identifier, so a partial rewrite is the failure mode worth engineering against.
 
 * **`GOVERNANCE.md`**: role ladder (Reader → Proposer → Contributor → Reviewer → Maintainer, with every tier above Proposer empty at launch except Maintainer), the four classes of change and who may make each, the dispute process, and the weekly triage cadence. Linked from the README and the site footer.
 * **Dispute fields**: `disputed` (boolean) and `disputes[]` (issue URLs) on a record. A disputed record stays live and citable; the site shows a banner and links the issues. `disputed: true` requires a linked dispute.

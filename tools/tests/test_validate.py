@@ -242,3 +242,102 @@ class DuplicateDetection(unittest.TestCase):
                     continue
                 worst = max(worst, similarity(left["statement"], right["statement"]))
         self.assertLess(worst, DEFAULT_THRESHOLD - 0.2, f"closest undeclared pair scores {worst:.2f}")
+
+
+class RebaseUri(unittest.TestCase):
+    """A base-URI move rewrites the public ID of every record, so it must be total.
+
+    These run against a throwaway copy of the repo: the operation edits records
+    in place, and a half-applied rewrite is exactly the failure being guarded
+    against.
+    """
+
+    def setUp(self):
+        import shutil
+        import tempfile
+
+        self.tmp = tempfile.mkdtemp()
+        self.root = Path(self.tmp) / "repo"
+        self.root.mkdir()
+        for name in ("oml.config.json", "records", "schema", "schemes", "reviewers"):
+            src = ROOT / name
+            dst = self.root / name
+            if src.is_dir():
+                shutil.copytree(src, dst)
+            else:
+                shutil.copy(src, dst)
+        self.config = Config.load(self.root)
+
+    def tearDown(self):
+        import shutil
+
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _read(self, rel):
+        return json.loads((self.root / rel).read_text())
+
+    def test_rewrites_every_kind_of_reference(self):
+        from oml.rebase import rebase
+
+        new = "https://openmisconceptions.example"
+        report = rebase(self.config, new)
+        self.assertGreater(report.occurrences, 100, "expected a corpus-wide rewrite")
+
+        record = self._read("records/math/frac.add-across.json")
+        self.assertTrue(record["uri"].startswith(new), "record uri not rewritten")
+        self.assertEqual(self._read("oml.config.json")["base_uri"], new)
+        self.assertTrue(self._read("schema/oml-record.schema.json")["$id"].startswith(new))
+
+        # Concept URIs live in about[] and in relations.*[].external.
+        prog = self._read("records/prog/var.assignment-is-equation.json")
+        self.assertTrue(prog["about"][0]["uri"].startswith(new))
+        self.assertTrue(prog["relations"]["conflicts_with"][0]["external"].startswith(new))
+
+    def test_scheme_registry_regex_is_rewritten(self):
+        """Regression: the OML pattern stores the host regex-escaped.
+
+        Plain text substitution misses `oml\\.learnco\\.io`, leaving the OML
+        scheme matching the old host. That surfaced as a warning on every
+        record carrying an OML concept URI, which blocks CI under --strict.
+        """
+        from oml.rebase import rebase
+
+        new = "https://openmisconceptions.example"
+        rebase(self.config, new)
+        pattern = next(
+            s["uri_pattern"] for s in self._read("schemes/registry.json")["schemes"] if s["name"] == "OML"
+        )
+        self.assertNotIn("learnco", pattern)
+        self.assertIn("openmisconceptions", pattern)
+
+        # And the rewritten pattern must actually match the rewritten URIs.
+        import re
+
+        concept = self._read("records/prog/var.assignment-is-equation.json")["about"][0]["uri"]
+        self.assertRegex(concept, pattern)
+
+    def test_rebased_corpus_validates_with_no_warnings(self):
+        from oml.rebase import rebase
+
+        rebase(self.config, "https://openmisconceptions.example")
+        config = Config.load(self.root)
+        config.schema_root = self.root / "schema"
+        report = validate_records(config.records_dir, config)
+        self.assertEqual(report.errors, [], "\n".join(map(str, report.errors)))
+        self.assertEqual(report.warnings, [], "\n".join(map(str, report.warnings)))
+
+    def test_round_trip_leaves_no_residue(self):
+        from oml.rebase import rebase
+
+        before = {p: p.read_text() for p in sorted(self.root.rglob("*.json"))}
+        rebase(self.config, "https://openmisconceptions.example")
+        rebase(Config.load(self.root), "https://oml.learnco.io")
+        after = {p: p.read_text() for p in sorted(self.root.rglob("*.json"))}
+        changed = [str(p.relative_to(self.root)) for p in before if before[p] != after.get(p)]
+        self.assertEqual(changed, [], f"round trip left residue in {changed}")
+
+    def test_rebasing_to_the_same_base_is_a_no_op(self):
+        from oml.rebase import rebase
+
+        report = rebase(self.config, self.config.base_uri)
+        self.assertEqual(report.changed, [])
