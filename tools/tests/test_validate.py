@@ -82,6 +82,12 @@ class BrokenFixtures(unittest.TestCase):
     def test_human_review_needs_handle(self):
         self.assertProblem("frac.no-handle.json", "durable handle")
 
+    def test_unregistered_reviewer_cannot_accept(self):
+        self.assertProblem("frac.unregistered-reviewer.json", "not in reviewers/registry.json")
+
+    def test_disputed_needs_a_linked_dispute(self):
+        self.assertProblem("frac.disputed-no-link.json", "disputes")
+
     def test_merged_without_target(self):
         self.assertProblem("frac.bad-merge.json", "merged_into")
 
@@ -174,3 +180,65 @@ class TrustComputation(unittest.TestCase):
     def test_trust_check_is_clean(self):
         proc = subprocess.run([sys.executable, "-m", "oml", "trust", "--check"], cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+
+
+class DuplicateDetection(unittest.TestCase):
+    """The duplicate check must fire on a restatement and stay quiet otherwise."""
+
+    def setUp(self):
+        self.records = [json.loads(f.read_text()) for f in sorted((ROOT / "records").rglob("*.json"))]
+        self.original = next(r for r in self.records if r["id"] == "math.frac.add-across")
+
+    def _twin(self, **overrides):
+        import copy
+
+        twin = copy.deepcopy(self.original)
+        twin["id"] = "math.frac.add-tops-and-bottoms"
+        twin["statement"] = "Fractions are added by adding the numerators together and adding the denominators."
+        twin["relations"] = {}
+        twin["discriminators"] = {"vs_slip": "unchanged"}
+        twin.update(overrides)
+        return twin
+
+    def test_live_corpus_is_clean(self):
+        from oml.duplicates import find_duplicates
+
+        self.assertEqual(find_duplicates(self.records), [])
+
+    def test_restatement_is_reported(self):
+        from oml.duplicates import find_duplicates
+
+        pairs = find_duplicates(self.records + [self._twin()])
+        self.assertEqual([(p.left, p.right) for p in pairs], [("math.frac.add-across", "math.frac.add-tops-and-bottoms")])
+
+    def test_declared_neighbour_is_not_reported(self):
+        from oml.duplicates import find_duplicates
+
+        twin = self._twin(relations={"confusable_with": ["math.frac.add-across"]})
+        self.assertEqual(find_duplicates(self.records + [twin]), [])
+
+    def test_discriminator_also_counts_as_declaring(self):
+        from oml.duplicates import find_duplicates
+
+        twin = self._twin(discriminators={"vs_slip": "x", "vs": {"math.frac.add-across": "differs by ..."}})
+        self.assertEqual(find_duplicates(self.records + [twin]), [])
+
+    def test_other_domains_are_not_compared(self):
+        from oml.duplicates import find_duplicates
+
+        twin = self._twin(id="prog.frac.add-tops-and-bottoms")
+        self.assertEqual(find_duplicates(self.records + [twin]), [])
+
+    def test_threshold_has_headroom_over_the_live_corpus(self):
+        """No real pair sits near the threshold, so the check has room to tighten."""
+        from oml.duplicates import DEFAULT_THRESHOLD, declared_neighbours, similarity
+
+        worst = 0.0
+        for i, left in enumerate(self.records):
+            for right in self.records[i + 1 :]:
+                if left["id"].split(".")[0] != right["id"].split(".")[0]:
+                    continue
+                if right["id"] in declared_neighbours(left) or left["id"] in declared_neighbours(right):
+                    continue
+                worst = max(worst, similarity(left["statement"], right["statement"]))
+        self.assertLess(worst, DEFAULT_THRESHOLD - 0.2, f"closest undeclared pair scores {worst:.2f}")

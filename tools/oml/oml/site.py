@@ -40,6 +40,8 @@ table{border-collapse:collapse;width:100%} th,td{text-align:left;padding:.4rem .
 .example{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.5rem;margin:.5rem 0}
 .example div{padding:.5rem;background:var(--code);border-radius:4px} .example span{display:block;color:var(--muted);font-size:.85rem}
 .muted{color:var(--muted)}
+.disputed{padding:.75rem 1rem;border-left:4px solid #b8860b;background:var(--code);border-radius:4px}
+@media (prefers-color-scheme:dark){.disputed{border-left-color:#e0b040}}
 @media (max-width:40rem){dl{grid-template-columns:1fr} dt{margin-top:.5rem}}
 """
 
@@ -69,6 +71,7 @@ def page(config: Config, title: str, body: str, *, description: str = "", canoni
 </main>
 <footer>
 <p>Records are <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Tooling is MIT. Library version {esc(config.library_version)}.</p>
+<p><a href="https://github.com/vikram-learnco/oml/blob/main/GOVERNANCE.md">Governance</a> · <a href="https://github.com/vikram-learnco/oml/blob/main/CONTRIBUTING.md">How to propose a record</a> · <a href="https://github.com/vikram-learnco/oml">Source</a></p>
 </footer>
 </body>
 </html>
@@ -91,11 +94,18 @@ def _target_html(config: Config, t, by_id: dict[str, dict]) -> str:
 def render_record(config: Config, r: dict, by_id: dict[str, dict]) -> str:
     rid = r["id"]
     parts: list[str] = []
-    parts.append(f'<p class="muted"><code>oml:{esc(rid)}</code> · <span class="badge">{esc(r["status"])}</span> · trust <span class="badge">{esc(r.get("trust", "low"))}</span> · v{esc(r["version"])} · kind <code>{esc(r["kind"])}</code></p>')
+    parts.append(f'<p class="muted"><code>oml:{esc(rid)}</code> · <span class="badge">{esc(r["status"])}</span> · trust <span class="badge">{esc(r.get("trust", "low"))}</span> · v{esc(r["version"])} · kind <code>{esc(r["kind"])}</code>' + (' · <span class="badge">disputed</span>' if r.get("disputed") else "") + '</p>')
     parts.append(f"<h1>{esc(r['title'])}</h1>")
     parts.append(f'<blockquote class="statement"><p>{esc(r["statement"])}</p></blockquote>')
     if r.get("notes"):
         parts.append(f'<p class="muted">{esc(r["notes"])}</p>')
+    if r.get("disputed"):
+        links = " ".join(f'<a href="{esc(u)}" rel="external">dispute</a>' for u in (r.get("disputes") or []))
+        parts.append(
+            '<p class="disputed"><strong>Disputed.</strong> An open dispute challenges this record. '
+            "It stays live and citable while the argument runs; the ruling is recorded in its changelog. "
+            f"{links}</p>"
+        )
 
     dl = [
         ("Stable URI", f'<a href="{esc(r["uri"])}">{esc(r["uri"])}</a>'),

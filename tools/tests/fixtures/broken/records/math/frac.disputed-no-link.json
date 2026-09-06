@@ -1,0 +1,175 @@
+{
+  "$schema": "../../schema/oml-record.schema.json",
+  "id": "math.frac.disputed-no-link",
+  "uri": "https://oml.learnco.io/m/math.frac.disputed-no-link",
+  "uuid": "8b8b8b8b-8b8b-4b8b-8b8b-8b8b8b8b8b8b",
+  "version": "1.1.0",
+  "status": "reviewed",
+  "trust": "high",
+  "title": "Adding fractions across numerators and denominators",
+  "statement": "Fractions are added by adding the numerators together and adding the denominators together.",
+  "notes": "Likely origins: whole-number bias (numerator and denominator treated as independent whole numbers) and overgeneralisation from the multiplication rule.",
+  "kind": "overgeneralization",
+  "domain": "math.fractions",
+  "about": [
+    {
+      "scheme": "CCSS",
+      "uri": "http://corestandards.org/Math/Content/5/NF/A/1/"
+    }
+  ],
+  "level_band": [
+    "primary",
+    "middle"
+  ],
+  "locale": "en",
+  "evidence_patterns": [
+    {
+      "item_shape": "add two fractions with unlike denominators",
+      "signature": "response numerator = a + c and response denominator = b + d for a/b + c/d, with no attempt at a common denominator",
+      "example": {
+        "item": "1/2 + 1/3",
+        "expected": "5/6",
+        "response": "2/5"
+      },
+      "notes": "Strongest single indicator: the response is smaller than at least one addend, which the learner rarely notices."
+    },
+    {
+      "item_shape": "add two fractions with like denominators",
+      "signature": "response numerator = a + c and response denominator = b + b for a/b + c/b; denominators are added even though they match",
+      "example": {
+        "item": "1/4 + 2/4",
+        "expected": "3/4",
+        "response": "3/8"
+      },
+      "notes": "Discriminates from math.frac.add-numerators-keep-denominator, which answers like-denominator items correctly."
+    }
+  ],
+  "discriminators": {
+    "vs_slip": "A slip appears on one item and not on the next of the same shape, and the learner self-corrects when asked to check with a diagram or with 1/2 + 1/2. A holder of this belief applies the rule consistently across unlike- and like-denominator items and defends 1/2 + 1/2 = 2/4 as correct.",
+    "vs": {
+      "math.frac.add-numerators-keep-denominator": "Give a like-denominator item. Add-across produces a doubled denominator (1/4 + 2/4 = 3/8); add-numerators-keep-denominator produces the correct 3/4 and only fails on unlike denominators."
+    }
+  },
+  "relations": {
+    "conflicts_with": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/A/1/",
+        "label": "CCSS 5.NF.A.1: add and subtract fractions with unlike denominators"
+      }
+    ],
+    "resolved_by": [
+      {
+        "external": "http://corestandards.org/Math/Content/5/NF/A/1/",
+        "label": "CCSS 5.NF.A.1: add and subtract fractions with unlike denominators"
+      },
+      {
+        "external": "http://corestandards.org/Math/Content/3/NF/A/1/",
+        "label": "CCSS 3.NF.A.1: understand a fraction 1/b as one part of a whole partitioned into b equal parts"
+      }
+    ],
+    "confusable_with": [
+      "math.frac.add-numerators-keep-denominator"
+    ]
+  },
+  "alignments": [
+    {
+      "scheme": "CCSS",
+      "code": "5.NF.A.1",
+      "uri": "http://corestandards.org/Math/Content/5/NF/A/1/",
+      "relation": "about",
+      "note": "Add and subtract fractions with unlike denominators by replacing given fractions with equivalent fractions. CASE Network GUID for this item to be added when the CASE Network export of CCSS Math is confirmed."
+    }
+  ],
+  "provenance": {
+    "sources": [
+      {
+        "type": "paper",
+        "citation": "Brown, J. S., & VanLehn, K. (1980). Repair theory: A generative theory of bugs in procedural skills. Cognitive Science, 4(4), 379-426.",
+        "doi": "10.1207/s15516709cog0404_3",
+        "note": "Frames systematic errors as stable procedural bugs, distinct from slips; the add-across rule is the canonical fraction example in the repair-theory tradition."
+      },
+      {
+        "type": "paper",
+        "citation": "Ni, Y., & Zhou, Y.-D. (2005). Teaching and learning fraction and rational numbers: The origins and implications of whole number bias. Educational Psychologist, 40(1), 27-52.",
+        "doi": "10.1207/s15326985ep4001_3",
+        "note": "Whole number bias: treating numerator and denominator as separate whole numbers."
+      },
+      {
+        "type": "paper",
+        "citation": "Siegler, R. S., Thompson, C. A., & Schneider, M. (2011). An integrated theory of whole number and fractions development. Cognitive Psychology, 62(4), 273-296.",
+        "doi": "10.1016/j.cogpsych.2011.03.001",
+        "note": "Reports independent whole-number operations on numerators and denominators as the most common fraction-arithmetic error."
+      },
+      {
+        "type": "book",
+        "citation": "Ashlock, R. B. (2010). Error Patterns in Computation: Using Error Patterns to Help Each Student Learn (10th ed.). Allyn & Bacon.",
+        "note": "Practitioner catalogue of computational error patterns including this one."
+      }
+    ],
+    "origin": "literature",
+    "notes": "Statement and examples written for OML. No text reused from any proprietary item bank."
+  },
+  "reviews": [
+    {
+      "kind": "human",
+      "by": "Vikram Maram (github:vikram-learnco)",
+      "date": "2026-09-05",
+      "scope": [
+        "statement",
+        "evidence",
+        "discriminators",
+        "sources"
+      ],
+      "verdict": "accept",
+      "notes": "Reviewed in session against the design worked example; statement trimmed to the belief; cause moved to notes."
+    },
+    {
+      "kind": "model",
+      "by": "claude-fable-5-1",
+      "date": "2026-09-05",
+      "scope": [
+        "statement",
+        "evidence",
+        "discriminators",
+        "sources"
+      ],
+      "verdict": "accept"
+    },
+    {
+      "kind": "attested",
+      "by": 0,
+      "date": "2026-09-05",
+      "scope": [
+        "statement"
+      ],
+      "verdict": "accept",
+      "notes": "Brown & VanLehn (1980): add-across as the canonical fraction bug in repair theory."
+    },
+    {
+      "kind": "attested",
+      "by": 2,
+      "date": "2026-09-05",
+      "scope": [
+        "statement"
+      ],
+      "verdict": "accept",
+      "notes": "Siegler, Thompson & Schneider (2011): independent whole-number operations on numerators and denominators as the most common fraction-arithmetic error."
+    }
+  ],
+  "history": {
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2026-09-05",
+        "change": "Initial record."
+      },
+      {
+        "version": "1.1.0",
+        "date": "2026-09-05",
+        "change": "Statement trimmed to the belief; likely origins moved to notes; about scheme relabelled CCSS; review replaced by reviews[] (human, model, two attested); trust computed. Review closed with Vikram Maram, 2026-09-05."
+      }
+    ]
+  },
+  "license": "CC-BY-4.0",
+  "disputed": true
+}

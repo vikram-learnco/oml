@@ -13,6 +13,11 @@ Before 1.0, minor releases may also change the schema; each such change is calle
 
 ### Added
 
+* **`GOVERNANCE.md`**: role ladder (Reader → Proposer → Contributor → Reviewer → Maintainer, with every tier above Proposer empty at launch except Maintainer), the four classes of change and who may make each, the dispute process, and the weekly triage cadence. Linked from the README and the site footer.
+* **Dispute fields**: `disputed` (boolean) and `disputes[]` (issue URLs) on a record. A disputed record stays live and citable; the site shows a banner and links the issues. `disputed: true` requires a linked dispute.
+* **Duplicate detection**: `oml validate` reports two same-domain records whose statements overlap above a similarity threshold unless one declares the other in `relations.confusable_with`, `relations.specializes` or `discriminators.vs`. Threshold 0.55, set from the corpus (highest undeclared pair scores 0.29) and tunable with `--duplicate-threshold`.
+* **DCO check** (`.github/workflows/dco.yml`): every non-merge commit in a pull request must carry a `Signed-off-by` line.
+* **Governance gates** (`.github/workflows/gate.yml`): pull requests from outside the contributor list are closed with a pointer to the issue templates; issues that never completed a template are closed after 7 days (the `keep-open` label exempts one). `CODEOWNERS` names the maintainer.
 * Zenodo concept DOI 10.5281/zenodo.22416011 in `CITATION.cff`, the README badge and the dataset card (minted on v0.1.1; version DOI 10.5281/zenodo.22416012).
 
 ## [0.1.1] - 2026-09-05
@@ -28,6 +33,11 @@ First release archived by Zenodo; the concept DOI is minted on this tag.
 * `math.frac.add-across` (record #1, version 1.1.0): statement trimmed to the belief; likely origins moved to `notes`; review closed with Vikram Maram on 2026-09-05 and recorded as `reviews[]` (human accept, model accept, two attested reviews); `status: reviewed`, `trust: high`.
 * Every other record gains a changelog entry and a patch version bump for the migration; all remain `draft` with `trust: low`.
 * Hugging Face mirror targets the dataset `vikram-learnco/oml`.
+
+### Changed
+
+* **`CONTRIBUTING.md` leads with propose, not contribute.** The front door is an issue; external pull requests are not merged during v0.x, and the path to Contributor (three accepted proposals) is stated. Licence section names the banks whose text must not be pasted, and documents `git commit -s`.
+* **The reviewer registry is now authoritative.** A human review with verdict `accept` from a handle not in `reviewers/registry.json` is an error, not a warning: adding yourself to a record no longer promotes it.
 
 ### Fixed
 

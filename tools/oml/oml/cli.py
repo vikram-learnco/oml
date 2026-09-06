@@ -8,6 +8,7 @@ from pathlib import Path
 
 from . import __version__
 from .config import Config
+from .duplicates import DEFAULT_THRESHOLD
 
 
 def _cmd_validate(args: argparse.Namespace) -> int:
@@ -18,7 +19,7 @@ def _cmd_validate(args: argparse.Namespace) -> int:
     if not target.exists():
         print(f"error: {target} does not exist", file=sys.stderr)
         return 2
-    report = validate_records(target, config)
+    report = validate_records(target, config, duplicate_threshold=args.duplicate_threshold)
     for problem in report.problems:
         print(problem, file=sys.stderr)
     print(report.summary())
@@ -87,6 +88,13 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("validate", help="validate records against the schema and cross-record rules")
     p.add_argument("target", nargs="?", help="records directory or a single record file (default: records/)")
     p.add_argument("--strict", action="store_true", help="treat warnings as errors")
+    p.add_argument(
+        "--duplicate-threshold",
+        type=float,
+        default=DEFAULT_THRESHOLD,
+        metavar="N",
+        help=f"statement-similarity score above which two undeclared records are reported as possible duplicates (default {DEFAULT_THRESHOLD})",
+    )
     p.set_defaults(func=_cmd_validate)
 
     p = sub.add_parser("validate-diagnosis", help="validate diagnosis record files")

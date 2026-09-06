@@ -33,12 +33,17 @@ One misconception. Required fields first.
 | `prevalence` | Reserved; not populated in v1. |
 | `reviews[]` | `{kind: human\|model\|attested, by, date, scope[], verdict: accept\|revise\|reject, notes?}`. `human.by` is a name plus a durable handle, `"Vikram Maram (github:vikram-learnco)"`; `model.by` is a model id and version; `attested.by` is an index into `provenance.sources[]`. `scope` values: `statement`, `evidence`, `discriminators`, `sources`. |
 | `history` | `supersedes[]`, `merged_into` (required when `merged`), `deprecated_reason`, `changelog[]`. |
+| `disputed` | `true` while an open dispute challenges the record. It stays live and citable; see [GOVERNANCE.md](../GOVERNANCE.md#disputes). Requires at least one entry in `disputes`. |
+| `disputes[]` | URLs of dispute issues, open or settled. Entries are never removed. |
 
 ### Conditional rules enforced by the schema
 
 * `status: reviewed` and `llm-reviewed` require a non-empty `reviews[]`; the validator checks the lifecycle rules above.
 * `status: merged` requires `history.merged_into`.
 * `trust` must equal the value `oml trust` computes; CI runs `oml trust --check`.
+* A human review with verdict `accept` is rejected unless its handle is in `reviewers/registry.json`; the registry, not the record, decides who may promote a record to `reviewed`.
+* `disputed: true` requires a linked dispute in `disputes[]`.
+* Two records in the same domain whose statements overlap above the similarity threshold are reported unless one declares the other in `relations.confusable_with`, `relations.specializes` or `discriminators.vs`. Tune with `oml validate --duplicate-threshold`.
 * Every evidence pattern has a concrete `example`.
 * Concept relations (`conflicts_with`, `resolved_by`) take `{"external": "<uri>"}`; misconception relations (`confusable_with`, `specializes`) take OML record ids. No other relation keys are accepted.
 

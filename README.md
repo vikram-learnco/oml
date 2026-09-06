@@ -80,8 +80,14 @@ thought this was worth writing down", not as a settled claim.
 
 ## How to contribute
 
-One record per pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) for the
-review checklist and how to propose a merge or dispute a statement.
+**Propose a misconception by opening an issue**, not a pull request. You get
+a structured response without waiting for a maintainer, and three accepted
+proposals earns the right to open pull requests directly.
+
+* [CONTRIBUTING.md](CONTRIBUTING.md) — what a good proposal contains, and
+  what `reviewed` means.
+* [GOVERNANCE.md](GOVERNANCE.md) — who may make which change, how disputes
+  are settled, and why an `oml:` ID is never deleted.
 
 ## Licence
 

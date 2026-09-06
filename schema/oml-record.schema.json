@@ -304,6 +304,21 @@
       "items": {
         "$ref": "#/$defs/review"
       }
+    },
+    "disputed": {
+      "type": "boolean",
+      "default": false,
+      "description": "True while an open dispute challenges this record. A disputed record stays live and citable; the site and the JSON show the flag and link the issues. Set by a maintainer when a dispute is accepted for ruling; see GOVERNANCE.md."
+    },
+    "disputes": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "URLs of dispute issues raised against this record, open or settled. Entries are never removed: a settled dispute stays as part of the record's history.",
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https?://"
+      }
     }
   },
   "allOf": [
@@ -346,6 +361,28 @@
             "required": [
               "merged_into"
             ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "disputed": {
+            "const": true
+          }
+        },
+        "required": [
+          "disputed"
+        ]
+      },
+      "then": {
+        "required": [
+          "disputes"
+        ],
+        "properties": {
+          "disputes": {
+            "minItems": 1
           }
         }
       }
