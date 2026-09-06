@@ -11,6 +11,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 
 from .config import Config
 from .loader import LoadedRecord, expected_id_for_path, load_records
+from .duplicates import DEFAULT_THRESHOLD, find_duplicates
 from .trust import REVIEW_SCOPES, compute_trust, load_reviewers, load_schemes, reviewer_id
 
 CONCEPT_RELATIONS = {"conflicts_with", "resolved_by"}
@@ -75,6 +76,7 @@ def validate_records(
     config: Config,
     *,
     all_records_dir: Path | None = None,
+    duplicate_threshold: float = DEFAULT_THRESHOLD,
 ) -> Report:
     """Validate every record under `target`.
 
@@ -108,6 +110,22 @@ def validate_records(
 
     for rec in records:
         _validate_one(rec, config, validator, known_ids, corpus_by_id, seen_uuids, seen_ids, report, registries)
+
+    # Corpus-level: two records saying the same thing in different words.
+    # A warning, not an error: the author declares the relationship or merges.
+    checked_ids = {r.id for r in records if r.id}
+    for pair in find_duplicates(list(corpus_by_id.values()), threshold=duplicate_threshold):
+        if pair.left not in checked_ids and pair.right not in checked_ids:
+            continue
+        left_path = next((r.path for r in records if r.id == pair.left), target)
+        report.problems.append(
+            Problem(
+                left_path,
+                f"statement is {pair.score:.0%} similar to {pair.right!r}; if they are the same belief merge them, "
+                "otherwise declare the neighbour in relations.confusable_with or discriminators.vs",
+                "warning",
+            )
+        )
 
     return report
 
@@ -256,7 +274,12 @@ def _validate_one(
             if not isinstance(by, str) or "(" not in by or not re.search(r"\((orcid:|github:|https?://)[^)]+\)\s*$", by):
                 report.problems.append(Problem(path, f"reviews[{i}]: human reviewer needs a durable handle, e.g. \"Name (github:handle)\" or \"Name (orcid:0000-...)\""))
             elif rid not in registry_ids:
-                report.problems.append(Problem(path, f"reviews[{i}]: reviewer {rid!r} is not in reviewers/registry.json", "warning"))
+                # The registry is the authority on who may review (GOVERNANCE.md).
+                # An accept from an unlisted human would otherwise promote a record.
+                level = "error" if rv.get("verdict") == "accept" else "warning"
+                report.problems.append(
+                    Problem(path, f"reviews[{i}]: reviewer {rid!r} is not in reviewers/registry.json; only registered reviewers may accept a record", level)
+                )
         elif kind == "model":
             if reviewer_id(rv) not in registry_ids:
                 report.problems.append(Problem(path, f"reviews[{i}]: model {by!r} is not in reviewers/registry.json", "warning"))
@@ -275,6 +298,12 @@ def _validate_one(
             report.problems.append(Problem(path, "status 'reviewed' requires a human review with verdict accept or an attested review"))
     if "review" in data:
         report.problems.append(Problem(path, "'review' was replaced by 'reviews[]' in schema 0.2"))
+
+    # disputes: a linked dispute with the flag off is a maintainer oversight, not an error
+    if data.get("disputes") and not data.get("disputed"):
+        report.problems.append(
+            Problem(path, "disputes[] is non-empty but disputed is false; if the dispute is settled say so in history.changelog", "warning")
+        )
 
     # trust is computed, never hand-typed
     expected_trust = compute_trust(data, reviewer_registry)

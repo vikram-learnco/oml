@@ -1,0 +1,121 @@
+name: gate
+
+# Governance gates that need no maintainer present. See GOVERNANCE.md.
+#   1. A pull request from outside the contributor list is closed with a
+#      pointer to the issue templates. Not a rejection of the idea: during
+#      v0.x the ID space has one editor, and proposals go through issues.
+#   2. An issue that never completed its template is closed after 7 days.
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  outside-pull-request:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close pull requests from outside the contributor list
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const author = pr.user.login;
+            // Write access means Contributor or above; bots that open PRs
+            // against this repo (e.g. dependency updates) also land here.
+            let permission = 'none';
+            try {
+              const res = await github.rest.repos.getCollaboratorPermissionLevel({
+                ...context.repo, username: author,
+              });
+              permission = res.data.permission;
+            } catch (error) {
+              core.info(`No permission record for ${author}: ${error.message}`);
+            }
+            if (['admin', 'maintain', 'write'].includes(permission) || pr.user.type === 'Bot') {
+              core.info(`${author} has '${permission}' access; leaving the pull request open.`);
+              return;
+            }
+            const body = [
+              `Thanks for this, @${author} — and sorry for the automated close.`,
+              '',
+              'During v0.x, pull requests are merged only from the contributor',
+              'list, because a stable ID space needs one editor deciding what an',
+              '`oml:` ID means. That is a rule about merge rights, not about the',
+              'value of your work.',
+              '',
+              '**The front door is an issue**, and it is not a lesser path:',
+              '',
+              '- [Propose a misconception](../../issues/new?template=new-misconception.yml) — you get a structured response without waiting for a maintainer',
+              '- [Dispute a record](../../issues/new?template=dispute.yml)',
+              '- [Request a merge](../../issues/new?template=merge-request.yml)',
+              '',
+              'Three accepted proposals earns an invitation to open pull requests',
+              'directly. See [GOVERNANCE.md](../blob/main/GOVERNANCE.md) for the',
+              'full ladder and [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) for',
+              'what a good proposal contains.',
+              '',
+              'If your change is to the tooling rather than to a record, say so on',
+              'an issue and a maintainer will reopen this.',
+            ].join('\n');
+            await github.rest.issues.createComment({
+              ...context.repo, issue_number: pr.number, body,
+            });
+            await github.rest.pulls.update({
+              ...context.repo, pull_number: pr.number, state: 'closed',
+            });
+
+  stale-incomplete-issues:
+    if: github.event_name != 'pull_request_target'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close issues that never completed their template
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const DAYS = 7;
+            const cutoff = Date.now() - DAYS * 24 * 60 * 60 * 1000;
+            // The issue forms make these headings; an issue without any of
+            // them was opened as a blank issue or had the form stripped out.
+            const MARKERS = ['### Statement', '### Record ID', '### Surviving record ID', '### What is wrong'];
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              ...context.repo, state: 'open', per_page: 100,
+            });
+            for (const issue of issues) {
+              if (issue.pull_request) continue;
+              if (issue.labels.some((l) => (l.name || l) === 'keep-open')) continue;
+              if (new Date(issue.updated_at).getTime() > cutoff) continue;
+              const body = issue.body || '';
+              if (MARKERS.some((m) => body.includes(m))) continue;
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: issue.number,
+                body: [
+                  `Closing after ${DAYS} days: this issue does not follow any of the issue`,
+                  'forms, so there is not enough here to act on.',
+                  '',
+                  'That is a formatting problem, not a verdict. Reopen it or file a new',
+                  'one with the matching template and it gets a structured response:',
+                  '',
+                  '- [Propose a misconception](../../issues/new?template=new-misconception.yml)',
+                  '- [Dispute a record](../../issues/new?template=dispute.yml)',
+                  '- [Request a merge](../../issues/new?template=merge-request.yml)',
+                  '',
+                  'For open-ended questions, use Discussions instead.',
+                  '',
+                  'A maintainer can add the `keep-open` label to exempt an issue from this.',
+                ].join('\n'),
+              });
+              await github.rest.issues.update({
+                ...context.repo, issue_number: issue.number, state: 'closed', state_reason: 'not_planned',
+              });
+              core.info(`Closed #${issue.number}: ${issue.title}`);
+            }

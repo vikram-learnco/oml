@@ -1,0 +1,4 @@
+# Every path is owned by the maintainer. See GOVERNANCE.md: merge is a
+# maintainer action, and review of a record's content is separate from
+# code ownership (that lives in reviewers/registry.json).
+*       @vikram-learnco
