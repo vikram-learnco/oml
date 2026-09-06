@@ -15,7 +15,7 @@ the bar to suggest one.
 | **Proposer** | anyone | Open issues: propose a misconception, dispute a record, request a merge. This is the front door. |
 | **Contributor** | invited | Open pull requests. Merge still belongs to maintainers. Earned by three accepted proposals. |
 | **Reviewer** | nominated by a maintainer | Everything a Contributor may do, plus add a `human` review that promotes a record to `reviewed`. Listed in [`reviewers/registry.json`](reviewers/registry.json). |
-| **Maintainer** | Vikram Maram | Merge, edit `reviewed` statements, merge or deprecate IDs, nominate Reviewers, rule on disputes. |
+| **Maintainer** | Vikram Maram, as an individual | Merge, edit `reviewed` statements, merge or deprecate IDs, nominate Reviewers, rule on disputes. |
 
 **At launch, every tier above Proposer is empty except Maintainer.** There
 are no Contributors and no Reviewers other than the maintainer. That is a
@@ -129,6 +129,33 @@ words is not.
 Every pull request must carry a `Signed-off-by` line
 ([DCO](https://developercertificate.org/)): `git commit -s`. It is your
 statement that you have the right to contribute the text.
+
+## Succession, and the right to fork
+
+One maintainer is a single point of failure. Pretending otherwise would be
+the dishonest way to run a shared vocabulary, so here is the arrangement
+instead.
+
+**If the maintainer is unresponsive for six months** — no merges, no
+triage, no reply on the issue tracker — **the Reviewers named in
+[`reviewers/registry.json`](reviewers/registry.json) at the time may fork
+the library under the same name and the same IDs, and that fork becomes
+the one people should use.** No permission is needed and none can be
+withheld. Announce it on the issue tracker and in the fork's README so
+adopters can follow.
+
+Everything needed for that is already in place, deliberately:
+
+* The licence permits redistribution and modification by anyone.
+* Every release is archived at Zenodo with a DOI, so the full history
+  survives the repository disappearing.
+* The dataset is mirrored on Hugging Face.
+* The IDs are strings, not URLs into any one host. `oml:math.frac.add-across`
+  keeps meaning what it means whoever serves it, and the tooling can move
+  the library to a new base URI in one command.
+
+An `oml:` ID is meant to outlive the person maintaining it. If it cannot,
+it is not worth adopting.
 
 ## Changing this document
 

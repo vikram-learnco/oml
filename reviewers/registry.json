@@ -1,13 +1,16 @@
 {
   "$comment": "Reviewer registry. Trust lives here, outside the record schema, so it can be revised without touching records. A record's `trust` is computed by `oml trust` from its `reviews[]` against these weights and must never be hand-typed; `oml validate` fails on a stored value that does not match the computed one. Score = sum of weights of `accept` reviews whose reviewer is listed (attested reviews use the `attested` entry). Thresholds: high >= 1.0, medium >= 0.5, otherwise low.",
-  "thresholds": { "high": 1.0, "medium": 0.5 },
+  "thresholds": {
+    "high": 1.0,
+    "medium": 0.5
+  },
   "reviewers": [
     {
       "id": "github:vikram-learnco",
       "kind": "human",
       "name": "Vikram Maram",
       "weight": 1.0,
-      "note": "Maintainer."
+      "note": "Maintainer (individual). See GOVERNANCE.md."
     },
     {
       "id": "claude-fable-5-1",

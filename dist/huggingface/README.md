@@ -69,5 +69,5 @@ Concept DOI (latest release): https://doi.org/10.5281/zenodo.22416011. Each rele
 
 ## Licence
 
-CC BY 4.0. Attribute "Open Misconception Library (LearnCo and contributors)"
+CC BY 4.0. Attribute "Open Misconception Library (Vikram Maram and contributors)"
 and link to the repository or the record URI.
