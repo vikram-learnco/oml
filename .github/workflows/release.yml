@@ -23,8 +23,8 @@ jobs:
       # the hf CLI exchanges this job's GitHub OIDC token for a one-hour token scoped
       # to HF_OIDC_RESOURCE. No HF_TOKEN secret is needed; if one is set it is used
       # as a fallback. The mirror steps never fail the release.
-      HF_DATASET: vikram-learnco/oml
-      HF_OIDC_RESOURCE: datasets/vikram-learnco/oml
+      HF_DATASET: open-misconceptions/oml
+      HF_OIDC_RESOURCE: datasets/open-misconceptions/oml
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
       - uses: actions/checkout@v4
@@ -73,7 +73,7 @@ jobs:
         run: |
           set -euo pipefail
           hf upload "$HF_DATASET" dist/oml.jsonl oml.jsonl --repo-type dataset \
-            --commit-message "Mirror ${RELEASE_TAG} from vikram-learnco/oml"
+            --commit-message "Mirror ${RELEASE_TAG} from open-misconceptions/oml"
           hf upload "$HF_DATASET" dist/huggingface/README.md README.md --repo-type dataset \
             --commit-message "Dataset card for ${RELEASE_TAG}"
           echo "::notice::Mirrored ${RELEASE_TAG} to https://huggingface.co/datasets/${HF_DATASET}"

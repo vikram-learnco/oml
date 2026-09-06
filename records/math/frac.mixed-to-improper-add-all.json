@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.mixed-to-improper-add-all",
-  "uri": "https://oml.learnco.io/m/math.frac.mixed-to-improper-add-all",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.mixed-to-improper-add-all",
   "uuid": "be94771a-f7b8-4af6-acb3-a3fe723a0d20",
   "version": "0.1.1",
   "status": "draft",
@@ -88,5 +88,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.part-to-part",
-  "uri": "https://oml.learnco.io/m/math.frac.part-to-part",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.part-to-part",
   "uuid": "15a57c88-bbde-47b3-bd0d-6771a62e6cec",
   "version": "0.1.1",
   "status": "draft",
@@ -92,5 +92,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

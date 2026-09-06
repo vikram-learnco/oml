@@ -307,8 +307,8 @@ class RebaseUri(unittest.TestCase):
         pattern = next(
             s["uri_pattern"] for s in self._read("schemes/registry.json")["schemes"] if s["name"] == "OML"
         )
-        self.assertNotIn("learnco", pattern)
         self.assertIn("openmisconceptions", pattern)
+        self.assertNotIn("github.io", pattern)
 
         # And the rewritten pattern must actually match the rewritten URIs.
         import re
@@ -329,9 +329,10 @@ class RebaseUri(unittest.TestCase):
     def test_round_trip_leaves_no_residue(self):
         from oml.rebase import rebase
 
+        original_base = self.config.base_uri
         before = {p: p.read_text() for p in sorted(self.root.rglob("*.json"))}
         rebase(self.config, "https://openmisconceptions.example")
-        rebase(Config.load(self.root), "https://oml.learnco.io")
+        rebase(Config.load(self.root), original_base)
         after = {p: p.read_text() for p in sorted(self.root.rglob("*.json"))}
         changed = [str(p.relative_to(self.root)) for p in before if before[p] != after.get(p)]
         self.assertEqual(changed, [], f"round trip left residue in {changed}")
@@ -341,3 +342,73 @@ class RebaseUri(unittest.TestCase):
 
         report = rebase(self.config, self.config.base_uri)
         self.assertEqual(report.changed, [])
+
+
+class BaseUriWithPath(unittest.TestCase):
+    """A GitHub Pages project site is <owner>.github.io/<repo>, so the base URI
+    carries a path. The record `uri` pattern originally assumed a bare domain
+    and rejected every record the moment the library moved to a Pages URL."""
+
+    def test_uri_pattern_accepts_a_base_with_a_path(self):
+        import re
+
+        schema = json.loads((ROOT / "schema" / "oml-record.schema.json").read_text())
+        pattern = schema["properties"]["uri"]["pattern"]
+        for uri in (
+            "https://open-misconceptions.github.io/oml/m/math.frac.add-across",
+            "https://oml.example.org/m/math.frac.add-across",
+            "https://example.org/a/deeper/path/m/prog.var.assignment-is-equation",
+        ):
+            self.assertRegex(uri, pattern, f"{uri} should be a valid record URI")
+
+    def test_uri_pattern_still_rejects_malformed_ids(self):
+        import re
+
+        schema = json.loads((ROOT / "schema" / "oml-record.schema.json").read_text())
+        pattern = schema["properties"]["uri"]["pattern"]
+        for uri in (
+            "https://example.org/m/NoCaps",
+            "https://example.org/m/nodot",
+            "https://example.org/math.frac.add-across",
+        ):
+            self.assertIsNone(re.match(pattern, uri), f"{uri} should not be a valid record URI")
+
+    def test_a_pages_style_base_validates_end_to_end(self):
+        """The whole corpus must validate, not just the pattern in isolation."""
+        import shutil
+        import tempfile
+
+        from oml.rebase import rebase
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            root.mkdir()
+            for name in ("oml.config.json", "records", "schema", "schemes", "reviewers"):
+                src = ROOT / name
+                dst = root / name
+                shutil.copytree(src, dst) if src.is_dir() else shutil.copy(src, dst)
+            rebase(Config.load(root), "https://open-misconceptions.github.io/oml")
+            config = Config.load(root)
+            report = validate_records(config.records_dir, config)
+            self.assertEqual(report.errors, [], "\n".join(map(str, report.errors)))
+            self.assertEqual(report.warnings, [], "\n".join(map(str, report.warnings)))
+
+
+class LicenceIsConfigDriven(unittest.TestCase):
+    def test_case_export_licence_matches_the_configured_licence(self):
+        """The CASE export hardcoded a CC BY title, so a relicensed library
+        exported a document naming the wrong licence beside a correct URL."""
+        from oml.export import build_case, load_all
+
+        config = Config.load(ROOT)
+        pkg = build_case(config, load_all(config))
+        licence = pkg["CFDefinitions"]["CFLicenses"][0]
+        self.assertEqual(licence["title"], config.license_name)
+        self.assertIn(config.license, licence["licenseText"])
+        self.assertEqual(licence["description"], config.license_uri)
+
+    def test_every_record_carries_the_configured_licence(self):
+        config = Config.load(ROOT)
+        for path in sorted((ROOT / "records").rglob("*.json")):
+            record = json.loads(path.read_text())
+            self.assertEqual(record["license"], config.license, f"{path.name} has a stale licence")

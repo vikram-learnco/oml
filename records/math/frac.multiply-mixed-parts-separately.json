@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.multiply-mixed-parts-separately",
-  "uri": "https://oml.learnco.io/m/math.frac.multiply-mixed-parts-separately",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.multiply-mixed-parts-separately",
   "uuid": "89ca96fb-84d7-4b24-a0f0-c24cf282e25c",
   "version": "0.1.1",
   "status": "draft",
@@ -90,5 +90,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.divide-makes-smaller",
-  "uri": "https://oml.learnco.io/m/math.frac.divide-makes-smaller",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.divide-makes-smaller",
   "uuid": "72884d31-1a9a-418f-92ee-f073eef02008",
   "version": "0.1.1",
   "status": "draft",
@@ -127,5 +127,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

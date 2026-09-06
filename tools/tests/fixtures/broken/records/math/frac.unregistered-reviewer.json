@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.unregistered-reviewer",
-  "uri": "https://oml.learnco.io/m/math.frac.unregistered-reviewer",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.unregistered-reviewer",
   "uuid": "7a7a7a7a-7a7a-4a7a-8a7a-7a7a7a7a7a7a",
   "version": "1.1.0",
   "status": "reviewed",
@@ -158,5 +158,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

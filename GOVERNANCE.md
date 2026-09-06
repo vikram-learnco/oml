@@ -11,7 +11,7 @@ the bar to suggest one.
 
 | Role | Who | May |
 |------|-----|-----|
-| **Reader** | anyone | Read, cite, redistribute under CC BY 4.0. No account needed. |
+| **Reader** | anyone | Read, use, adapt and redistribute. CC0, so no attribution required and no account needed. |
 | **Proposer** | anyone | Open issues: propose a misconception, dispute a record, request a merge. This is the front door. |
 | **Contributor** | invited | Open pull requests. Merge still belongs to maintainers. Earned by three accepted proposals. |
 | **Reviewer** | nominated by a maintainer | Everything a Contributor may do, plus add a `human` review that promotes a record to `reviewed`. Listed in [`reviewers/registry.json`](reviewers/registry.json). |
@@ -115,9 +115,15 @@ honest fix is to say so here, not to promise faster.
 
 ## Licence and provenance
 
-Records, schemas and distributions are CC BY 4.0; tooling is MIT. By
-proposing or contributing you agree your text is released under those
-terms.
+Records, schemas and distributions are **CC0 1.0** (public domain);
+tooling is MIT. CC0 is a waiver, not a licence: contributing a record
+places it in the public domain and you keep no right to be attributed.
+Contribute only text you are free to release on those terms.
+
+The reason for CC0 rather than an attribution licence: an adopter should
+never have to attribute, or think about, whoever maintains this. A
+vocabulary that carries obligations is one more thing for a platform's
+legal review to object to.
 
 Text must be original or from a CC BY compatible source. Do not paste
 item text, distractor rationales or misconception descriptions from
@@ -146,7 +152,7 @@ adopters can follow.
 
 Everything needed for that is already in place, deliberately:
 
-* The licence permits redistribution and modification by anyone.
+* The licence is CC0, so redistribution and modification need nobody's permission — including a successor's.
 * Every release is archived at Zenodo with a DOI, so the full history
   survives the repository disappearing.
 * The dataset is mirrored on Hugging Face.

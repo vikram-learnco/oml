@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.cross-multiply-to-multiply",
-  "uri": "https://oml.learnco.io/m/math.frac.cross-multiply-to-multiply",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.cross-multiply-to-multiply",
   "uuid": "fef262fa-6980-416d-bd92-851b64e59458",
   "version": "0.1.1",
   "status": "draft",
@@ -88,5 +88,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://oml.learnco.io/schema/oml-record.schema.json",
+  "$id": "https://open-misconceptions.github.io/oml/schema/oml-record.schema.json",
   "title": "OML record",
   "description": "One misconception in the Open Misconception Library. Schema version 0.2 (v0.1.1 release): framework-agnostic alignments, reviews[] with a status lifecycle, computed trust.",
   "type": "object",
@@ -32,8 +32,8 @@
     "uri": {
       "type": "string",
       "format": "uri",
-      "pattern": "^https?://[^/]+/m/[a-z]+(\\.[a-z0-9-]+)+$",
-      "description": "Stable URI: base URI + /m/ + id."
+      "pattern": "^https?://[^/]+(/[^/]+)*/m/[a-z]+(\\.[a-z0-9-]+)+$",
+      "description": "Stable URI: base URI + /m/ + id. The base may carry a path (a GitHub Pages project site is <owner>.github.io/<repo>), so the host is not required to be the whole prefix. `oml validate` pins the exact value against the configured base."
     },
     "uuid": {
       "type": "string",
@@ -282,8 +282,8 @@
     },
     "license": {
       "type": "string",
-      "const": "CC-BY-4.0",
-      "description": "Licence for this record's content. All OML records are CC BY 4.0."
+      "const": "CC0-1.0",
+      "description": "Licence for this record's content. Records are CC0 1.0 from v0.2.0 onward; releases up to v0.1.1 carry CC-BY-4.0 and keep it."
     },
     "notes": {
       "type": "string",

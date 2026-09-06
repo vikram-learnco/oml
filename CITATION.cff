@@ -9,9 +9,9 @@ authors:
   - name: "OML contributors"
 version: 0.1.1
 date-released: 2026-09-05
-license: CC-BY-4.0
-repository-code: "https://github.com/vikram-learnco/oml"
-url: "https://oml.learnco.io"
+license: CC0-1.0
+repository-code: "https://github.com/open-misconceptions/oml"
+url: "https://open-misconceptions.github.io/oml"
 keywords:
   - misconceptions
   - learning analytics

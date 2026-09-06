@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.division-is-sharing-only",
-  "uri": "https://oml.learnco.io/m/math.frac.division-is-sharing-only",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.division-is-sharing-only",
   "uuid": "50e4d120-cd01-49b2-95e6-5ec8df0762d1",
   "version": "0.1.1",
   "status": "draft",
@@ -112,5 +112,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

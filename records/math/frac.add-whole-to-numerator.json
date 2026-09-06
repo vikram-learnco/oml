@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.add-whole-to-numerator",
-  "uri": "https://oml.learnco.io/m/math.frac.add-whole-to-numerator",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.add-whole-to-numerator",
   "uuid": "692fc169-3842-429b-bf5a-36be6eb6e910",
   "version": "0.1.1",
   "status": "draft",
@@ -91,5 +91,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

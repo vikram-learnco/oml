@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://oml.learnco.io/schema/diagnosis-record.schema.json",
+  "$id": "https://open-misconceptions.github.io/oml/schema/diagnosis-record.schema.json",
   "title": "OML diagnosis record",
   "description": "One diagnosed learner response: the item, what was expected, what was given, and which OML misconceptions the response is evidence for. Schema version 0.1.",
   "type": "object",

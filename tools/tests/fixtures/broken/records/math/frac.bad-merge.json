@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.bad-merge",
-  "uri": "https://oml.learnco.io/m/math.frac.bad-merge",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.bad-merge",
   "uuid": "0f0f0f0f-0f0f-4f0f-8f0f-0f0f0f0f0f0f",
   "version": "1.1.0",
   "status": "merged",
@@ -170,5 +170,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

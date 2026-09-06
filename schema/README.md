@@ -23,7 +23,7 @@ One misconception. Required fields first.
 | `domain` | Subject area matching the first segment of `id`; may be qualified. |
 | `evidence_patterns[]` | At least one `{item_shape, signature, example{item, expected, response}}`. |
 | `provenance` | `{sources[], origin}`; every source has `type` and `citation`, optionally `doi`, `url`, `identifier`, `license`. |
-| `license` | Always `CC-BY-4.0`. |
+| `license` | Always `CC0-1.0` from v0.2.0. Releases up to v0.1.1 carry `CC-BY-4.0`. |
 | `about[]` | Concepts the misconception is about: `{scheme, uri, code?, note?}`. `scheme` is a free string; known schemes are data in `schemes/registry.json` and the validator warns on unknown ones. Prefer `CASE` item URIs; `OML` concept URIs (`<base>/c/<concept-id>`) only where no CASE URI exists. |
 | `level_band[]` | Education levels where it is typically seen. |
 | `locale` | BCP 47 tag for the text; default `en`. |
@@ -89,5 +89,5 @@ One diagnosed learner response, for systems that emit diagnoses citing OML.
 ## Still provisional
 
 * `prevalence` is reserved and unpopulated; its shape may change.
-* The base URI (`https://oml.learnco.io`) is a placeholder until the domain
+* The base URI (`https://open-misconceptions.github.io/oml`) is a placeholder until the domain
   is decided. Record `uri` values are rewritten mechanically when it changes.

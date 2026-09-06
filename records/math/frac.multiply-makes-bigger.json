@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.multiply-makes-bigger",
-  "uri": "https://oml.learnco.io/m/math.frac.multiply-makes-bigger",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.multiply-makes-bigger",
   "uuid": "04246969-9c77-41b0-a67b-b48be9b2f5a3",
   "version": "0.1.1",
   "status": "draft",
@@ -112,5 +112,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

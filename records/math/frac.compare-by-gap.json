@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.compare-by-gap",
-  "uri": "https://oml.learnco.io/m/math.frac.compare-by-gap",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.compare-by-gap",
   "uuid": "c2797bf8-5aff-4019-98c3-3462a3c42f71",
   "version": "0.1.1",
   "status": "draft",
@@ -106,5 +106,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

@@ -25,6 +25,7 @@ class Config:
     title: str
     creator: str
     license: str
+    license_name: str
     license_uri: str
     extra: dict = field(default_factory=dict)
     schema_root: Path | None = None
@@ -33,15 +34,16 @@ class Config:
     def load(cls, root: Path | None = None) -> "Config":
         root = root or find_repo_root()
         raw = json.loads((root / "oml.config.json").read_text(encoding="utf-8"))
-        known = {"base_uri", "library_version", "title", "creator", "license", "license_uri"}
+        known = {"base_uri", "library_version", "title", "creator", "license", "license_name", "license_uri"}
         return cls(
             root=root,
             base_uri=raw["base_uri"].rstrip("/"),
             library_version=raw.get("library_version", "0.0.0"),
             title=raw.get("title", "Open Misconception Library"),
             creator=raw.get("creator", ""),
-            license=raw.get("license", "CC-BY-4.0"),
-            license_uri=raw.get("license_uri", "https://creativecommons.org/licenses/by/4.0/"),
+            license=raw.get("license", "CC0-1.0"),
+            license_name=raw.get("license_name", raw.get("license", "CC0-1.0")),
+            license_uri=raw.get("license_uri", "https://creativecommons.org/publicdomain/zero/1.0/"),
             extra={k: v for k, v in raw.items() if k not in known},
             schema_root=Path(os.environ["OML_SCHEMA_DIR"]) if os.environ.get("OML_SCHEMA_DIR") else None,
         )

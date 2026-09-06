@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.multiply-with-common-denominator",
-  "uri": "https://oml.learnco.io/m/math.frac.multiply-with-common-denominator",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.multiply-with-common-denominator",
   "uuid": "116cbd32-81bd-4fbb-b5b2-31a47ff576b4",
   "version": "0.1.1",
   "status": "draft",
@@ -105,5 +105,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

@@ -128,9 +128,14 @@ stored value disagrees.
 
 ## Licence and sign-off
 
-Records, schemas and distributions are CC BY 4.0; tooling under `tools/`
-and `site/` is MIT. By proposing or contributing you agree your additions
-are released under those terms.
+Records, schemas and distributions are **CC0 1.0**; tooling under
+`tools/` and `site/` is MIT.
+
+CC0 is a waiver rather than a licence: by proposing or contributing a
+record you place your contribution in the public domain, giving up any
+copyright claim over it worldwide, as far as the law allows. You keep no
+right to be attributed. Contribute only text you are free to release on
+those terms.
 
 **Write your own text.** It must be original or from a CC BY compatible
 source. Do not paste item text, distractor rationales or misconception

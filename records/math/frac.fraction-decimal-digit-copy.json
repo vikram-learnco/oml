@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.fraction-decimal-digit-copy",
-  "uri": "https://oml.learnco.io/m/math.frac.fraction-decimal-digit-copy",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.fraction-decimal-digit-copy",
   "uuid": "fb3c3db0-26d5-4aba-a7ea-c9ce84089d88",
   "version": "0.1.1",
   "status": "draft",
@@ -93,5 +93,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

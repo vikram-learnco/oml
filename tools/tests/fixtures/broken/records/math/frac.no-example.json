@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.no-example",
-  "uri": "https://oml.learnco.io/m/math.frac.no-example",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.no-example",
   "uuid": "1a1a1a1a-1a1a-4a1a-8a1a-1a1a1a1a1a1a",
   "version": "1.1.0",
   "status": "reviewed",
@@ -154,5 +154,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }
