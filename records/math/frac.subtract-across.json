@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.subtract-across",
-  "uri": "https://oml.learnco.io/m/math.frac.subtract-across",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.subtract-across",
   "uuid": "f9b8d0fd-1f46-47ac-8fc7-d4923e7ef2c8",
   "version": "0.1.1",
   "status": "draft",
@@ -98,5 +98,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

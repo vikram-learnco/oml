@@ -229,9 +229,9 @@ def build_case(config: Config, records: list[dict], version: str | None = None) 
             {
                 "identifier": license_id,
                 "uri": license_link["uri"],
-                "title": "Creative Commons Attribution 4.0 International",
+                "title": config.license_name,
                 "description": config.license_uri,
-                "licenseText": f"This work is licensed under CC BY 4.0. See {config.license_uri}",
+                "licenseText": f"This work is released under {config.license}. See {config.license_uri}",
                 "lastChangeDateTime": now,
             }
         ],

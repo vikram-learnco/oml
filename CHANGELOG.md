@@ -13,6 +13,11 @@ Before 1.0, minor releases may also change the schema; each such change is calle
 
 ### Changed
 
+* **Records are CC0 1.0** (public domain), from this release onward. Adopters may use, adapt and redistribute without attributing or asking. A citation is welcome and not required. Tooling stays MIT. Releases **up to and including v0.1.1 were published under CC BY 4.0**; that grant is public and irrevocable, so those releases remain available under it. The record schema's `license` is now `const: "CC0-1.0"`, so a record carrying the old value no longer validates against the current schema — the v0.1.1 archive carries its own copy of the schema it was published with.
+* **The library moved to a neutral home.** Canonical base URI is now `https://open-misconceptions.github.io/oml`, and the repository is `open-misconceptions/oml`. **`oml:` IDs are unchanged and stable** — `oml:math.frac.add-across` still means exactly what it meant; only the host that resolves it moved. Applied with `oml rebase-uri`, which rewrote 188 references across 83 files. The Hugging Face dataset is now `open-misconceptions/oml`.
+
+### Changed
+
 * **OML is maintained by Vikram Maram as an individual project.** The MIT copyright holder, the `creator` in `oml.config.json` (which flows into the CASE `CFDocument`), and the dataset-card attribution now name the maintainer rather than a company. Nothing about the `oml:` IDs changes.
 
 ### Added
@@ -39,7 +44,7 @@ First release archived by Zenodo; the concept DOI is minted on this tag.
 * New optional top-level `notes` field for text that is not the belief itself (e.g. likely origins).
 * `math.frac.add-across` (record #1, version 1.1.0): statement trimmed to the belief; likely origins moved to `notes`; review closed with Vikram Maram on 2026-09-05 and recorded as `reviews[]` (human accept, model accept, two attested reviews); `status: reviewed`, `trust: high`.
 * Every other record gains a changelog entry and a patch version bump for the migration; all remain `draft` with `trust: low`.
-* Hugging Face mirror targets the dataset `vikram-learnco/oml`.
+* Hugging Face mirror targets the dataset `open-misconceptions/oml`.
 
 ### Changed
 
@@ -73,6 +78,6 @@ First citable release.
 
 * Base URI `https://oml.learnco.io` is a placeholder pending the domain decision.
 
-[Unreleased]: https://github.com/vikram-learnco/oml/compare/v0.1.1...HEAD
-[0.1.1]: https://github.com/vikram-learnco/oml/releases/tag/v0.1.1
-[0.1.0]: https://github.com/vikram-learnco/oml/releases/tag/v0.1.0
+[Unreleased]: https://github.com/open-misconceptions/oml/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/open-misconceptions/oml/releases/tag/v0.1.1
+[0.1.0]: https://github.com/open-misconceptions/oml/releases/tag/v0.1.0

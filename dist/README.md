@@ -14,7 +14,7 @@ and the Pages build serves them from the site root).
 
 | OML | CASE |
 |-----|------|
-| library | `CFDocument` (`title`, `creator`, `licenseURI` → CC BY 4.0, `version` = release tag) |
+| library | `CFDocument` (`title`, `creator`, `licenseURI` → CC0 1.0, `version` = release tag) |
 | record `uuid` | `CFItem.identifier` |
 | `oml:<id>` | `CFItem.humanCodingScheme` |
 | `statement` | `CFItem.fullStatement` |

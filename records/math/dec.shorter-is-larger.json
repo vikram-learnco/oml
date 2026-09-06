@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.dec.shorter-is-larger",
-  "uri": "https://oml.learnco.io/m/math.dec.shorter-is-larger",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.dec.shorter-is-larger",
   "uuid": "e3685617-2ee2-41c1-875f-5e0d835be18f",
   "version": "0.1.1",
   "status": "draft",
@@ -118,5 +118,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

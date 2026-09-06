@@ -64,14 +64,14 @@ def page(config: Config, title: str, body: str, *, description: str = "", canoni
 </head>
 <body>
 <header>
-<nav aria-label="Site"><a href="{config.base_uri}/">{esc(config.title)}</a> <a href="{config.base_uri}/records.html">Records</a> <a href="{config.base_uri}/schema/">Schema</a> <a href="https://github.com/vikram-learnco/oml">GitHub</a></nav>
+<nav aria-label="Site"><a href="{config.base_uri}/">{esc(config.title)}</a> <a href="{config.base_uri}/records.html">Records</a> <a href="{config.base_uri}/schema/">Schema</a> <a href="https://github.com/open-misconceptions/oml">GitHub</a></nav>
 </header>
 <main id="main">
 {body}
 </main>
 <footer>
-<p>Records are <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Tooling is MIT. Library version {esc(config.library_version)}.</p>
-<p><a href="https://github.com/vikram-learnco/oml/blob/main/GOVERNANCE.md">Governance</a> · <a href="https://github.com/vikram-learnco/oml/blob/main/CONTRIBUTING.md">How to propose a record</a> · <a href="https://github.com/vikram-learnco/oml">Source</a></p>
+<p>Records are <a href="{esc(config.license_uri)}">{esc(config.license)}</a>. Tooling is MIT. Library version {esc(config.library_version)}.</p>
+<p><a href="https://github.com/open-misconceptions/oml/blob/main/GOVERNANCE.md">Governance</a> · <a href="https://github.com/open-misconceptions/oml/blob/main/CONTRIBUTING.md">How to propose a record</a> · <a href="https://github.com/open-misconceptions/oml">Source</a></p>
 </footer>
 </body>
 </html>
@@ -205,7 +205,7 @@ def render_record(config: Config, r: dict, by_id: dict[str, dict]) -> str:
     parts.append("<h2>Formats</h2><ul>")
     parts.append(f'<li><a href="{esc(r["uri"])}.json">Raw JSON</a></li>')
     parts.append(f'<li><a href="{config.base_uri}/oml.case.json">CASE 1.1 package</a> (CFItem <code>{esc(r["uuid"])}</code>)</li>')
-    parts.append(f'<li><a href="https://github.com/vikram-learnco/oml/blob/main/records/{esc(domain)}/{esc(rest)}.json">Source on GitHub</a></li>')
+    parts.append(f'<li><a href="https://github.com/open-misconceptions/oml/blob/main/records/{esc(domain)}/{esc(rest)}.json">Source on GitHub</a></li>')
     parts.append("</ul>")
     parts.append(f"<h2>Cite</h2><pre><code>oml:{esc(rid)}\n{esc(r['uri'])}</code></pre>")
 
@@ -245,7 +245,7 @@ def render_home(config: Config, records: list[dict], readme_paragraph: str) -> s
 <li>Schemas: <a href="{config.base_uri}/schema/">record and diagnosis</a></li>
 </ul>
 <h2>How to contribute</h2>
-<p>One record per pull request. Read <a href="https://github.com/vikram-learnco/oml/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for the review checklist.</p>
+<p>One record per pull request. Read <a href="https://github.com/open-misconceptions/oml/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for the review checklist.</p>
 """
     return page(config, config.title, body, description=readme_paragraph, canonical=config.base_uri + "/")
 
@@ -264,7 +264,7 @@ def render_records_index(config: Config, records: list[dict]) -> str:
 
 
 def render_schema_page(config: Config, schemas: dict[str, dict]) -> str:
-    parts = ["<h1>Schemas</h1><p>JSON Schema 2020-12. Field-by-field notes are in <a href='https://github.com/vikram-learnco/oml/blob/main/schema/README.md'>schema/README.md</a>.</p>"]
+    parts = ["<h1>Schemas</h1><p>JSON Schema 2020-12. Field-by-field notes are in <a href='https://github.com/open-misconceptions/oml/blob/main/schema/README.md'>schema/README.md</a>.</p>"]
     for name, schema in schemas.items():
         parts.append(f"<h2 id='{esc(name)}'>{esc(schema.get('title', name))}</h2>")
         parts.append(f"<p>{esc(schema.get('description', ''))} <a href='{config.base_uri}/schema/{esc(name)}'>Download</a></p>")

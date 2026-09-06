@@ -10,8 +10,8 @@
     {
       "name": "OML",
       "description": "OML concept URIs, <base>/c/<concept-id>, used only where no CASE URI exists.",
-      "uri_pattern": "^https://oml\\.learnco\\.io/c/[a-z]+(\\.[a-z0-9-]+)+$",
-      "homepage": "https://oml.learnco.io"
+      "uri_pattern": "^https://open\\-misconceptions\\.github\\.io/oml/c/[a-z]+(\\.[a-z0-9-]+)+$",
+      "homepage": "https://open-misconceptions.github.io/oml"
     },
     {
       "name": "CCSS",

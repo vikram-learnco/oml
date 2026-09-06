@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.two-whole-numbers",
-  "uri": "https://oml.learnco.io/m/math.frac.two-whole-numbers",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.two-whole-numbers",
   "uuid": "dd52364b-0b0d-4ab8-a0f5-51bcb845f7fc",
   "version": "0.1.1",
   "status": "draft",
@@ -117,5 +117,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

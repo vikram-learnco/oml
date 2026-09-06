@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.number-line-whole-is-line",
-  "uri": "https://oml.learnco.io/m/math.frac.number-line-whole-is-line",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.number-line-whole-is-line",
   "uuid": "fb647fd2-a6ef-40a4-a0ac-abd0d497e750",
   "version": "0.1.1",
   "status": "draft",
@@ -102,5 +102,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.improper-impossible",
-  "uri": "https://oml.learnco.io/m/math.frac.improper-impossible",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.improper-impossible",
   "uuid": "5211ad46-cba5-4c3d-92ff-9fa79d9ed753",
   "version": "0.1.1",
   "status": "draft",
@@ -105,5 +105,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

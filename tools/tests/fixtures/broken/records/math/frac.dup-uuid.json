@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.dup-uuid",
-  "uri": "https://oml.learnco.io/m/math.frac.dup-uuid",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.dup-uuid",
   "uuid": "20f1dd60-ea8a-4e14-ab41-12addc94b751",
   "version": "1.1.0",
   "status": "reviewed",
@@ -170,5 +170,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }

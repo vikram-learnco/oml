@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/oml-record.schema.json",
   "id": "math.frac.of-quantity-swap-roles",
-  "uri": "https://oml.learnco.io/m/math.frac.of-quantity-swap-roles",
+  "uri": "https://open-misconceptions.github.io/oml/m/math.frac.of-quantity-swap-roles",
   "uuid": "721c3f30-4b4e-4ffb-ac77-3433d1a18164",
   "version": "0.1.1",
   "status": "draft",
@@ -94,5 +94,5 @@
       }
     ]
   },
-  "license": "CC-BY-4.0"
+  "license": "CC0-1.0"
 }
